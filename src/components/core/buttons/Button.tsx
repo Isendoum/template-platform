@@ -1,0 +1,40 @@
+import { ButtonHTMLAttributes } from "react";
+type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
+  variant?: "primary" | "success";
+};
+const CustomButton: React.FC<ButtonProps> = ({ children, ...props }) => {
+  switch (props.variant) {
+    case "primary":
+      return (
+        <button
+          type="button"
+          className="border border-indigo-500 bg-indigo-500 text-white rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-indigo-600 focus:outline-none focus:shadow-outline"
+          {...props}>
+          <div className="flex flex-row justify-center">{children}</div>
+        </button>
+      );
+
+    case "success":
+      return (
+        <button
+          type="button"
+          className="border border-green-500 bg-green-500 text-white rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-green-600 focus:outline-none focus:shadow-outline"
+          {...props}>
+          <div className="flex flex-row justify-center">{children}</div>
+        </button>
+      );
+
+    default:
+      return (
+        <button
+          className={`${
+            props.className ? props.className + " " : ""
+          } border w-[100%] border-indigo-500 bg-indigo-500 text-white rounded-md px-4 py-2 transition 
+          duration-500 ease select-none hover:bg-indigo-600 focus:outline-none focus:shadow-outline`}
+          {...props}>
+          <div className="flex flex-row justify-center">{children}</div>
+        </button>
+      );
+  }
+};
+export default CustomButton;
