@@ -3,20 +3,20 @@
 import CustomButton from "@/components/core/buttons/Button";
 import TextInput from "@/components/core/inputs/TextInput";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { signIn } from "next-auth/react";
+import { getSession, signIn } from "next-auth/react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 
 type Inputs = {
-  email: string;
+  username: string;
   password: string;
 };
 export const LoginForm = () => {
   const validationSchema = yup
     .object({
-      email: yup.string().email().required(),
+      username: yup.string().required(),
       password: yup.string().required(),
     })
     .required();
@@ -41,22 +41,19 @@ export const LoginForm = () => {
 
       const res = await signIn("credentials", {
         redirect: false,
-        email: values.email,
+        username: values.username,
         password: values.password,
         callbackUrl,
       });
-
-      setLoading(false);
-
-      console.log(res);
       if (!res?.error) {
         router.push(callbackUrl);
       } else {
         setError("invalid email or password");
       }
     } catch (error: any) {
-      setLoading(false);
       setError(error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -71,10 +68,10 @@ export const LoginForm = () => {
 
       <div className="mb-6">
         <TextInput
-          type="email"
-          label={"Email"}
-          error={errors["email"]}
-          {...register("email")}
+          type="text"
+          label={"Username"}
+          error={errors["username"]}
+          {...register("username")}
         />
       </div>
       <div className="mb-6">
@@ -86,7 +83,7 @@ export const LoginForm = () => {
         />
       </div>
       <CustomButton onClick={handleSubmit(onSubmit)} type="submit">
-        Sign Up
+        Sign In
       </CustomButton>
     </form>
   );
