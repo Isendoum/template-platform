@@ -2,7 +2,6 @@ import axios from "axios";
 import CredentialsProvider from "next-auth/providers/credentials";
 
 import { signOut } from "next-auth/react";
-import { axiosInstance } from "@/lib/axios/index";
 
 export const authOptions = {
   session: {
@@ -13,7 +12,7 @@ export const authOptions = {
   },
   callbacks: {
     async signIn({ user, account, profile, email, credentials }) {
-      if (user?.cookie) {
+      if (user?.cookie && account) {
         account.cookie = user?.cookie;
       }
       return true;
@@ -29,36 +28,21 @@ export const authOptions = {
 
       return session;
     },
-    async jwt({ token, user, account, profile, isNewUser }) {
+    async jwt({ token, user, trigger, account, profile, isNewUser }) {
       if (account?.cookie) {
         token.cookie = account.cookie;
       }
 
-      if (
-        Date.now() <
-        new Date(token.cookie[0].split("Expires=")[1].split(";")[0])
-      ) {
+      if (token) {
         // Return previous token if the access token has not expired yet
         return token;
       }
 
-      try {
-        const refreshTokenResponse = await (
-          await axiosInstance()
-        ).post("/auth/refreshToken", {
-          refreshToken: token.cookie[1].split("=")[1].split(";")[0],
-        });
-        console.log(refreshTokenResponse.data.accessToken);
-        token = `${refreshTokenResponse.data.tokenType} ${refreshTokenResponse.data.accessToken}`;
-        return refreshTokenResponse.data.accessToken;
-      } catch (error) {
-        console.log(error);
-        // Replace this with the appropriate code to clear cookies
+      // Replace this with the appropriate code to clear cookies
 
-        // You can also consider refreshing the page to reset the application state
-        await signOut({ redirect: true });
-        return null;
-      }
+      // You can also consider refreshing the page to reset the application state
+      await signOut({ redirect: true });
+      return null;
     },
   },
   providers: [

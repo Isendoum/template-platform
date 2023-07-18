@@ -6,4 +6,13 @@ declare module "next-auth" {
     refreshToken?: string;
     cookie?: string[];
   }
+  interface User {
+    cookie: string[];
+  }
+
+  interface Account {
+    jwt?: string;
+    refreshToken?: string;
+    cookie: string[];
+  }
 }

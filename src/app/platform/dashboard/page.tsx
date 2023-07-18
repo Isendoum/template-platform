@@ -1,18 +1,15 @@
 "use client";
 import { axiosInstance } from "@/lib/axios/index";
-import { Session } from "next-auth";
 
 import { useSession } from "next-auth/react";
 import { useCallback, useEffect, useState } from "react";
 
 const Dashboard = () => {
-  const { data: session } = useSession();
   const [data, setData] = useState("");
   const healthCheck = useCallback(async () => {
     try {
-      const res = await (await axiosInstance()).get("auth/get");
+      const res = await axiosInstance.get("auth/get");
       setData(res.data);
-      return res.data;
     } catch (error) {
       console.log(error);
     }

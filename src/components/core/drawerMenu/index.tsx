@@ -79,7 +79,7 @@ const DrawerMenu = () => {
             <CustomButton
               onClick={async () => {
                 try {
-                  await (await axiosInstance()).post("auth/signOut");
+                  await axiosInstance.post("auth/signOut");
                 } catch (error) {
                 } finally {
                   signOut();
