@@ -8,7 +8,7 @@ import { signOut } from "next-auth/react";
 import MobileMenu from "./MobileMenu";
 import { Bars3Icon } from "@heroicons/react/24/solid";
 import { ArrowLeftOnRectangleIcon } from "@heroicons/react/24/solid";
-import { subscribe } from "diagnostics_channel";
+import { axiosInstance } from "@/lib/axios/index";
 const menu = [
   {
     label: "Dashboard",
@@ -28,7 +28,7 @@ const DrawerMenu = () => {
 
   const renderMenuItems = (menuItems: any) => {
     return menuItems.map((mItem: any) => (
-      <MenuItem title={mItem.label} link={mItem.link}>
+      <MenuItem key={mItem.link} title={mItem.label} link={mItem.link}>
         {mItem.children && (
           <ul className="pl-2">{renderMenuItems(mItem.children)}</ul>
         )}
@@ -76,7 +76,15 @@ const DrawerMenu = () => {
               style={{ scrollbarWidth: "thin" }}>
               {renderMenuItems(menu)}
             </ul>
-            <CustomButton onClick={() => signOut()}>
+            <CustomButton
+              onClick={async () => {
+                try {
+                  await axiosInstance.post("auth/signOut");
+                } catch (error) {
+                } finally {
+                  signOut();
+                }
+              }}>
               Logout
               <ArrowLeftOnRectangleIcon className="w-6 h-6 flex self-end flex-col" />
             </CustomButton>

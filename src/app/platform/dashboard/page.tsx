@@ -1,26 +1,30 @@
-import CustomButton from "@/components/core/buttons/Button";
-import DateInput from "@/components/core/inputs/DateInput";
-import TextInput from "@/components/core/inputs/TextInput";
-import { authOptions } from "@/lib/auth";
-import { getServerSession } from "next-auth";
-import { supabase } from "../../../lib/supabaseClient";
+"use client";
+import { axiosInstance } from "@/lib/axios/index";
 
-const Dashboard = async () => {
-  const session = await getServerSession(authOptions);
-  console.log(JSON.stringify(session, null, 2));
+import { useSession } from "next-auth/react";
+import { useCallback, useEffect, useState } from "react";
 
-  let { data: Cars, error } = await supabase.from("Cars").select("*");
+const Dashboard = () => {
+  const [data, setData] = useState("");
+  const healthCheck = useCallback(async () => {
+    try {
+      const res = await axiosInstance.get("auth/get");
+      setData(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
+
+  useEffect(() => {
+    healthCheck();
+  }, []);
 
   return (
     <div className="flex flex-col w-[100%] max-h-[100%]">
       <h1 className="block font-sans text-5xl font-semibold leading-tight tracking-normal text-inherit antialiased">
         Dashboard
       </h1>
-      {Cars?.map((car) => (
-        <div>
-          {car.name} {car.color}
-        </div>
-      ))}
+      {data}
     </div>
   );
 };
