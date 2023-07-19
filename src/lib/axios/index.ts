@@ -40,23 +40,18 @@ axiosInstance.interceptors.response.use(
           redirect: false,
           refreshToken: refreshToken!,
         });
-        console.log(res);
         if (res?.error) {
           console.log("In sign in axios 401 error");
           await signOut({ redirect: false });
           throw error;
         }
         if (res?.ok) {
-          console.log("In sign in axios 401 with valid re-try");
           const token = await setGetSessionJwt();
           originalRequest.headers.Authorization = `Bearer ${token}`;
           // this causes loops
           return axiosInstance(originalRequest);
         }
       } catch (error) {
-        console.log("In down error");
-        console.log(error);
-
         // You can also consider refreshing the page to reset the application state
         await signOut({ redirect: true });
 
@@ -65,7 +60,6 @@ axiosInstance.interceptors.response.use(
       }
     }
     if (error.response && error.response.status === 403) {
-      console.log("In 403 error axios");
       axiosInstance.interceptors.response.eject(originalRequest);
       await signOut({ redirect: true });
     }

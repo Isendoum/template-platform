@@ -58,14 +58,12 @@ export const authOptions = {
       async authorize(credentials) {
         try {
           if (credentials.refreshToken) {
-            console.log("in refreshtoken");
             const res = await axios.post(
               `${process.env.SERVER_URL}auth/refreshToken`,
               {
                 refreshToken: credentials?.refreshToken,
               }
             );
-            console.log("Refresh token next auth", res.data);
 
             const user = {
               id: res.data.id,
@@ -76,7 +74,6 @@ export const authOptions = {
             };
             return user;
           } else {
-            console.log("in credentials");
             const res = await axios.post(
               `${process.env.SERVER_URL}auth/signIn`,
               {
@@ -95,8 +92,6 @@ export const authOptions = {
             return user;
           }
         } catch (error) {
-          console.log("In next auth error");
-          console.log("Error: ", error.message);
           return null;
         }
       },
