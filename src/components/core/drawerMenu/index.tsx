@@ -28,7 +28,7 @@ const DrawerMenu = () => {
 
   const renderMenuItems = (menuItems: any) => {
     return menuItems.map((mItem: any) => (
-      <MenuItem title={mItem.label} link={mItem.link}>
+      <MenuItem key={mItem.link} title={mItem.label} link={mItem.link}>
         {mItem.children && (
           <ul className="pl-2">{renderMenuItems(mItem.children)}</ul>
         )}

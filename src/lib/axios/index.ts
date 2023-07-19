@@ -1,37 +1,60 @@
 import axios from "axios";
-import { getSession, signOut } from "next-auth/react";
+import { getSession, signIn, signOut } from "next-auth/react";
+let token;
+
+const setGetSessionJwt = async () => {
+  const session = await getSession();
+  console.log("Setting session: ", session);
+  token = session?.jwt;
+  axiosInstance.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return token;
+};
 
 let axiosInstance = axios.create({
   baseURL: "http://localhost:8080/",
   responseType: "json",
   headers: {
     "content-type": "application/json",
+    Authorization: `Bearer ${token}`,
   },
+});
+
+axiosInstance.interceptors.request.use(async (req) => {
+  const token = await setGetSessionJwt();
+  req.headers.Authorization = `Bearer ${token}`;
+  return req;
 });
 
 axiosInstance.interceptors.response.use(
   async (response) => response,
   async (error) => {
     const originalRequest = error.config;
-    const session = await getSession();
-    const refreshToken = session?.refreshToken;
+
     if (error.response && error.response.status === 401) {
       try {
-        const refreshTokenResponse = await axiosInstance.post(
-          "/auth/refreshToken",
-          {
-            refreshToken: refreshToken,
-          }
-        );
+        const sessionOld = await getSession();
+        const refreshToken = sessionOld?.refreshToken;
         axiosInstance.interceptors.response.eject(originalRequest);
-        const newToken = refreshTokenResponse.data.accessToken;
-        axiosInstance.defaults.headers.common[
-          "Authorization"
-        ] = `Bearer ${newToken}`;
-        originalRequest.headers.Authorization = `Bearer ${newToken}`;
-        // Retry the original request with the updated token
-        return axiosInstance(originalRequest);
+
+        const res = await signIn("credentials", {
+          redirect: false,
+          refreshToken: refreshToken!,
+        });
+        console.log(res);
+        if (res?.error) {
+          console.log("In sign in axios 401 error");
+          await signOut({ redirect: false });
+          throw error;
+        }
+        if (res?.ok) {
+          console.log("In sign in axios 401 with valid re-try");
+          const token = await setGetSessionJwt();
+          originalRequest.headers.Authorization = `Bearer ${token}`;
+          // this causes loops
+          return axiosInstance(originalRequest);
+        }
       } catch (error) {
+        console.log("In down error");
         console.log(error);
 
         // You can also consider refreshing the page to reset the application state
@@ -40,6 +63,11 @@ axiosInstance.interceptors.response.use(
         // Throw the error to stop the further processing of the request
         throw error;
       }
+    }
+    if (error.response && error.response.status === 403) {
+      console.log("In 403 error axios");
+      axiosInstance.interceptors.response.eject(originalRequest);
+      await signOut({ redirect: true });
     }
 
     // For other error statuses, simply throw the error to be handled elsewhere

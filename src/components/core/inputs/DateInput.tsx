@@ -29,4 +29,6 @@ const DateInput = React.forwardRef<
   </div>
 ));
 
+DateInput.displayName = "DateInput";
+
 export default DateInput;

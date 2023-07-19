@@ -3,7 +3,7 @@
 import CustomButton from "@/components/core/buttons/Button";
 import TextInput from "@/components/core/inputs/TextInput";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { getSession, signIn } from "next-auth/react";
+import { signIn } from "next-auth/react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -48,7 +48,7 @@ export const LoginForm = () => {
       if (!res?.error) {
         router.push(callbackUrl);
       } else {
-        setError("invalid email or password");
+        setError("invalid username or password");
       }
     } catch (error: any) {
       setError(error);

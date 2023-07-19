@@ -2,6 +2,7 @@ import axios from "axios";
 import CredentialsProvider from "next-auth/providers/credentials";
 
 import { signOut } from "next-auth/react";
+import { axiosInstance } from "./axios";
 
 export const authOptions = {
   session: {
@@ -19,13 +20,14 @@ export const authOptions = {
     },
     async session({ session, user, token }) {
       if (token?.cookie) {
-        session.cookie = token.cookie;
+        if (!session.cookie) {
+          session.cookie = token.cookie;
+        }
         session.jwt = token.cookie[0].split("=")[1].split(";")[0];
         session.refreshToken = token.cookie[1].split("=")[1].split(";")[0];
       } else {
         session.jwt = null;
       }
-
       return session;
     },
     async jwt({ token, user, trigger, account, profile, isNewUser }) {
@@ -38,16 +40,12 @@ export const authOptions = {
         return token;
       }
 
-      // Replace this with the appropriate code to clear cookies
-
-      // You can also consider refreshing the page to reset the application state
-      await signOut({ redirect: true });
       return null;
     },
   },
   providers: [
     CredentialsProvider({
-      name: "Sign in",
+      name: "Credentials",
       credentials: {
         username: {
           label: "Username",
@@ -55,26 +53,50 @@ export const authOptions = {
           placeholder: "",
         },
         password: { label: "Password", type: "password" },
+        refreshToken: { label: "refreshToken", type: "text" },
       },
       async authorize(credentials) {
         try {
-          const res = await axios.post("http://localhost:8080/auth/signIn", {
-            username: credentials?.username,
-            password: credentials?.password,
-          });
+          if (credentials.refreshToken) {
+            console.log("in refreshtoken");
+            const res = await axios.post(
+              `${process.env.SERVER_URL}auth/refreshToken`,
+              {
+                refreshToken: credentials?.refreshToken,
+              }
+            );
+            console.log("Refresh token next auth", res.data);
 
-          // throw new Error("testing error");
-          // const res1 = await axios.get("http://localhost:8080/auth/get");
-          const user = {
-            id: res.data.id,
-            email: res.data.email,
-            username: res.data.username,
-            name: res.data.username,
-            cookie: res.headers["set-cookie"],
-          };
-          return user;
+            const user = {
+              id: res.data.id,
+              email: res.data.email,
+              username: res.data.username,
+              name: res.data.username,
+              cookie: res.headers["set-cookie"],
+            };
+            return user;
+          } else {
+            console.log("in credentials");
+            const res = await axios.post(
+              `${process.env.SERVER_URL}auth/signIn`,
+              {
+                username: credentials?.username,
+                password: credentials?.password,
+              }
+            );
+
+            const user = {
+              id: res.data.id,
+              email: res.data.email,
+              username: res.data.username,
+              name: res.data.username,
+              cookie: res.headers["set-cookie"],
+            };
+            return user;
+          }
         } catch (error) {
-          console.log(error);
+          console.log("In next auth error");
+          console.log("Error: ", error.message);
           return null;
         }
       },
