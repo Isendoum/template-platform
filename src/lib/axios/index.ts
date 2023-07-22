@@ -42,7 +42,7 @@ axiosInstance.interceptors.response.use(
         });
         if (res?.error) {
           console.log("In sign in axios 401 error");
-          await signOut({ redirect: false });
+          await signOut({ redirect: true });
           throw error;
         }
         if (res?.ok) {

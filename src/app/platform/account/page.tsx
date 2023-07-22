@@ -1,9 +1,3 @@
-import CustomButton from "@/components/core/buttons/Button";
-import DateInput from "@/components/core/inputs/DateInput";
-import TextInput from "@/components/core/inputs/TextInput";
-import { authOptions } from "@/lib/auth";
-import { getServerSession } from "next-auth";
-
 const Account = async () => {
   //   const session = await getServerSession(authOptions);
   //   console.log("session page", session);

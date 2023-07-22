@@ -1,7 +1,6 @@
 "use client";
 import { axiosInstance } from "@/lib/axios/index";
 
-import { useSession } from "next-auth/react";
 import { useCallback, useEffect, useState } from "react";
 
 const Dashboard = () => {
@@ -24,7 +23,6 @@ const Dashboard = () => {
       <h1 className="block font-sans text-5xl font-semibold leading-tight tracking-normal text-inherit antialiased">
         Dashboard
       </h1>
-      {data}
     </div>
   );
 };
