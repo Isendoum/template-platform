@@ -2,7 +2,6 @@
 
 import CustomButton from "@/components/core/buttons/Button";
 import TextInput from "@/components/core/inputs/TextInput";
-import ButtonLoader from "@/components/core/loaders/ButtonLoader";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { signIn } from "next-auth/react";
 import { useSearchParams, useRouter } from "next/navigation";
@@ -14,7 +13,7 @@ type Inputs = {
   username: string;
   password: string;
 };
-export const LoginForm = () => {
+const BasicInfoForm = () => {
   const validationSchema = yup
     .object({
       username: yup.string().required(),
@@ -26,9 +25,10 @@ export const LoginForm = () => {
     handleSubmit,
     setValue,
     watch,
-    formState: { errors, isLoading, isSubmitting },
+    formState: { errors },
   } = useForm<Inputs>({ resolver: yupResolver(validationSchema) });
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
 
   const [error, setError] = useState("");
 
@@ -37,6 +37,8 @@ export const LoginForm = () => {
 
   const onSubmit = async (values: Inputs) => {
     try {
+      setLoading(true);
+
       const res = await signIn("credentials", {
         redirect: false,
         username: values.username,
@@ -51,6 +53,7 @@ export const LoginForm = () => {
     } catch (error: any) {
       setError(error);
     } finally {
+      setLoading(false);
     }
   };
 
@@ -79,13 +82,11 @@ export const LoginForm = () => {
           {...register("password")}
         />
       </div>
-      <CustomButton
-        disabled={isSubmitting}
-        onClick={handleSubmit(onSubmit)}
-        type="submit">
-        Sign In
-        {isSubmitting && <ButtonLoader />}
+      <CustomButton onClick={handleSubmit(onSubmit)} type="submit">
+        Update
       </CustomButton>
     </form>
   );
 };
+
+export default BasicInfoForm;

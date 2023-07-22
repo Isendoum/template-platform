@@ -1,3 +1,6 @@
+import SimpleSpace from "@/components/core/spaces/SimpleSpace";
+import BasicInfoForm from "./BasicInfoForm";
+
 const Account = async () => {
   //   const session = await getServerSession(authOptions);
   //   console.log("session page", session);
@@ -6,6 +9,9 @@ const Account = async () => {
       <h1 className="block font-sans text-5xl font-semibold leading-tight tracking-normal text-inherit antialiased">
         Account
       </h1>
+      <SimpleSpace>
+        <BasicInfoForm />
+      </SimpleSpace>
     </div>
   );
 };

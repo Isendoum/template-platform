@@ -1,4 +1,4 @@
-import { ButtonHTMLAttributes } from "react";
+import React, { ButtonHTMLAttributes } from "react";
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   variant?: "primary" | "success";
 };
@@ -32,7 +32,11 @@ const CustomButton: React.FC<ButtonProps> = ({ children, ...props }) => {
           } border w-[100%] border-indigo-500 bg-indigo-500 text-white rounded-md px-4 py-2 transition 
           duration-500 ease select-none hover:bg-indigo-600 focus:outline-none focus:shadow-outline`}
           {...props}>
-          <div className="flex flex-row justify-center">{children}</div>
+          <div className="flex flex-row justify-center items-center">
+            {React.Children.map(children, (child) => (
+              <div className="mr-2">{child}</div>
+            ))}
+          </div>
         </button>
       );
   }
