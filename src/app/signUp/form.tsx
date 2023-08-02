@@ -7,7 +7,9 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import CustomButton from "@/components/core/buttons/Button";
 import TextInput from "@/components/core/inputs/TextInput";
+import { axiosInstance } from "@/lib/axios";
 type Inputs = {
+  username: string;
   email: string;
   password: string;
   password2: string;
@@ -21,6 +23,7 @@ export const SignUpForm = () => {
   // const emailW = watch("email");
   const validationSchema = yup
     .object({
+      username: yup.string().required(),
       email: yup.string().email().required(),
       password: yup.string().required(),
       password2: yup
@@ -40,9 +43,11 @@ export const SignUpForm = () => {
   const onSubmit = async (values: Inputs) => {
     try {
       setLoading(true);
-
+      await axiosInstance.post("auth/signUp", values);
       setLoading(false);
+      router.push("/auth/success");
     } catch (error: any) {
+      alert(error);
       setLoading(false);
       setError(error);
     }
@@ -53,7 +58,14 @@ export const SignUpForm = () => {
       {error && (
         <p className="text-center bg-red-300 py-4 mb-6 rounded">{error}</p>
       )}
-
+      <div className="mb-6">
+        <TextInput
+          type="text"
+          label={"Username"}
+          error={errors["username"]}
+          {...register("username")}
+        />
+      </div>
       <div className="mb-6">
         <TextInput
           type="email"
