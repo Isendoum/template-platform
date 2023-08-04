@@ -19,28 +19,18 @@ const menu = [
   {
     label: "Home",
     link: "/",
-    children: [
-      {
-        label: "Other",
-        link: "/1",
-      },
-      {
-        label: "Other 2 Other 2 Other 2",
-        link: "/2",
-      },
-    ],
   },
   {
     label: "Services",
-    link: "/3",
+    link: "/services",
     children: [
       {
         label: "Service 1",
-        link: "/4",
+        link: "/services/#",
       },
       {
         label: "Service 2",
-        link: "/5",
+        link: "/services/#",
       },
     ],
   },
@@ -70,7 +60,7 @@ const NavMenu: React.FC = () => {
   ) => {
     return menuItems.map((mItem: any) => (
       <NavMenuItem
-        key={mItem.link}
+        key={mItem.label}
         title={mItem.label}
         link={mItem.link}
         expandedMenu={expandedMenu} // pass down the state
