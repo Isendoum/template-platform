@@ -1,6 +1,9 @@
 import "./globals.css";
 import { Inter } from "next/font/google";
 import { NextAuthProvider } from "./providers";
+import Link from "next/link";
+import MobileMenu from "@/components/core/drawerMenu/MobileMenu";
+import NavMenu from "@/components/core/navMenu";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,6 +22,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <NextAuthProvider>
           <main className="flex min-h-screen max-w-screen flex-col items-center">
+            <NavMenu />
             {children}
           </main>
         </NextAuthProvider>
