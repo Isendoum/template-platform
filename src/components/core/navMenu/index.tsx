@@ -4,6 +4,8 @@ import NavMobileMenu from "./NavMobileMenu";
 import NavMenuItem from "./NavMenuItem";
 import { useCallback, useState } from "react";
 import { Bars3Icon } from "@heroicons/react/24/solid";
+import { useSession } from "next-auth/react";
+import { usePathname } from "next/navigation";
 
 const menu = [
   {
@@ -15,6 +17,8 @@ const menu = [
 const NavMenu: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
+  const session = useSession();
+  const pathname = usePathname();
   const setIsOpenCallback = useCallback((val: boolean) => {
     setIsOpen(val);
   }, []);
@@ -39,26 +43,42 @@ const NavMenu: React.FC = () => {
       </NavMenuItem>
     ));
   };
+  if (pathname.includes("/platform")) {
+    return null;
+  }
   return (
     <div className="w-full">
       <div className="flex flex-row w-full bg-black h-[4rem] justify-between items-center">
         <div>{renderMenuItems(menu)}</div>
-        <div className="flex flex-row items-center mr-4">
-          <Link
-            className="inline-block px-6 py-3 text-white shadow-lg hover:text-sky-400"
-            href="/signUp">
-            <span className="text-1xl ">Sign up</span>
-          </Link>
-          <Link
-            href="/login"
-            className="inline-block px-6 py-3 text-white shadow-lg hover:text-sky-400">
-            <span className="text-1xl ">Login</span>
-          </Link>
-          <Bars3Icon
-            className="w-6 h-6 cursor-pointer lg:hidden"
-            onClick={() => setIsOpen(true)}
-          />
-        </div>
+        {session?.status !== "authenticated" && (
+          <div className="flex flex-row items-center mr-4">
+            <Link
+              className="inline-block px-6 py-3 text-white shadow-lg hover:text-sky-400"
+              href="/signUp">
+              <span className="text-1xl ">Sign up</span>
+            </Link>
+            <Link
+              href="/login"
+              className="inline-block px-6 py-3 text-white shadow-lg hover:text-sky-400">
+              <span className="text-1xl ">Login</span>
+            </Link>
+          </div>
+        )}
+
+        {session?.status === "authenticated" && (
+          <div className="flex flex-row items-center mr-4">
+            <Link
+              className="inline-block px-6 py-3 text-white shadow-lg hover:text-sky-400"
+              href="/platform/dashboard">
+              <span className="text-1xl ">Dashboard</span>
+            </Link>
+          </div>
+        )}
+
+        <Bars3Icon
+          className="w-6 h-6 cursor-pointer lg:hidden mr-4"
+          onClick={() => setIsOpen(true)}
+        />
       </div>
       <div id="test" className="lg:hidden">
         <NavMobileMenu

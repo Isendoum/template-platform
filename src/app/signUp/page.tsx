@@ -7,13 +7,6 @@ export default function SignUpPage() {
     <div className="container mx-auto px-6 py-12 h-full flex justify-center items-center">
       <SimpleSpace>
         <SignUpForm />
-        <div className="flex flex-col">
-          <Link
-            className="inline-block mt-4 self-center px-6 py-3 text-white bg-blue-500 rounded-lg shadow-lg hover:bg-blue-600"
-            href="/">
-            <span className="text-1xl ">Home</span>
-          </Link>
-        </div>
       </SimpleSpace>
     </div>
   );
