@@ -8,7 +8,7 @@ const CustomButton: React.FC<ButtonProps> = ({ children, ...props }) => {
       return (
         <button
           type="button"
-          className="border border-indigo-500 bg-indigo-500 text-white rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-indigo-600 focus:outline-none focus:shadow-outline"
+          className="border bg-primary text-white rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-primary-hover focus:outline-none focus:shadow-outline"
           {...props}>
           <div className="flex flex-row justify-center">{children}</div>
         </button>
@@ -27,11 +27,11 @@ const CustomButton: React.FC<ButtonProps> = ({ children, ...props }) => {
     default:
       return (
         <button
+          {...props}
           className={`${
             props.className ? props.className + " " : ""
-          } border w-[100%] border-indigo-500 bg-indigo-500 text-white rounded-md px-4 py-2 transition 
-          duration-500 ease select-none hover:bg-indigo-600 focus:outline-none focus:shadow-outline`}
-          {...props}>
+          } border w-[100%] bg-primary rounded-md px-4 py-2 transition 
+          duration-500 ease select-none hover:bg-primary-hover focus:outline-none focus:shadow-outline`}>
           <div className="flex flex-row justify-center items-center">
             {React.Children.map(children, (child) => (
               <div className="mr-2">{child}</div>

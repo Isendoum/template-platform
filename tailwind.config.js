@@ -28,6 +28,10 @@ module.exports = {
         primary: "#FFFFFF",
         secondary: "#000670",
       },
+      backgroundColor: {
+        primary: "rgb(10, 20, 40)",
+        "primary-hover": "rgb(60, 60, 90)",
+      },
       animation: {
         spin: "spin 1s linear infinite",
       },
