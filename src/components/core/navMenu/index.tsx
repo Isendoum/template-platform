@@ -14,6 +14,8 @@ import {
 import { Bars3Icon } from "@heroicons/react/24/solid";
 import { useSession } from "next-auth/react";
 import { usePathname } from "next/navigation";
+import MenuItem from "../drawerMenu/MenuItem";
+import NavMenuItemMobile from "./NavMenuItemMobile";
 
 const menu = [
   {
@@ -91,6 +93,15 @@ const NavMenu: React.FC = () => {
   if (pathname.includes("/platform")) {
     return null;
   }
+  const renderMenuItemsMob = (menuItems: any) => {
+    return menuItems.map((mItem: any) => (
+      <NavMenuItemMobile key={mItem.link} title={mItem.label} link={mItem.link}>
+        {mItem.children && (
+          <ul className="pl-2">{renderMenuItemsMob(mItem.children)}</ul>
+        )}
+      </NavMenuItemMobile>
+    ));
+  };
   return (
     <div className="w-full" ref={navMenuRef}>
       <div className="flex flex-row w-full bg-[#4169E1] h-[4rem] justify-between items-center">
@@ -136,7 +147,7 @@ const NavMenu: React.FC = () => {
             setIsOpen={setIsOpen}
             isClosing={isClosing}
             setIsClosing={setIsClosing}>
-            {renderMenuItems(menu, setIsOpenCallback, setIsClosingCallback)}
+            {renderMenuItemsMob(menu)}
           </NavMobileMenu>
         </div>
       </div>
