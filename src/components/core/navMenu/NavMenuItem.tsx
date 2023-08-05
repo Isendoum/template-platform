@@ -44,7 +44,7 @@ const NavMenuItem = ({
   return (
     <li id={title} className={`flex flex-col w-full`}>
       <div className={`flex flex-row items-center relative`}>
-        <div className="flex flex-row w-full justify-between p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white">
+        <div className="flex flex-row w-full justify-between p-2 text-base font-normal">
           <div onClick={handleClick} className="flex">
             <MenuItemTitle title={title} />
           </div>

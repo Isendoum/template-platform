@@ -103,8 +103,8 @@ const NavMenu: React.FC = () => {
     ));
   };
   return (
-    <div className="w-full" ref={navMenuRef}>
-      <div className="flex flex-row w-full bg-[#4169E1] h-[4rem] justify-between items-center">
+    <nav className="w-full" ref={navMenuRef}>
+      <div className="flex flex-row w-full h-[4rem] justify-between items-center">
         <p className="pl-6">Logo</p>
         <div className="flex flex-row items-center justify-between w-full">
           <div className="max-lg:hidden flex flex-row pl-6 items-center">
@@ -117,10 +117,10 @@ const NavMenu: React.FC = () => {
           </div>
           {session?.status !== "authenticated" && (
             <div className="flex flex-row items-center mr-4">
-              <Link className="inline-block px-6 text-primary" href="/signUp">
+              <Link className="inline-block px-6" href="/signUp">
                 <span className="text-1xl ">Sign up</span>
               </Link>
-              <Link href="/login" className="inline-block py-3 text-primary">
+              <Link href="/login" className="inline-block py-3">
                 <span className="text-1xl ">Login</span>
               </Link>
             </div>
@@ -151,7 +151,7 @@ const NavMenu: React.FC = () => {
           </NavMobileMenu>
         </div>
       </div>
-    </div>
+    </nav>
   );
 };
 
