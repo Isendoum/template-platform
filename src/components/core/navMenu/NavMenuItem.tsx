@@ -58,7 +58,7 @@ const NavMenuItem = ({
           )}
         </div>
         <div
-          className={`absolute -bottom-[5.7rem] min-w-[10rem] ml-10 flex bg-[#321041] rounded-b-lg transition-opacity ${transitionDuration} ${
+          className={`nav-submenu transition-opacity ${transitionDuration} ${
             isExpanded ? "opacity-100" : "opacity-0"
           }`}>
           {children}

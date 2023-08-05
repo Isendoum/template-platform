@@ -7,6 +7,7 @@
   --background: 255, 255, 255;
   --nav-bg: 100, 160, 255;
   --nav-text-color: 255, 255, 255;
+  --nav-submenu-bg: 10, 20, 40;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -15,6 +16,7 @@
     --background: 60, 60, 90;
     --nav-text-color: 255, 255, 255;
     --nav-bg: 10, 20, 40;
+    --nav-submenu-bg: 10, 30, 59;
   }
 }
 
@@ -26,4 +28,15 @@ body {
 nav {
   color: rgb(var(--nav-text-color));
   background: rgb(var(--nav-bg));
+}
+
+.nav-submenu {
+  color: rgb(var(--nav-text-color));
+  background: rgb(var(--nav-submenu-bg));
+  position: absolute;
+  min-width: 10rem;
+  display: flex;
+  bottom: -5.7rem;
+  border-bottom-left-radius: 0.3rem;
+  border-bottom-right-radius: 1rem;
 }
