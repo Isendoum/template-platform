@@ -22,7 +22,12 @@ module.exports = {
       "2xl": "1536px",
       // => @media (min-width: 1536px) { ... }
     },
+
     extend: {
+      colors: {
+        primary: "#FFFFFF",
+        secondary: "#000670",
+      },
       animation: {
         spin: "spin 1s linear infinite",
       },

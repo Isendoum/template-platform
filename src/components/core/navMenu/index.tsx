@@ -106,13 +106,11 @@ const NavMenu: React.FC = () => {
         {session?.status !== "authenticated" && (
           <div className="flex flex-row items-center mr-4">
             <Link
-              className="inline-block px-6 py-3 text-white shadow-lg hover:text-sky-400"
+              className="inline-block px-6 py-3 text-primary"
               href="/signUp">
               <span className="text-1xl ">Sign up</span>
             </Link>
-            <Link
-              href="/login"
-              className="inline-block px-6 py-3 text-white shadow-lg hover:text-sky-400">
+            <Link href="/login" className="inline-block px-6 py-3 text-primary">
               <span className="text-1xl ">Login</span>
             </Link>
           </div>
@@ -121,7 +119,7 @@ const NavMenu: React.FC = () => {
         {session?.status === "authenticated" && (
           <div className="flex flex-row items-center mr-4">
             <Link
-              className="inline-block px-6 py-3 text-white shadow-lg hover:text-sky-400"
+              className="inline-block px-6 py-3 text-primary"
               href="/platform/dashboard">
               <span className="text-1xl ">Dashboard</span>
             </Link>

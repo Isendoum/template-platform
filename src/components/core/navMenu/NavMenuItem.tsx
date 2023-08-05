@@ -1,5 +1,4 @@
-"use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import MenuItemTitle from "./NavMenuItemTitle";
 import { useRouter } from "next/navigation";
 import { ChevronDownIcon } from "@heroicons/react/24/solid";
@@ -10,8 +9,8 @@ const NavMenuItem = ({
   icon,
   setIsClosing,
   children,
-  expandedMenu, // receive the state
-  setExpandedMenu, // receive the setter
+  expandedMenu,
+  setExpandedMenu,
 }: {
   title: string;
   link: string;
@@ -29,9 +28,18 @@ const NavMenuItem = ({
   };
 
   const handleExpandClick = () => {
-    // if this menu is already expanded, collapse it, otherwise expand it
     setExpandedMenu(isExpanded ? null : title);
   };
+
+  const [transitionDuration, setTransitionDuration] = useState("duration-500");
+
+  useEffect(() => {
+    if (isExpanded) {
+      setTransitionDuration("duration-500"); // fade-in when opening
+    } else {
+      setTransitionDuration("duration-500"); // fade-out when closing
+    }
+  }, [isExpanded]);
 
   return (
     <li id={title} className={`flex flex-col w-full`}>
@@ -43,16 +51,17 @@ const NavMenuItem = ({
           {children && (
             <div className="flex self-end ml-2 cursor-pointer">
               <ChevronDownIcon
-                onClick={handleExpandClick} // toggle expansion here
-                className={`w-6 h-6`}
+                onClick={handleExpandClick}
+                className={`w-5 h-5`}
               />
             </div>
           )}
         </div>
-        <div className="absolute -bottom-[5.7rem] flex flex-col">
-          <div className="bg-[#000080] rounded-b-lg">
-            {isExpanded && children}
-          </div>
+        <div
+          className={`absolute -bottom-[5.7rem] min-w-[10rem] ml-10 flex bg-[#321041] rounded-b-lg transition-opacity ${transitionDuration} ${
+            isExpanded ? "opacity-100" : "opacity-0"
+          }`}>
+          {children}
         </div>
       </div>
     </li>
