@@ -95,7 +95,11 @@ const NavMenu: React.FC = () => {
   }
   const renderMenuItemsMob = (menuItems: any) => {
     return menuItems.map((mItem: any) => (
-      <NavMenuItemMobile key={mItem.link} title={mItem.label} link={mItem.link}>
+      <NavMenuItemMobile
+        key={mItem.link}
+        title={mItem.label}
+        link={mItem.link}
+        setIsClosing={setIsClosing}>
         {mItem.children && (
           <ul className="pl-2">{renderMenuItemsMob(mItem.children)}</ul>
         )}
