@@ -4,7 +4,6 @@ let token;
 
 const setGetSessionJwt = async () => {
   const session = await getSession();
-  console.log("Setting session: ", session);
   token = session?.jwt;
   axiosInstance.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return token;
