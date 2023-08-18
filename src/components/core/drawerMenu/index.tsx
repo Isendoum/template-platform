@@ -9,6 +9,8 @@ import MobileMenu from "./MobileMenu";
 import { Bars3Icon } from "@heroicons/react/24/solid";
 import { ArrowLeftOnRectangleIcon } from "@heroicons/react/24/solid";
 import { axiosInstance } from "@/lib/axios/index";
+import Image from "next/image";
+import Logo from "../../../../public/logo.svg";
 const menu = [
   {
     label: "Dashboard",
@@ -65,7 +67,7 @@ const DrawerMenu = () => {
           <div
             className="ml-4 lg:mb-4 lg:ml-0 cursor-pointer font-sans"
             onClick={() => router.push("/")}>
-            Your Company Logo
+            <Image width={30} height={30} alt="logo" src={Logo} />
           </div>
           <div id="test" className="lg:hidden">
             <MobileMenu isOpen={isOpen} setIsOpen={setIsOpen}>

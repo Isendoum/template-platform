@@ -16,7 +16,8 @@ import { useSession } from "next-auth/react";
 import { usePathname } from "next/navigation";
 import MenuItem from "../drawerMenu/MenuItem";
 import NavMenuItemMobile from "./NavMenuItemMobile";
-
+import Logo from "../../../../public/logo.svg";
+import Image from "next/image";
 const menu = [
   {
     label: "Home",
@@ -109,7 +110,7 @@ const NavMenu: React.FC = () => {
   return (
     <nav className="w-full" ref={navMenuRef}>
       <div className="flex flex-row w-full h-[4rem] justify-between items-center">
-        <p className="pl-6 text-center">Your Company Logo</p>
+        <Image className="ml-4" width={30} height={30} alt="logo" src={Logo} />
         <div className="flex flex-row items-center justify-between w-full">
           <div className="max-lg:hidden flex flex-row pl-6 items-center">
             {renderMenuItems(

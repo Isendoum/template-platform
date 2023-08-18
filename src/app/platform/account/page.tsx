@@ -1,5 +1,6 @@
 import SimpleSpace from "@/components/core/spaces/SimpleSpace";
 import BasicUserForm from "./BasicUserInfo";
+import { AdditionalInfoForm } from "./AdditionalInfoForm";
 
 const Account = async () => {
   return (
@@ -21,6 +22,7 @@ const Account = async () => {
           <h4 className="text-[#07074D] text-xl font-medium mb-8">
             Additional information
           </h4>
+          <AdditionalInfoForm />
         </SimpleSpace>
       </div>
     </div>
