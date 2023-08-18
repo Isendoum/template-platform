@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -18,6 +18,7 @@ export const AdditionalInfoForm = () => {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [userMetada, setUserMetadata] = useState<Inputs>();
   // we can assing to watch a spesific field
   // const emailW = watch("email");
   const validationSchema = yup
@@ -33,12 +34,16 @@ export const AdditionalInfoForm = () => {
     setValue,
     watch,
     formState: { errors },
-  } = useForm<Inputs>({ resolver: yupResolver(validationSchema) });
+  } = useForm<Inputs>({
+    resolver: yupResolver(validationSchema),
+    defaultValues: userMetada,
+    values: userMetada,
+  });
 
   const onSubmit = async (values: Inputs) => {
     try {
       setLoading(true);
-      await axiosInstance.post("account/updateUserAdditionalInfo", values);
+      await axiosInstance.post("account/updateUserMetadata", values);
       setLoading(false);
     } catch (error: any) {
       alert(error);
@@ -46,6 +51,18 @@ export const AdditionalInfoForm = () => {
       setError(error);
     }
   };
+
+  const getAccountMetadataInfo = async () => {
+    try {
+      const res = await axiosInstance.get("account/getUserMetadataInfo");
+      setUserMetadata(res?.data);
+    } catch (error) {}
+  };
+  useEffect(() => {
+    (async () => {
+      await getAccountMetadataInfo();
+    })();
+  }, []);
 
   return (
     <form>
