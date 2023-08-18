@@ -5,7 +5,7 @@ import TextInput from "@/components/core/inputs/TextInput";
 import ButtonLoader from "@/components/core/loaders/ButtonLoader";
 import { axiosInstance } from "@/lib/axios";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useSearchParams, useRouter } from "next/navigation";
+import { useSearchParams, useRouter, useParams } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
@@ -13,10 +13,10 @@ import * as yup from "yup";
 type Inputs = {
   email: string;
 };
-export const EmailResendForm = () => {
+export const ForgotPasswordForm = () => {
   const validationSchema = yup
     .object({
-      email: yup.string().required().email(),
+      email: yup.string().email(),
     })
     .required();
   const {
@@ -32,13 +32,13 @@ export const EmailResendForm = () => {
 
   const onSubmit = async (values: Inputs) => {
     try {
-      const res = await axiosInstance.get(
-        "/account/resendConfirmAccountEmail",
-        {
-          params: { email: values.email },
-        }
+      const res = await axiosInstance.get("/account/resetUserPassword", {
+        params: { email: values.email },
+      });
+
+      router.push(
+        "/success?message=Email for reseting password has been sent successfully."
       );
-      router.push("/success?message=A confirmation email has been sent.");
     } catch (error: any) {
       setError(error);
     } finally {
@@ -67,7 +67,7 @@ export const EmailResendForm = () => {
         disabled={isSubmitting}
         onClick={handleSubmit(onSubmit)}
         type="submit">
-        Resend
+        Email to reset password.
         {isSubmitting && <ButtonLoader />}
       </CustomButton>
     </form>

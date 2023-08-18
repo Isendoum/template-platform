@@ -27,12 +27,9 @@ axiosInstance.interceptors.request.use(async (req) => {
 axiosInstance.interceptors.response.use(
   async (response) => response,
   async (error) => {
-    const originalRequest = error.config;
-    if (error.response && error.response.status === 401) {
-      throw error;
-    }
+    const originalRequest = error?.config;
 
-    if (error.response && error.response.status === 401) {
+    if (error?.response && error?.response?.status === 401) {
       try {
         const sessionOld = await getSession();
         const refreshToken = sessionOld?.refreshToken;

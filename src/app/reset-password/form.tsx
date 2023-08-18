@@ -5,18 +5,19 @@ import TextInput from "@/components/core/inputs/TextInput";
 import ButtonLoader from "@/components/core/loaders/ButtonLoader";
 import { axiosInstance } from "@/lib/axios";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useSearchParams, useRouter } from "next/navigation";
+import { useSearchParams, useRouter, useParams } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 
 type Inputs = {
-  email: string;
+  password: string;
+  passwordConfirm: string;
 };
-export const EmailResendForm = () => {
+export const ResetPasswordForm = () => {
   const validationSchema = yup
     .object({
-      email: yup.string().required().email(),
+      email: yup.string().email(),
     })
     .required();
   const {
@@ -27,21 +28,22 @@ export const EmailResendForm = () => {
     formState: { errors, isLoading, isSubmitting },
   } = useForm<Inputs>({ resolver: yupResolver(validationSchema) });
   const router = useRouter();
+  const params = useSearchParams();
+  console.log(params.get("code"));
 
   const [error, setError] = useState("");
 
   const onSubmit = async (values: Inputs) => {
     try {
-      const res = await axiosInstance.get(
-        "/account/resendConfirmAccountEmail",
-        {
-          params: { email: values.email },
-        }
-      );
-      router.push("/success?message=A confirmation email has been sent.");
+      const res = await axiosInstance.post("/account/updateUserPassword", {
+        ...values,
+        code: params.get("code"),
+      });
+
+      router.push("/success?message=Password has been successfully reset.");
     } catch (error: any) {
-      setError(error);
-    } finally {
+      console.log(error);
+      setError(error?.message);
     }
   };
 
@@ -56,10 +58,18 @@ export const EmailResendForm = () => {
 
       <div className="mb-6">
         <TextInput
-          type="text"
-          label={"Email"}
-          error={errors["email"]}
-          {...register("email")}
+          type="password"
+          label={"Password"}
+          error={errors["password"]}
+          {...register("password")}
+        />
+      </div>
+      <div className="mb-6">
+        <TextInput
+          type="password"
+          label={"Confirm Password"}
+          error={errors["passwordConfirm"]}
+          {...register("passwordConfirm")}
         />
       </div>
 
@@ -67,7 +77,7 @@ export const EmailResendForm = () => {
         disabled={isSubmitting}
         onClick={handleSubmit(onSubmit)}
         type="submit">
-        Resend
+        Reset password
         {isSubmitting && <ButtonLoader />}
       </CustomButton>
     </form>

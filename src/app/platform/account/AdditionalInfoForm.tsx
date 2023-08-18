@@ -23,9 +23,9 @@ export const AdditionalInfoForm = () => {
   // const emailW = watch("email");
   const validationSchema = yup
     .object({
-      firstName: yup.string().required(),
-      lastName: yup.string().required(),
-      address: yup.string().required(),
+      firstName: yup.string().required("Field is required"),
+      lastName: yup.string().required("Field is required"),
+      address: yup.string(),
     })
     .required();
   const {
@@ -36,14 +36,17 @@ export const AdditionalInfoForm = () => {
     formState: { errors },
   } = useForm<Inputs>({
     resolver: yupResolver(validationSchema),
-    defaultValues: userMetada,
     values: userMetada,
   });
 
   const onSubmit = async (values: Inputs) => {
     try {
       setLoading(true);
-      await axiosInstance.post("account/updateUserMetadata", values);
+      const res = await axiosInstance.post(
+        "account/updateUserMetadata",
+        values
+      );
+      setUserMetadata(res.data);
       setLoading(false);
     } catch (error: any) {
       alert(error);

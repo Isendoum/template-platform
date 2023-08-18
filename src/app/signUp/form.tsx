@@ -45,7 +45,7 @@ export const SignUpForm = () => {
       setLoading(true);
       await axiosInstance.post("auth/signUp", values);
       setLoading(false);
-      router.push("/signUp/success");
+      router.push("/success?message=A confirmation email has been sent.");
     } catch (error: any) {
       alert(error);
       setLoading(false);
