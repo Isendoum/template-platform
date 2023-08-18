@@ -40,7 +40,7 @@ export const ForgotPasswordForm = () => {
         "/success?message=Email for reseting password has been sent successfully."
       );
     } catch (error: any) {
-      setError(error);
+      setError(error?.message);
     } finally {
     }
   };

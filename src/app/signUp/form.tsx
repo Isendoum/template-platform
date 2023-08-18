@@ -49,7 +49,7 @@ export const SignUpForm = () => {
     } catch (error: any) {
       alert(error);
       setLoading(false);
-      setError(error);
+      setError(error?.message);
     }
   };
 

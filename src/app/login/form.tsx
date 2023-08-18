@@ -49,7 +49,7 @@ export const LoginForm = () => {
         setError("invalid username or password");
       }
     } catch (error: any) {
-      setError(error);
+      setError(error?.message);
     } finally {
     }
   };
