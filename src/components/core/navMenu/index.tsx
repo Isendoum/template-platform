@@ -109,7 +109,7 @@ const NavMenu: React.FC = () => {
   return (
     <nav className="w-full" ref={navMenuRef}>
       <div className="flex flex-row w-full h-[4rem] justify-between items-center">
-        <p className="pl-6">Logo</p>
+        <p className="pl-6 text-center">Your Company Logo</p>
         <div className="flex flex-row items-center justify-between w-full">
           <div className="max-lg:hidden flex flex-row pl-6 items-center">
             {renderMenuItems(

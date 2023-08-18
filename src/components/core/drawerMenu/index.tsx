@@ -63,9 +63,9 @@ const DrawerMenu = () => {
             onClick={() => setIsOpen(true)}
           />
           <div
-            className="ml-4 lg:ml-0 cursor-pointer"
+            className="ml-4 lg:mb-4 lg:ml-0 cursor-pointer font-sans"
             onClick={() => router.push("/")}>
-            Logo
+            Your Company Logo
           </div>
           <div id="test" className="lg:hidden">
             <MobileMenu isOpen={isOpen} setIsOpen={setIsOpen}>
