@@ -26,7 +26,7 @@ export const LoginForm = () => {
   const onSubmit = async () => {
     try {
       setLoggingIn(true);
-      const res = await signIn("google");
+      const res = await signIn("google", { callbackUrl: callbackUrl });
     } catch (error: any) {
       setError(error?.message);
     } finally {
