@@ -4,7 +4,7 @@ import "../../../app/globals.css";
 import { useEffect, useState } from "react";
 import MenuItem from "./MenuItem";
 import CustomButton from "../buttons/Button";
-import { signOut } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import MobileMenu from "./MobileMenu";
 import { Bars3Icon } from "@heroicons/react/24/solid";
 import { ArrowLeftOnRectangleIcon } from "@heroicons/react/24/solid";
@@ -23,6 +23,8 @@ const menu = [
 const DrawerMenu = () => {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
+  const { data } = useSession();
+  console.log(data?.user?.name);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -82,18 +84,30 @@ const DrawerMenu = () => {
               style={{ scrollbarWidth: "thin" }}>
               {renderMenuItems(menu)}
             </ul>
-            <CustomButton
-              onClick={async () => {
-                try {
-                  // await axiosInstance.post("auth/signOut");
-                } catch (error) {
-                } finally {
-                  signOut();
-                }
-              }}>
-              Logout
-              <ArrowLeftOnRectangleIcon className="w-6 h-6 flex self-end flex-col" />
-            </CustomButton>
+            <div>
+              <div className="flex flex-row justify-around mb-2 items-center">
+                <Image
+                  className="rounded-2xl"
+                  width={30}
+                  height={30}
+                  src={data?.user?.image!}
+                  alt="profile pic"
+                />
+                <div>{data?.user?.name}</div>
+              </div>
+              <CustomButton
+                onClick={async () => {
+                  try {
+                    // await axiosInstance.post("auth/signOut");
+                  } catch (error) {
+                  } finally {
+                    signOut();
+                  }
+                }}>
+                Logout
+                <ArrowLeftOnRectangleIcon className="w-6 h-6 flex self-end flex-col" />
+              </CustomButton>
+            </div>
           </div>
         </div>
       </aside>

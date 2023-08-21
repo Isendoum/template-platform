@@ -44,8 +44,7 @@ export const LoginForm = () => {
       )}
 
       <CustomButton disabled={loggingIn} onClick={onSubmit} type="submit">
-        Sign In with Google
-        {loggingIn && <ButtonLoader />}
+        Sign In with Google{loggingIn && <ButtonLoader />}
       </CustomButton>
     </div>
   );

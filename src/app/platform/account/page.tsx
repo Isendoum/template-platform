@@ -18,12 +18,12 @@ const Account = async () => {
             these info cannot be changed
           </div>
         </SimpleSpace>
-        <SimpleSpace>
+        {/* <SimpleSpace>
           <h4 className="text-[#07074D] text-xl font-medium mb-8">
             Additional information
           </h4>
           <AdditionalInfoForm />
-        </SimpleSpace>
+        </SimpleSpace> */}
       </div>
     </div>
   );
