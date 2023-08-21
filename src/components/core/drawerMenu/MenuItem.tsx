@@ -8,16 +8,19 @@ const MenuItem = ({
   title,
   link,
   icon,
+  setIsClosing,
   children,
 }: {
   title: string;
   link: string;
   icon?: any;
+  setIsClosing?: (val: boolean) => void;
   children?: any[];
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
   const handleClick = () => {
+    setIsClosing ? setIsClosing(true) : null;
     router.push(link);
   };
   const handleOpenMenuItem = () => {

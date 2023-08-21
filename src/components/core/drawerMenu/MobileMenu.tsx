@@ -1,17 +1,38 @@
-import { Dispatch, SetStateAction } from "react";
-import { XMarkIcon } from "@heroicons/react/24/solid";
+"use client";
+import { Dispatch, SetStateAction, useEffect } from "react";
+import { ArrowLeftOnRectangleIcon, XMarkIcon } from "@heroicons/react/24/solid";
+
+import { signOut, useSession } from "next-auth/react";
+import Image from "next/image";
+import CustomButton from "../buttons/Button";
 const MobileMenu = ({
   isOpen,
   setIsOpen,
+  isClosing,
+  setIsClosing,
   children,
 }: {
   isOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
+  isClosing: boolean;
+  setIsClosing: Dispatch<SetStateAction<boolean>>;
   children: any;
 }) => {
+  const { data } = useSession();
+  useEffect(() => {
+    if (isClosing) {
+      const timer = setTimeout(() => {
+        setIsOpen(false);
+        setIsClosing(false);
+      }, 500); // this is the duration of your transition in milliseconds
+      return () => clearTimeout(timer);
+    }
+  }, [isClosing, setIsOpen]);
   return (
     <div
-      className={`relative z-10 ${isOpen ? `` : `hidden`}`}
+      className={`relative z-10 ${isOpen ? `` : `hidden`} ${
+        isClosing ? `opacity-0 transition-opacity duration-500` : ``
+      }`}
       aria-labelledby="slide-over-title"
       role="dialog"
       aria-modal="true">
@@ -25,7 +46,7 @@ const MobileMenu = ({
                 <span className="sr-only">Close panel</span>
                 <XMarkIcon
                   className="w-6 h-6 cursor-pointer text-gray-300 hover:text-white lg:hidden mr-4"
-                  onClick={() => setIsOpen(false)}
+                  onClick={() => setIsClosing(true)}
                 />
               </div>
 
@@ -33,6 +54,32 @@ const MobileMenu = ({
                 <div className="px-4 sm:px-6"></div>
                 <div className="relative mt-6 flex-1 px-4 sm:px-6">
                   {children}
+                </div>
+                <div className="flex flex-row justify-around mb-2 items-center">
+                  <div>{data?.user?.name}</div>
+                  {data?.user?.image && (
+                    <Image
+                      className="rounded-2xl"
+                      width={30}
+                      height={30}
+                      placeholder="empty"
+                      src={data?.user?.image}
+                      alt="profile pic"
+                    />
+                  )}
+                </div>
+                <div className="mr-14 ml-14">
+                  <CustomButton
+                    onClick={async () => {
+                      try {
+                      } catch (error) {
+                      } finally {
+                        signOut();
+                      }
+                    }}>
+                    Logout
+                    <ArrowLeftOnRectangleIcon className="w-6 h-6 flex self-end flex-col" />
+                  </CustomButton>
                 </div>
               </div>
             </div>

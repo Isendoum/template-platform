@@ -8,9 +8,9 @@ import { signOut, useSession } from "next-auth/react";
 import MobileMenu from "./MobileMenu";
 import { Bars3Icon } from "@heroicons/react/24/solid";
 import { ArrowLeftOnRectangleIcon } from "@heroicons/react/24/solid";
-import { axiosInstance } from "@/lib/axios/index";
 import Image from "next/image";
 import Logo from "../../../../public/logo.svg";
+
 const menu = [
   {
     label: "Dashboard",
@@ -24,15 +24,18 @@ const DrawerMenu = () => {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const { data } = useSession();
-  console.log(data?.user?.name);
-
+  const [isClosing, setIsClosing] = useState(false);
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
 
   const renderMenuItems = (menuItems: any) => {
     return menuItems.map((mItem: any) => (
-      <MenuItem key={mItem.link} title={mItem.label} link={mItem.link}>
+      <MenuItem
+        key={mItem.link}
+        title={mItem.label}
+        link={mItem.link}
+        setIsClosing={setIsClosing}>
         {mItem.children && (
           <ul className="pl-2">{renderMenuItems(mItem.children)}</ul>
         )}
@@ -56,6 +59,10 @@ const DrawerMenu = () => {
     };
   }, []);
 
+  const imageLoader = ({ src }: any) => {
+    return src;
+  };
+
   return (
     <div className={`lg:relative`}>
       <aside
@@ -71,12 +78,18 @@ const DrawerMenu = () => {
             onClick={() => router.push("/")}>
             <Image width={30} height={30} alt="logo" src={Logo} />
           </div>
+
           <div id="test" className="lg:hidden">
-            <MobileMenu isOpen={isOpen} setIsOpen={setIsOpen}>
+            <MobileMenu
+              isClosing={isClosing}
+              setIsClosing={setIsClosing}
+              isOpen={isOpen}
+              setIsOpen={setIsOpen}>
               {renderMenuItems(menu)}
             </MobileMenu>
           </div>
         </div>
+
         <div className="flex lg:flex-col w-[100%] overflow-y-auto lg:rounded-r lg:h-[100%]">
           <div className="flex-col justify-between w-[100%] hidden lg:flex lg:h-[100%]">
             <ul
@@ -86,14 +99,17 @@ const DrawerMenu = () => {
             </ul>
             <div>
               <div className="flex flex-row justify-around mb-2 items-center">
-                <Image
-                  className="rounded-2xl"
-                  width={30}
-                  height={30}
-                  src={data?.user?.image!}
-                  alt="profile pic"
-                />
                 <div>{data?.user?.name}</div>
+                {data?.user?.image && (
+                  <Image
+                    className="rounded-2xl"
+                    width={30}
+                    height={30}
+                    placeholder="empty"
+                    src={data?.user?.image}
+                    alt="profile pic"
+                  />
+                )}
               </div>
               <CustomButton
                 onClick={async () => {

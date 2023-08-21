@@ -18,23 +18,7 @@ const BasicInfoForm = () => {
   const [user, setUser] = useState<any>();
   const [loading, setLoading] = useState(false);
   const { data } = useSession();
-  console.log(data?.user?.name);
   const [error, setError] = useState("");
-
-  const getAccountInfo = async () => {
-    try {
-      const res = await axiosInstance.get("account/getUserInfo");
-      setUser(res?.data);
-    } catch (error) {}
-  };
-  useEffect(() => {
-    (async () => {
-      await getAccountInfo();
-    })();
-  }, []);
-
-  const input_style = `form-control block w-full px-4 py-5 text-sm font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded 
-    transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none`;
 
   return (
     <form>
