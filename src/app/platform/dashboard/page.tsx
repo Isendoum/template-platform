@@ -1,5 +1,6 @@
 "use client";
 import { axiosInstance } from "@/lib/axios/index";
+import axios from "axios";
 
 import { useCallback, useEffect, useState } from "react";
 
@@ -7,7 +8,7 @@ const Dashboard = () => {
   const [data, setData] = useState("");
   const healthCheck = useCallback(async () => {
     try {
-      const res = await axiosInstance.get("auth/get");
+      const res = await axios.get("/api/user");
       setData(res.data);
     } catch (error) {
       console.log(error);
