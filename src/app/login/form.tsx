@@ -17,8 +17,8 @@ type Inputs = {
 export const LoginForm = () => {
   const validationSchema = yup
     .object({
-      username: yup.string().required(),
-      password: yup.string().required(),
+      username: yup.string(),
+      password: yup.string(),
     })
     .required();
   const {
@@ -37,12 +37,7 @@ export const LoginForm = () => {
 
   const onSubmit = async (values: Inputs) => {
     try {
-      const res = await signIn("credentials", {
-        redirect: false,
-        username: values.username,
-        password: values.password,
-        callbackUrl,
-      });
+      const res = await signIn("google", { redirect: false });
       if (!res?.error) {
         router.push(callbackUrl);
       } else {
@@ -58,34 +53,18 @@ export const LoginForm = () => {
     transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none`;
 
   return (
-    <form>
+    <div>
       {error && (
         <p className="text-center bg-red-300 py-4 mb-6 rounded">{error}</p>
       )}
 
-      <div className="mb-6">
-        <TextInput
-          type="text"
-          label={"Username"}
-          error={errors["username"]}
-          {...register("username")}
-        />
-      </div>
-      <div className="mb-6">
-        <TextInput
-          type="password"
-          label={"Password"}
-          error={errors["password"]}
-          {...register("password")}
-        />
-      </div>
       <CustomButton
         disabled={isSubmitting}
         onClick={handleSubmit(onSubmit)}
         type="submit">
-        Sign In
+        Sign In with Google
         {isSubmitting && <ButtonLoader />}
       </CustomButton>
-    </form>
+    </div>
   );
 };

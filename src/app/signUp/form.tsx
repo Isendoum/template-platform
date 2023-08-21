@@ -21,17 +21,15 @@ export const SignUpForm = () => {
   const [error, setError] = useState("");
   // we can assing to watch a spesific field
   // const emailW = watch("email");
-  const validationSchema = yup
-    .object({
-      username: yup.string().required(),
-      email: yup.string().email().required(),
-      password: yup.string().required(),
-      password2: yup
-        .string()
-        .oneOf([yup.ref("password")], "Passwords must match")
-        .required("password confirmation is required"),
-    })
-    .required();
+  const validationSchema = yup.object({
+    username: yup.string(),
+    email: yup.string().email(),
+    password: yup.string(),
+    password2: yup
+      .string()
+      .oneOf([yup.ref("password")], "Passwords must match")
+      .required("password confirmation is required"),
+  });
   const {
     register,
     handleSubmit,
@@ -54,45 +52,14 @@ export const SignUpForm = () => {
   };
 
   return (
-    <form>
+    <div>
       {error && (
         <p className="text-center bg-red-300 py-4 mb-6 rounded">{error}</p>
       )}
-      <div className="mb-6">
-        <TextInput
-          type="text"
-          label={"Username"}
-          error={errors["username"]}
-          {...register("username")}
-        />
-      </div>
-      <div className="mb-6">
-        <TextInput
-          type="email"
-          label={"Email"}
-          error={errors["email"]}
-          {...register("email")}
-        />
-      </div>
-      <div className="mb-6">
-        <TextInput
-          type="password"
-          label={"Password"}
-          error={errors["password"]}
-          {...register("password")}
-        />
-      </div>
-      <div className="mb-6">
-        <TextInput
-          type="password"
-          label={"Confirm Password"}
-          error={errors["password2"]}
-          {...register("password2")}
-        />
-      </div>
+
       <CustomButton onClick={handleSubmit(onSubmit)} type="submit">
         Sign Up
       </CustomButton>
-    </form>
+    </div>
   );
 };

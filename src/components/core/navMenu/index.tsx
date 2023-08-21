@@ -122,9 +122,6 @@ const NavMenu: React.FC = () => {
           </div>
           {session?.status !== "authenticated" && (
             <div className="flex flex-row items-center mr-4">
-              <Link className="inline-block px-6" href="/signUp">
-                <span className="text-1xl ">Sign up</span>
-              </Link>
               <Link href="/login" className="inline-block py-3">
                 <span className="text-1xl ">Login</span>
               </Link>
