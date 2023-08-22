@@ -1,11 +1,8 @@
-import axios from "axios";
-import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
-import { signOut } from "next-auth/react";
-import { axiosInstance } from "./axios";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { prisma } from "@/lib/prisma";
-
+// Global variable to save user data which I want in session
+let userData = {};
 export const authOptions = {
   adapter: PrismaAdapter(prisma),
   pages: {
