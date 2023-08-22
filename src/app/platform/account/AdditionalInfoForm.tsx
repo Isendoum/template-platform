@@ -42,11 +42,7 @@ export const AdditionalInfoForm = () => {
   const onSubmit = async (values: Inputs) => {
     try {
       setLoading(true);
-      const res = await axiosInstance.post(
-        "account/updateUserMetadata",
-        values
-      );
-      setUserMetadata(res.data);
+
       setLoading(false);
     } catch (error: any) {
       alert(error);
@@ -54,18 +50,6 @@ export const AdditionalInfoForm = () => {
       setError(error);
     }
   };
-
-  const getAccountMetadataInfo = async () => {
-    try {
-      const res = await axiosInstance.get("account/getUserMetadataInfo");
-      setUserMetadata(res?.data);
-    } catch (error) {}
-  };
-  useEffect(() => {
-    (async () => {
-      await getAccountMetadataInfo();
-    })();
-  }, []);
 
   return (
     <form>

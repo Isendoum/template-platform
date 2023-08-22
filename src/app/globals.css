@@ -6,6 +6,8 @@
   --foreground-rgb: 0, 0, 0;
   --button-color: 255, 255, 255;
   --text-color: 0, 0, 0;
+  --button-background-color: 70, 130, 180;
+  --button-background-color-hover: 70, 140, 190;
   --background: 230, 230, 230;
   --nav-bg: 100, 160, 255;
   --nav-text-color: 255, 255, 255;
@@ -13,7 +15,7 @@
   --drawer-background-color: 70, 130, 180;
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;
     --text-color: 255, 255, 255;
@@ -24,6 +26,19 @@
     --nav-submenu-bg: 10, 30, 59;
     --drawer-background-color: 31, 41, 55;
   }
+} */
+
+[data-theme="dark"] {
+  --foreground-rgb: 255, 255, 255;
+  --text-color: 255, 255, 255;
+  --button-color: 255, 255, 255;
+  --button-background-color: 31, 41, 55;
+  --button-background-color-hover: 31, 44, 65;
+  --background: 60, 60, 90;
+  --nav-text-color: 255, 255, 255;
+  --nav-bg: 10, 20, 40;
+  --nav-submenu-bg: 10, 30, 59;
+  --drawer-background-color: 31, 41, 55;
 }
 
 aside {
@@ -37,7 +52,27 @@ body {
 }
 
 button {
+  background-color: rgb(var(--button-background-color));
   color: rgb(var(--button-color));
+  transition: background-color 0.4s ease;
+  border-radius: 1rem;
+  width: 100%;
+  margin-top: 4px;
+  margin-bottom: 4px;
+  padding: 12px;
+}
+
+button:hover {
+  background-color: rgb(var(--button-background-color-hover));
+}
+
+footer {
+  height: 4rem;
+  background-color: rgb(var(--nav-bg));
+  color: rgb(var(--nav-text-color));
+  justify-content: center;
+  display: flex;
+  align-items: center;
 }
 
 nav {

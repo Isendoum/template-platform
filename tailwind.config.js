@@ -34,11 +34,16 @@ module.exports = {
       },
       animation: {
         spin: "spin 1s linear infinite",
+        "fade-in": "fadeIn 2s ease-in-out",
       },
       keyframes: {
         spin: {
           "0%": { transform: "rotate(0deg)" },
           "100%": { transform: "rotate(360deg)" },
+        },
+        fadeIn: {
+          from: { opacity: 0 },
+          to: { opacity: 1 },
         },
       },
       backgroundImage: {
@@ -46,7 +51,24 @@ module.exports = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
+      fontSize: {
+        hover: "1.2rem",
+      },
     },
   },
-  plugins: [],
+  plugins: [
+    function ({ addUtilities }) {
+      const newUtilities = {
+        ".hover-grow": {
+          display: "inline-block",
+          transform: "scale(1)",
+          transition: "transform 0.3s ease-in-out",
+        },
+        ".hover-grow:hover": {
+          transform: "scale(1.2)",
+        },
+      };
+      addUtilities(newUtilities, ["responsive", "hover"]);
+    },
+  ],
 };

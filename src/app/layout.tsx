@@ -2,6 +2,8 @@ import "./globals.css";
 import { Inter } from "next/font/google";
 import { NextAuthProvider } from "./providers";
 import NavMenu from "@/components/core/navMenu";
+import Link from "next/link";
+import { ThemeProvider } from "next-themes";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,6 +26,11 @@ export default function RootLayout({
             {children}
           </main>
         </NextAuthProvider>
+        <footer className="">
+          <Link href={"https://github.com/Isendoum"}>
+            Find more information in github repo
+          </Link>
+        </footer>
       </body>
     </html>
   );

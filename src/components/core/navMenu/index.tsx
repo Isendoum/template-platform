@@ -24,18 +24,8 @@ const menu = [
     link: "/",
   },
   {
-    label: "Services",
-    link: "/services",
-    children: [
-      {
-        label: "Service 1",
-        link: "/services/#",
-      },
-      {
-        label: "Service 2",
-        link: "/services/#",
-      },
-    ],
+    label: "Features",
+    link: "/features",
   },
 ];
 
