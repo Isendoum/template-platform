@@ -26,7 +26,7 @@ export default function RootLayout({
             {children}
           </main>
         </NextAuthProvider>
-        <footer className="">
+        <footer>
           <Link href={"https://github.com/Isendoum"}>
             Find more information in github repo
           </Link>

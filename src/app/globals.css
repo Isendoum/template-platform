@@ -33,7 +33,7 @@
   --text-color: 255, 255, 255;
   --button-color: 255, 255, 255;
   --button-background-color: 31, 41, 55;
-  --button-background-color-hover: 31, 44, 65;
+  --button-background-color-hover: 55, 65, 81;
   --background: 60, 60, 90;
   --nav-text-color: 255, 255, 255;
   --nav-bg: 10, 20, 40;
@@ -72,6 +72,7 @@ footer {
   color: rgb(var(--nav-text-color));
   justify-content: center;
   display: flex;
+  width: 100%;
   align-items: center;
 }
 
