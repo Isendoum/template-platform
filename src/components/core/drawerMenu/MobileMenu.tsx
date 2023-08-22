@@ -50,7 +50,7 @@ const MobileMenu = ({
                 />
               </div>
 
-              <div className="flex h-full flex-col overflow-y-hidden bg-white py-6 shadow-xl bg-gray-50 dark:bg-gray-800">
+              <aside className="flex h-full flex-col overflow-y-hidden py-6 shadow-xl">
                 <div className="px-4 sm:px-6"></div>
                 <div className="relative mt-6 flex-1 px-4 sm:px-6">
                   {children}
@@ -81,7 +81,7 @@ const MobileMenu = ({
                     <ArrowLeftOnRectangleIcon className="w-6 h-6 flex self-end flex-col" />
                   </CustomButton>
                 </div>
-              </div>
+              </aside>
             </div>
           </div>
         </div>

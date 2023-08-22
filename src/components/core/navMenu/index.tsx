@@ -110,7 +110,13 @@ const NavMenu: React.FC = () => {
   return (
     <nav className="w-full" ref={navMenuRef}>
       <div className="flex flex-row w-full h-[4rem] justify-between items-center">
-        <Image className="ml-4" width={30} height={30} alt="logo" src={Logo} />
+        <Image
+          className="ml-4 mr-4"
+          width={36}
+          height={36}
+          alt="logo"
+          src={Logo}
+        />
         <div className="flex flex-row items-center justify-between w-full">
           <div className="max-lg:hidden flex flex-row pl-6 items-center">
             {renderMenuItems(
@@ -121,7 +127,7 @@ const NavMenu: React.FC = () => {
             )}
           </div>
           {session?.status !== "authenticated" && (
-            <div className="flex flex-row items-center mr-4">
+            <div className="flex flex-row items-center ml-4 mr-4">
               <Link href="/login" className="inline-block py-3">
                 <span className="text-1xl ">Login</span>
               </Link>

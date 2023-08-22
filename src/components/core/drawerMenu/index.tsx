@@ -66,17 +66,17 @@ const DrawerMenu = () => {
   return (
     <div className={`lg:relative`}>
       <aside
-        className={`lg:h-[100%] lg:w-64 flex lg:flex-col w-[100%] px-3 py-4 overflow-y-auto lg:rounded-r bg-gray-50 dark:bg-gray-800 lg:h-[100%]`}
+        className={`lg:h-[100%] lg:w-64 flex lg:flex-col w-[100%] px-3 py-4 overflow-y-auto lg:rounded-r lg:h-[100%]`}
         aria-label="Sidebar">
-        <div className="flex flex-row lg:justify-center">
+        <div className="flex flex-row lg:justify-center items-center">
           <Bars3Icon
-            className="w-6 h-6 cursor-pointer lg:hidden"
+            className="w-8 h-8 cursor-pointer lg:hidden ml-4 mr-4"
             onClick={() => setIsOpen(true)}
           />
           <div
             className="ml-4 lg:mb-4 lg:ml-0 cursor-pointer font-sans"
             onClick={() => router.push("/")}>
-            <Image width={30} height={30} alt="logo" src={Logo} />
+            <Image width={36} height={36} alt="logo" src={Logo} />
           </div>
 
           <div id="test" className="lg:hidden">

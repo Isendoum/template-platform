@@ -10,6 +10,7 @@
   --nav-bg: 100, 160, 255;
   --nav-text-color: 255, 255, 255;
   --nav-submenu-bg: 10, 20, 40;
+  --drawer-background-color: 70, 130, 180;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -21,7 +22,13 @@
     --nav-text-color: 255, 255, 255;
     --nav-bg: 10, 20, 40;
     --nav-submenu-bg: 10, 30, 59;
+    --drawer-background-color: 31, 41, 55;
   }
+}
+
+aside {
+  background-color: rgb(var(--drawer-background-color));
+  color: rgb(var(--nav-text-color));
 }
 
 body {

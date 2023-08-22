@@ -3,7 +3,7 @@ import CustomButton from "@/components/core/buttons/Button";
 import SimpleSpace from "@/components/core/spaces/SimpleSpace";
 import { useRouter, useSearchParams } from "next/navigation";
 import { CheckCircleIcon } from "@heroicons/react/24/solid";
-export default function SignUpSuccessPage() {
+export default function SuccessPage() {
   const router = useRouter();
   const params = useSearchParams();
 
