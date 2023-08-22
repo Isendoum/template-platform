@@ -1,25 +1,21 @@
 import axios from "axios";
-import { getSession, signIn, signOut } from "next-auth/react";
-let token;
 
-const setGetSessionJwt = async () => {
-  const session = await getSession();
-  token = session?.jwt;
-  axiosInstance.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-  return token;
-};
+// const setGetSessionJwt = async () => {
+//   const session = await getSession();
+//   token = session?.jwt;
+//   axiosInstance.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+//   return token;
+// };
 
 let axiosInstance = axios.create({
-  baseURL: "http://localhost:8080/",
   responseType: "json",
   headers: {
     "content-type": "application/json",
   },
 });
 
-// axiosInstance.interceptors.request.use(async (req) => {
-//   const token = await setGetSessionJwt();
-//   req.headers.Authorization = `Bearer ${token}`;
+// axios.interceptors.response.use(async (req) => {
+//   console.log("asdasd");
 //   return req;
 // });
 

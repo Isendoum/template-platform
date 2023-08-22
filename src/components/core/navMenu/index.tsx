@@ -2,15 +2,7 @@
 import Link from "next/link";
 import NavMobileMenu from "./NavMobileMenu";
 import NavMenuItem from "./NavMenuItem";
-import {
-  DetailedHTMLProps,
-  HTMLAttributes,
-  LegacyRef,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Bars3Icon } from "@heroicons/react/24/solid";
 import { useSession } from "next-auth/react";
 import { usePathname } from "next/navigation";
@@ -60,6 +52,7 @@ const NavMenu: React.FC = () => {
       </NavMenuItem>
     ));
   };
+
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       //@ts-ignore

@@ -23,7 +23,8 @@ export const authOptions = {
     strategy: "jwt",
 
     // ** Seconds - How long until an idle session expires and is no longer valid
-    maxAge: 30 * 24 * 60 * 60, // ** 30 days
+    // maxAge: 30 * 24 * 60 * 60, // ** 30 days
+    maxAge: 24 * 60 * 60, // ** 1 day
   },
   providers: [
     GoogleProvider({
