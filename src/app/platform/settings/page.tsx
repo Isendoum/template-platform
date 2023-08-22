@@ -1,8 +1,8 @@
 "use client";
-
 import CustomButton from "@/components/core/buttons/Button";
 import SimpleSpace from "@/components/core/spaces/SimpleSpace";
 import { useTheme } from "next-themes";
+
 const Settings = () => {
   const { theme, setTheme } = useTheme();
   return (

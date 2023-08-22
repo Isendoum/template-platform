@@ -14,7 +14,6 @@ import {
 import { Bars3Icon } from "@heroicons/react/24/solid";
 import { useSession } from "next-auth/react";
 import { usePathname } from "next/navigation";
-import MenuItem from "../drawerMenu/MenuItem";
 import NavMenuItemMobile from "./NavMenuItemMobile";
 import Logo from "../../../../public/logo.svg";
 import Image from "next/image";
@@ -22,10 +21,6 @@ const menu = [
   {
     label: "Home",
     link: "/",
-  },
-  {
-    label: "Features",
-    link: "/features",
   },
 ];
 

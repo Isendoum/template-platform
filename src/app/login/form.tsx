@@ -1,14 +1,10 @@
 "use client";
 
 import CustomButton from "@/components/core/buttons/Button";
-import TextInput from "@/components/core/inputs/TextInput";
 import ButtonLoader from "@/components/core/loaders/ButtonLoader";
-import { yupResolver } from "@hookform/resolvers/yup";
 import { signIn } from "next-auth/react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { useState } from "react";
-import { useForm } from "react-hook-form";
-import * as yup from "yup";
 
 type Inputs = {
   username: string;

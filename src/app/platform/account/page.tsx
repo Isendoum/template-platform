@@ -1,6 +1,5 @@
 import SimpleSpace from "@/components/core/spaces/SimpleSpace";
 import BasicUserForm from "./BasicUserInfo";
-import { AdditionalInfoForm } from "./AdditionalInfoForm";
 
 const Account = async () => {
   return (

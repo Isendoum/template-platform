@@ -1,14 +1,7 @@
 "use client";
 
-import CustomButton from "@/components/core/buttons/Button";
-import TextInput from "@/components/core/inputs/TextInput";
-import { axiosInstance } from "@/lib/axios";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { signIn, useSession } from "next-auth/react";
-import { useSearchParams, useRouter } from "next/navigation";
-import { use, useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
-import * as yup from "yup";
+import { useSession } from "next-auth/react";
+import { useState } from "react";
 
 type Inputs = {
   username: string;
