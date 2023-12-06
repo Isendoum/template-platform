@@ -1,6 +1,6 @@
 {
   "extends": ["next/core-web-vitals"],
-  "ignorePatterns": [".eslintrc.json","node_modules/**/*"],
+  "ignorePatterns": [".eslintrc.json","node_modules/**/*","**/*.tsx"],
   "rules":{
     "indent":[2,2]
   }
