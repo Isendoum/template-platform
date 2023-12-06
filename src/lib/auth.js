@@ -3,7 +3,7 @@ import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { prisma } from "@/lib/prisma";
 
 export const authOptions = {
-    adapter: PrismaAdapter(prisma),
+  adapter: PrismaAdapter(prisma),
   pages: {
     signIn: "/login",
   },
