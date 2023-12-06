@@ -12,7 +12,6 @@ const Dashboard = () => {
   const c = "";
   const bb = "";
   const bbc = "";
-  const adasd = "";
 
   const fetchData = useCallback(() => {
     const data1 = [
