@@ -1,6 +1,6 @@
 {
   "extends": ["next/core-web-vitals"],
-  "ignorePatterns": [".eslintrc.json","node_modules/**/*","auth.js"],
+  "ignorePatterns": [".eslintrc.json","node_modules/**/*"],
   "rules":{
     "indent":[2,2]
   }
