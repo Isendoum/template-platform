@@ -11,6 +11,7 @@ const Dashboard = () => {
   const b ="";
   const c ="";
   const bb ="";
+  const bbc ="";
   const fetchData = useCallback(() => {
     const data1 = [
       { x: "2023-04-15", y: 6 },
