@@ -34,7 +34,7 @@ const NavMenu: React.FC = () => {
   }, []);
   const renderMenuItems = (
     menuItems: any,
-    setIsClosing?: (val: boolean) => void,
+    setIsClosing?: () => void,
     expandedMenu?: any,
     setExpandedMenu?: any,
   ) => {
