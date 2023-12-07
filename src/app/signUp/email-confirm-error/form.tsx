@@ -36,7 +36,7 @@ export const EmailResendForm = () => {
         "/account/resendConfirmAccountEmail",
         {
           params: { email: values.email },
-        }
+        },
       );
       router.push("/success?message=A confirmation email has been sent.");
     } catch (error: any) {
@@ -66,7 +66,8 @@ export const EmailResendForm = () => {
       <CustomButton
         disabled={isSubmitting}
         onClick={handleSubmit(onSubmit)}
-        type="submit">
+        type="submit"
+      >
         Resend
         {isSubmitting && <ButtonLoader />}
       </CustomButton>

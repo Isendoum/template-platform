@@ -1,7 +1,23 @@
 {
-  "extends": ["next/core-web-vitals"],
-  "ignorePatterns": [".eslintrc.json","node_modules/**/*"],
+  "root": true,
+  "env": { "browser": true, "es2020": true, "es6": true, "node": true },
+  "extends": ["next/core-web-vitals", "eslint:recommended", "plugin:react-hooks/recommended","prettier"],
+  "ignorePatterns": ["node_modules/**/*"],
   "rules":{
-    "indent":[2,2]
+    "no-unused-vars": "error",
+    "indent":[2,2],
+    "space-infix-ops": "error",
+    "unused-imports/no-unused-imports-ts": 0,
+    "linebreak-style": ["warn", "unix"],
+    "quotes": ["warn", "double"],
+    "max-len": ["warn", 270],
+    "no-trailing-spaces": [2],
+    "no-multiple-empty-lines": [
+      "warn",
+      {
+        "max": 1,
+        "maxEOF": 0
+      }
+    ]
   }
 }

@@ -2,7 +2,7 @@
 import Link from "next/link";
 import NavMobileMenu from "./NavMobileMenu";
 import NavMenuItem from "./NavMenuItem";
-import { useCallback, useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { Bars3Icon } from "@heroicons/react/24/solid";
 import { useSession } from "next-auth/react";
 import { usePathname } from "next/navigation";
@@ -23,12 +23,12 @@ const NavMenu: React.FC = () => {
   const session = useSession();
   const pathname = usePathname();
   const navMenuRef = useRef<HTMLDivElement>(null);
-  const setIsOpenCallback = useCallback((val: boolean) => {
-    setIsOpen(val);
-  }, []);
-  const setIsClosingCallback = useCallback((val: boolean) => {
-    setIsClosing(val);
-  }, []);
+  // const setIsOpenCallback = useCallback((val: boolean) => {
+  //   setIsOpen(val);
+  // }, []);
+  // const setIsClosingCallback = useCallback((val: boolean) => {
+  //   setIsClosing(val);
+  // }, []);
   const setIsExpandedCallback = useCallback((val: string) => {
     setExpandedMenu(val);
   }, []);
@@ -36,7 +36,7 @@ const NavMenu: React.FC = () => {
     menuItems: any,
     setIsClosing?: (val: boolean) => void,
     expandedMenu?: any,
-    setExpandedMenu?: any
+    setExpandedMenu?: any,
   ) => {
     return menuItems.map((mItem: any) => (
       <NavMenuItem
@@ -45,7 +45,8 @@ const NavMenu: React.FC = () => {
         link={mItem.link}
         expandedMenu={expandedMenu} // pass down the state
         setExpandedMenu={setExpandedMenu} // pass down the setter
-        setIsClosing={setIsClosing}>
+        setIsClosing={setIsClosing}
+      >
         {mItem.children && (
           <ul className="pl-2">{renderMenuItems(mItem.children)}</ul>
         )}
@@ -78,7 +79,8 @@ const NavMenu: React.FC = () => {
         key={mItem.link}
         title={mItem.label}
         link={mItem.link}
-        setIsClosing={setIsClosing}>
+        setIsClosing={setIsClosing}
+      >
         {mItem.children && (
           <ul className="pl-2">{renderMenuItemsMob(mItem.children)}</ul>
         )}
@@ -101,7 +103,7 @@ const NavMenu: React.FC = () => {
               menu,
               () => null,
               expandedMenu,
-              setIsExpandedCallback
+              setIsExpandedCallback,
             )}
           </div>
           {session?.status !== "authenticated" && (
@@ -116,7 +118,8 @@ const NavMenu: React.FC = () => {
             <div className="flex flex-row items-center mr-4">
               <Link
                 className="inline-block px-6 py-3 text-primary"
-                href="/platform/dashboard">
+                href="/platform/dashboard"
+              >
                 <span className="text-1xl ">Dashboard</span>
               </Link>
             </div>
@@ -132,7 +135,8 @@ const NavMenu: React.FC = () => {
             isOpen={isOpen}
             setIsOpen={setIsOpen}
             isClosing={isClosing}
-            setIsClosing={setIsClosing}>
+            setIsClosing={setIsClosing}
+          >
             {renderMenuItemsMob(menu)}
           </NavMobileMenu>
         </div>

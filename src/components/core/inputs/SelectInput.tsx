@@ -16,7 +16,8 @@ const SelectInput = React.forwardRef<
       <div className="mb-5">
         <label
           className="mb-3 block text-base font-medium text-[#07074D]"
-          htmlFor={name}>
+          htmlFor={name}
+        >
           {label}
         </label>
         <select
@@ -24,7 +25,8 @@ const SelectInput = React.forwardRef<
           name={name}
           ref={ref}
           onChange={onChange}
-          onBlur={onBlur}>
+          onBlur={onBlur}
+        >
           {options?.map(({ label, value }) => (
             <option key={value} value={value}>
               {label}

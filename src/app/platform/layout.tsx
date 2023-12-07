@@ -11,7 +11,8 @@ export default function DashboardLayout({
       <DrawerMenu />
       <div
         className="flex w-[100%] h-[100vh] min-h-[100%] flex-col items-center overflow-y-auto overflow-x-hidden p-6"
-        style={{ scrollbarWidth: "thin" }}>
+        style={{ scrollbarWidth: "thin" }}
+      >
         {children}
       </div>
     </section>

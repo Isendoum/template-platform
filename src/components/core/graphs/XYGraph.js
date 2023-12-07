@@ -60,7 +60,8 @@ const XYGraph = ({
   return (
     <div
       style={{ width: width + 60, height: height + 100, padding: 16 }}
-      className={`rounded-md bg-white`}>
+      className={`rounded-md bg-white`}
+    >
       <div className="text-black mb-2">{graphTitle}</div>
       <div className="relative">
         <svg width={width + padding} height={height + padding}>
@@ -136,7 +137,8 @@ const XYGraph = ({
               x={padding - 10} // Adjust this value to position the labels to the left of the Y-axis
               y={getYPosition(yInterval * (i + 1)) + 5} // Adjust this value to vertically center the text with the gridline
               textAnchor="end"
-              fontSize="10">
+              fontSize="10"
+            >
               {(yInterval * (i + 1)).toFixed(2)}{" "}
               {/* You can adjust the precision as needed */}
             </text>
@@ -172,7 +174,8 @@ const XYGraph = ({
             x={width / 2}
             y={height + padding / 1 - pointRadius}
             textAnchor="middle"
-            fontSize="12">
+            fontSize="12"
+          >
             {xAxisLabel}
           </text>
           {/* Y axis label */}
@@ -181,14 +184,16 @@ const XYGraph = ({
             y={height / 1.75 - 15}
             textAnchor="middle"
             fontSize="12"
-            transform={`rotate(-90, ${padding - 20}, ${height / 2}) `}>
+            transform={`rotate(-90, ${padding - 20}, ${height / 2}) `}
+          >
             {yAxisLabel}
           </text>
         </svg>
         {!hasData && (
           <div
             className="absolute inset-0 flex items-center justify-center text-black opacity-50"
-            style={{ pointerEvents: "none" }}>
+            style={{ pointerEvents: "none" }}
+          >
             No data
           </div>
         )}

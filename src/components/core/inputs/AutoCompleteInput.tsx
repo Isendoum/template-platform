@@ -20,7 +20,7 @@ const AutoCompleteInput = React.forwardRef<
     const searchValue = event.target.value;
     if (searchValue) {
       const filteredOptions = options.filter((option) =>
-        option.label.toLowerCase().includes(searchValue.toLowerCase())
+        option.label.toLowerCase().includes(searchValue.toLowerCase()),
       );
       setAutoCompleteOptions(filteredOptions);
     } else {
@@ -40,7 +40,8 @@ const AutoCompleteInput = React.forwardRef<
       <div className="mb-5">
         <label
           className="mb-3 block text-base font-medium text-[#07074D]"
-          htmlFor={name}>
+          htmlFor={name}
+        >
           {label}
         </label>
         <input
@@ -55,7 +56,8 @@ const AutoCompleteInput = React.forwardRef<
             {autoCompleteOptions?.map((option, index) => (
               <p
                 key={index}
-                className="px-4 py-2 text-black hover:bg-[#e0e0e0] cursor-pointer">
+                className="px-4 py-2 text-black hover:bg-[#e0e0e0] cursor-pointer"
+              >
                 {option.label}
               </p>
             ))}

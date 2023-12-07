@@ -1,18 +1,10 @@
 "use client";
-import { axiosInstance } from "@/lib/axios/index";
-import axios from "axios";
 import XYGraph from "@/components/core/graphs/XYGraph";
 
 import { useCallback, useEffect, useState } from "react";
 
 const Dashboard = () => {
   const [data, setData] = useState<any>([]);
-  const a = "";
-  const b = "";
-  const c = "";
-  const bb = "";
-  const baaa = "";
-  const baaaa = "";
 
   const fetchData = useCallback(() => {
     const data1 = [

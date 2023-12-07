@@ -60,7 +60,8 @@ const NavMenuItem = ({
         <div
           className={`nav-submenu transition-opacity ${transitionDuration} ${
             isExpanded ? "opacity-100" : "opacity-0"
-          }`}>
+          }`}
+        >
           {children}
         </div>
       </div>

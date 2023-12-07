@@ -13,7 +13,8 @@ const TextInput = React.forwardRef<
     <div className="mb-5">
       <label
         className="mb-3 block text-base font-medium text-[#07074D]"
-        htmlFor={label}>
+        htmlFor={label}
+      >
         {label}
       </label>
       <input

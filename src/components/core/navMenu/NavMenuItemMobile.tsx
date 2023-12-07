@@ -36,7 +36,8 @@ const NavMenuItemMobile = ({
           {children && (
             <div
               className="flex self-end cursor-pointer"
-              onClick={handleOpenMenuItem}>
+              onClick={handleOpenMenuItem}
+            >
               <ChevronDownIcon className={`w-6 h-6`} />
             </div>
           )}

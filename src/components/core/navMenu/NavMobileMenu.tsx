@@ -31,7 +31,8 @@ const NavMobileMenu = ({
       }`}
       aria-labelledby="slide-over-title"
       role="dialog"
-      aria-modal="true">
+      aria-modal="true"
+    >
       <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
 
       <div className="fixed inset-0 overflow-hidden">
