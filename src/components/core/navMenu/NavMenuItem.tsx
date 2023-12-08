@@ -15,8 +15,8 @@ const NavMenuItem = ({
   title: string;
   link: string;
   // icon?: any;
-  expandedMenu: string;
-  setExpandedMenu: (val: string|null) => void | undefined;
+  expandedMenu?: string|null;
+  setExpandedMenu?: (val: string | null) => void;
   setIsClosing?: (val: boolean) => void;
   children?: React.ReactNode;
 }) => {
@@ -28,7 +28,7 @@ const NavMenuItem = ({
   };
 
   const handleExpandClick = () => {
-    setExpandedMenu(isExpanded ? null : title);
+    setExpandedMenu && setExpandedMenu(isExpanded ? null : title);
   };
 
   const [transitionDuration, setTransitionDuration] = useState("duration-500");

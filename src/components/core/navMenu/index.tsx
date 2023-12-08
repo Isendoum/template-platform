@@ -11,10 +11,10 @@ import Logo from "../../../../public/logo.svg";
 import Image from "next/image";
 
 type TMenuItem = {
-  label:string;
-  link:string;
-  children?:TMenuItem[]
-}
+  label: string;
+  link: string;
+  children?: TMenuItem[];
+};
 
 const menu = [
   {
@@ -36,29 +36,31 @@ const NavMenu: React.FC = () => {
   // const setIsClosingCallback = useCallback((val: boolean) => {
   //   setIsClosing(val);
   // }, []);
-  const setIsExpandedCallback = useCallback((val: string) => {
+  const setIsExpandedCallback = useCallback((val: string|null) => {
     setExpandedMenu(val);
   }, []);
   const renderMenuItems = (
     menuItems: TMenuItem[],
     setIsClosing?: () => void,
-    expandedMenu?: any,
-    setExpandedMenu?: any,
+    expandedMenu?: string|null,
+    setExpandedMenu?: (val:string|null) => void,
   ) => {
-    return menuItems.map((mItem: TMenuItem):React.ReactNode => (
-      <NavMenuItem
-        key={mItem.label}
-        title={mItem.label}
-        link={mItem.link}
-        expandedMenu={expandedMenu} // pass down the state
-        setExpandedMenu={setExpandedMenu} // pass down the setter
-        setIsClosing={setIsClosing}
-      >
-        {mItem.children && (
-          <ul className="pl-2">{renderMenuItems(mItem.children)}</ul>
-        )}
-      </NavMenuItem>
-    ));
+    return menuItems.map(
+      (mItem: TMenuItem): React.ReactNode => (
+        <NavMenuItem
+          key={mItem.label}
+          title={mItem.label}
+          link={mItem.link}
+          expandedMenu={expandedMenu} // pass down the state
+          setExpandedMenu={setExpandedMenu} // pass down the setter
+          setIsClosing={setIsClosing}
+        >
+          {mItem.children && (
+            <ul className="pl-2">{renderMenuItems(mItem.children)}</ul>
+          )}
+        </NavMenuItem>
+      ),
+    );
   };
 
   useEffect(() => {
