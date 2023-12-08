@@ -23,10 +23,9 @@ esac
 # Run commands based on OS
 if [ "$OS" = "Windows" ]; then
     # Windows commands
-    $npm_command run format:all
-    $npm_command run lint --fix
+    #$npm_command run format:all
+    npx lint-staged
 else
     # Unix/Linux/Mac commands
-    npm run format:all
-    npm run lint --fix
+    npx lint-staged
 fi
