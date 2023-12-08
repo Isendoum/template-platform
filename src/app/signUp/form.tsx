@@ -52,9 +52,7 @@ export const SignUpForm = () => {
 
    return (
       <div>
-         {error && (
-            <p className="text-center bg-red-300 py-4 mb-6 rounded">{error}</p>
-         )}
+         {error && <p className="text-center bg-red-300 py-4 mb-6 rounded">{error}</p>}
 
          <CustomButton onClick={handleSubmit(onSubmit)} type="submit">
             Sign Up

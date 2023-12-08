@@ -50,20 +50,11 @@ const NavMenuItem = ({
                </div>
                {children && (
                   <div className="flex self-end ml-2 cursor-pointer">
-                     <ChevronDownIcon
-                        onClick={handleExpandClick}
-                        className={"w-5 h-5"}
-                     />
+                     <ChevronDownIcon onClick={handleExpandClick} className={"w-5 h-5"} />
                   </div>
                )}
             </div>
-            <div
-               className={`nav-submenu transition-opacity ${transitionDuration} ${
-                  isExpanded ? "opacity-100" : "opacity-0"
-               }`}
-            >
-               {children}
-            </div>
+            <div className={`nav-submenu transition-opacity ${transitionDuration} ${isExpanded ? "opacity-100" : "opacity-0"}`}>{children}</div>
          </div>
       </li>
    );

@@ -51,32 +51,15 @@ export const AdditionalInfoForm = () => {
 
    return (
       <form>
-         {error && (
-            <p className="text-center bg-red-300 py-4 mb-6 rounded">{error}</p>
-         )}
+         {error && <p className="text-center bg-red-300 py-4 mb-6 rounded">{error}</p>}
          <div className="mb-6">
-            <TextInput
-               type="text"
-               label={"First name"}
-               error={errors["firstName"]}
-               {...register("firstName")}
-            />
+            <TextInput type="text" label={"First name"} error={errors["firstName"]} {...register("firstName")} />
          </div>
          <div className="mb-6">
-            <TextInput
-               type="text"
-               label={"Last name"}
-               error={errors["lastName"]}
-               {...register("lastName")}
-            />
+            <TextInput type="text" label={"Last name"} error={errors["lastName"]} {...register("lastName")} />
          </div>
          <div className="mb-6">
-            <TextInput
-               type="text"
-               label={"Address"}
-               error={errors["address"]}
-               {...register("address")}
-            />
+            <TextInput type="text" label={"Address"} error={errors["address"]} {...register("address")} />
          </div>
          <CustomButton onClick={handleSubmit(onSubmit)} type="submit">
             update

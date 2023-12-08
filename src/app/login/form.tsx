@@ -26,9 +26,7 @@ export const LoginForm = () => {
 
    return (
       <div>
-         {error && (
-            <p className="text-center bg-red-300 py-4 mb-6 rounded">{error}</p>
-         )}
+         {error && <p className="text-center bg-red-300 py-4 mb-6 rounded">{error}</p>}
 
          <CustomButton disabled={loggingIn} onClick={onSubmit}>
             Sign In with Google{loggingIn && <ButtonLoader />}
