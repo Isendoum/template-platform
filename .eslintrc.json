@@ -17,6 +17,7 @@
     "space-unary-ops": 2,
     "space-infix-ops": "error",
     "object-curly-spacing": ["error", "always"],
+    "arrow-spacing": ["error", { "before": true, "after": true }],
     "unused-imports/no-unused-imports-ts": 0,
     "linebreak-style": ["warn", "unix"],
     "quotes": ["warn", "double"],
