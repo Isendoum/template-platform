@@ -16,6 +16,7 @@
     "semi": [1, "always"],
     "space-unary-ops": 2,
     "space-infix-ops": "error",
+    "object-curly-spacing": ["error", "always"],
     "unused-imports/no-unused-imports-ts": 0,
     "linebreak-style": ["warn", "unix"],
     "quotes": ["warn", "double"],

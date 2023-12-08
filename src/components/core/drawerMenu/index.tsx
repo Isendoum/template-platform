@@ -20,6 +20,9 @@ const menu = [
    { label: "Account", link: "platform/account" },
 ];
 
+const test = { id: 1, name: "test" };
+console.log(test);
+
 const DrawerMenu = () => {
    const router = useRouter();
    const [isOpen, setIsOpen] = useState(false);
@@ -31,15 +34,8 @@ const DrawerMenu = () => {
 
    const renderMenuItems = (menuItems: any) => {
       return menuItems.map((mItem: any) => (
-         <MenuItem
-            key={mItem.link}
-            title={mItem.label}
-            link={mItem.link}
-            setIsClosing={setIsClosing}
-         >
-            {mItem.children && (
-               <ul className="pl-2">{renderMenuItems(mItem.children)}</ul>
-            )}
+         <MenuItem key={mItem.link} title={mItem.label} link={mItem.link} setIsClosing={setIsClosing}>
+            {mItem.children && <ul className="pl-2">{renderMenuItems(mItem.children)}</ul>}
          </MenuItem>
       ));
    };
@@ -66,31 +62,15 @@ const DrawerMenu = () => {
 
    return (
       <div className={"lg:relative"}>
-         <aside
-            className={
-               "lg:h-[100%] lg:w-64 flex lg:flex-col w-[100%] px-3 py-4 overflow-y-auto lg:rounded-r lg:h-[100%]"
-            }
-            aria-label="Sidebar"
-         >
+         <aside className={"lg:h-[100%] lg:w-64 flex lg:flex-col w-[100%] px-3 py-4 overflow-y-auto lg:rounded-r lg:h-[100%]"} aria-label="Sidebar">
             <div className="flex flex-row lg:justify-center items-center">
-               <Bars3Icon
-                  className="w-8 h-8 cursor-pointer lg:hidden ml-4 mr-4"
-                  onClick={() => setIsOpen(true)}
-               />
-               <div
-                  className="ml-4 lg:mb-4 lg:ml-0 cursor-pointer font-sans"
-                  onClick={() => router.push("/")}
-               >
+               <Bars3Icon className="w-8 h-8 cursor-pointer lg:hidden ml-4 mr-4" onClick={() => setIsOpen(true)} />
+               <div className="ml-4 lg:mb-4 lg:ml-0 cursor-pointer font-sans" onClick={() => router.push("/")}>
                   <Image width={36} height={36} alt="logo" src={Logo} />
                </div>
 
                <div id="test" className="lg:hidden">
-                  <MobileMenu
-                     isClosing={isClosing}
-                     setIsClosing={setIsClosing}
-                     isOpen={isOpen}
-                     setIsOpen={setIsOpen}
-                  >
+                  <MobileMenu isClosing={isClosing} setIsClosing={setIsClosing} isOpen={isOpen} setIsOpen={setIsOpen}>
                      {renderMenuItems(menu)}
                   </MobileMenu>
                </div>
@@ -98,25 +78,13 @@ const DrawerMenu = () => {
 
             <div className="flex lg:flex-col w-[100%] overflow-y-auto lg:rounded-r lg:h-[100%]">
                <div className="flex-col justify-between w-[100%] hidden lg:flex lg:h-[100%]">
-                  <ul
-                     className="flex flex-row items-center lg:items-start lg:flex-col overflow-x-auto w-[100%]"
-                     style={{ scrollbarWidth: "thin" }}
-                  >
+                  <ul className="flex flex-row items-center lg:items-start lg:flex-col overflow-x-auto w-[100%]" style={{ scrollbarWidth: "thin" }}>
                      {renderMenuItems(menu)}
                   </ul>
                   <div>
                      <div className="flex flex-row justify-around mb-2 items-center">
                         <div>{data?.user?.name}</div>
-                        {data?.user?.image && (
-                           <Image
-                              className="rounded-2xl"
-                              width={30}
-                              height={30}
-                              placeholder="empty"
-                              src={data?.user?.image}
-                              alt="profile pic"
-                           />
-                        )}
+                        {data?.user?.image && <Image className="rounded-2xl" width={30} height={30} placeholder="empty" src={data?.user?.image} alt="profile pic" />}
                      </div>
                      <CustomButton onClick={async () => signOut()}>
                         Logout
