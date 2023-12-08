@@ -3,16 +3,16 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --button-color: 255, 255, 255;
-  --text-color: 0, 0, 0;
-  --button-background-color: 70, 130, 180;
-  --button-background-color-hover: 70, 140, 190;
-  --background: 230, 230, 230;
-  --nav-bg: 100, 160, 255;
-  --nav-text-color: 255, 255, 255;
-  --nav-submenu-bg: 10, 20, 40;
-  --drawer-background-color: 70, 130, 180;
+   --foreground-rgb: 0, 0, 0;
+   --button-color: 255, 255, 255;
+   --text-color: 0, 0, 0;
+   --button-background-color: 70, 130, 180;
+   --button-background-color-hover: 70, 140, 190;
+   --background: 230, 230, 230;
+   --nav-bg: 100, 160, 255;
+   --nav-text-color: 255, 255, 255;
+   --nav-submenu-bg: 10, 20, 40;
+   --drawer-background-color: 70, 130, 180;
 }
 
 /* @media (prefers-color-scheme: dark) {
@@ -29,65 +29,65 @@
 } */
 
 [data-theme="dark"] {
-  --foreground-rgb: 255, 255, 255;
-  --text-color: 255, 255, 255;
-  --button-color: 255, 255, 255;
-  --button-background-color: 31, 41, 55;
-  --button-background-color-hover: 55, 65, 81;
-  --background: 60, 60, 90;
-  --nav-text-color: 255, 255, 255;
-  --nav-bg: 10, 20, 40;
-  --nav-submenu-bg: 10, 30, 59;
-  --drawer-background-color: 31, 41, 55;
+   --foreground-rgb: 255, 255, 255;
+   --text-color: 255, 255, 255;
+   --button-color: 255, 255, 255;
+   --button-background-color: 31, 41, 55;
+   --button-background-color-hover: 55, 65, 81;
+   --background: 60, 60, 90;
+   --nav-text-color: 255, 255, 255;
+   --nav-bg: 10, 20, 40;
+   --nav-submenu-bg: 10, 30, 59;
+   --drawer-background-color: 31, 41, 55;
 }
 
 aside {
-  background-color: rgb(var(--drawer-background-color));
-  color: rgb(var(--nav-text-color));
+   background-color: rgb(var(--drawer-background-color));
+   color: rgb(var(--nav-text-color));
 }
 
 body {
-  color: rgb(var(--text-color));
-  background: rgb(var(--background));
+   color: rgb(var(--text-color));
+   background: rgb(var(--background));
 }
 
 button {
-  background-color: rgb(var(--button-background-color));
-  color: rgb(var(--button-color));
-  transition: background-color 0.4s ease;
-  border-radius: 1rem;
-  width: 100%;
-  margin-top: 4px;
-  margin-bottom: 4px;
-  padding: 12px;
+   background-color: rgb(var(--button-background-color));
+   color: rgb(var(--button-color));
+   transition: background-color 0.4s ease;
+   border-radius: 1rem;
+   width: 100%;
+   margin-top: 4px;
+   margin-bottom: 4px;
+   padding: 12px;
 }
 
 button:hover {
-  background-color: rgb(var(--button-background-color-hover));
+   background-color: rgb(var(--button-background-color-hover));
 }
 
 footer {
-  height: 4rem;
-  background-color: rgb(var(--nav-bg));
-  color: rgb(var(--nav-text-color));
-  justify-content: center;
-  display: flex;
-  width: 100%;
-  align-items: center;
+   height: 4rem;
+   background-color: rgb(var(--nav-bg));
+   color: rgb(var(--nav-text-color));
+   justify-content: center;
+   display: flex;
+   width: 100%;
+   align-items: center;
 }
 
 nav {
-  color: rgb(var(--nav-text-color));
-  background: rgb(var(--nav-bg));
+   color: rgb(var(--nav-text-color));
+   background: rgb(var(--nav-bg));
 }
 
 .nav-submenu {
-  color: rgb(var(--nav-text-color));
-  background: rgb(var(--nav-submenu-bg));
-  position: absolute;
-  min-width: 10rem;
-  display: flex;
-  bottom: -5.7rem;
-  border-bottom-left-radius: 0.3rem;
-  border-bottom-right-radius: 1rem;
+   color: rgb(var(--nav-text-color));
+   background: rgb(var(--nav-submenu-bg));
+   position: absolute;
+   min-width: 10rem;
+   display: flex;
+   bottom: -5.7rem;
+   border-bottom-left-radius: 0.3rem;
+   border-bottom-right-radius: 1rem;
 }

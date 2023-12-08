@@ -8,10 +8,10 @@ import axios from "axios";
 // };
 
 const axiosInstance = axios.create({
-  responseType: "json",
-  headers: {
-    "content-type": "application/json",
-  },
+   responseType: "json",
+   headers: {
+      "content-type": "application/json",
+   },
 });
 
 // axios.interceptors.response.use(async (req) => {
