@@ -5,13 +5,13 @@ import { ThemeProvider } from "next-themes";
 import React from "react";
 
 type Props = {
-  children?: React.ReactNode;
+   children?: React.ReactNode;
 };
 
 export const NextAuthProvider = ({ children }: Props) => {
-  return (
-    <SessionProvider>
-      <ThemeProvider>{children}</ThemeProvider>
-    </SessionProvider>
-  );
+   return (
+      <SessionProvider>
+         <ThemeProvider>{children}</ThemeProvider>
+      </SessionProvider>
+   );
 };

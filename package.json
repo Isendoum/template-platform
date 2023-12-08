@@ -4,7 +4,7 @@
   "private": true,
   "lint-staged": {
     "src/**/*.{js,jsx,ts,tsx}": [
-      "npx next lint --fix",
+      "eslint --fix",
       "prettier --write"
     ],
     "src/**/*.{css,md,json}": "prettier --write"

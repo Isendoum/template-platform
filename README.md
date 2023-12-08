@@ -9,7 +9,7 @@ npm install
 yarn install
 ```
 
-2. Setup husky
+2. Setup husky to use pre-commit hooks
 ```bash
 - npm set-script prepare "husky install"
 
