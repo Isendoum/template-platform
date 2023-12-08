@@ -6,8 +6,8 @@ import MenuItem from "./MenuItem";
 import CustomButton from "../buttons/Button";
 import { signOut, useSession } from "next-auth/react";
 import MobileMenu from "./MobileMenu";
-import { Bars3Icon } from "@heroicons/react/24/solid";
-import { ArrowLeftOnRectangleIcon } from "@heroicons/react/24/solid";
+
+import { ArrowLeftOnRectangleIcon, Bars3Icon } from "@heroicons/react/24/solid";
 import Image from "next/image";
 import Logo from "../../../../public/logo.svg";
 
