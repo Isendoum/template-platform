@@ -15,7 +15,7 @@ const NavMenuItem = ({
   title: string;
   link: string;
   // icon?: any;
-  expandedMenu?: string|null;
+  expandedMenu?: string | null;
   setExpandedMenu?: (val: string | null) => void;
   setIsClosing?: (val: boolean) => void;
   children?: React.ReactNode;

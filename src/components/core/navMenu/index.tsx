@@ -36,14 +36,14 @@ const NavMenu: React.FC = () => {
   // const setIsClosingCallback = useCallback((val: boolean) => {
   //   setIsClosing(val);
   // }, []);
-  const setIsExpandedCallback = useCallback((val: string|null) => {
+  const setIsExpandedCallback = useCallback((val: string | null) => {
     setExpandedMenu(val);
   }, []);
   const renderMenuItems = (
     menuItems: TMenuItem[],
     setIsClosing?: () => void,
-    expandedMenu?: string|null,
-    setExpandedMenu?: (val:string|null) => void,
+    expandedMenu?: string | null,
+    setExpandedMenu?: (val: string | null) => void,
   ) => {
     return menuItems.map(
       (mItem: TMenuItem): React.ReactNode => (
