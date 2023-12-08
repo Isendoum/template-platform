@@ -32,12 +32,9 @@ export const EmailResendForm = () => {
 
   const onSubmit = async (values: Inputs) => {
     try {
-      await axiosInstance.get(
-        "/account/resendConfirmAccountEmail",
-        {
-          params: { email: values.email },
-        },
-      );
+      await axiosInstance.get("/account/resendConfirmAccountEmail", {
+        params: { email: values.email },
+      });
       router.push("/success?message=A confirmation email has been sent.");
     } catch (error: any) {
       setError(error);

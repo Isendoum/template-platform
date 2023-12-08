@@ -4,9 +4,8 @@ import { useSession } from "next-auth/react";
 import { useState } from "react";
 
 const BasicInfoForm = () => {
-
   const { data } = useSession();
-  const [error,] = useState("");
+  const [error] = useState("");
 
   return (
     <form>

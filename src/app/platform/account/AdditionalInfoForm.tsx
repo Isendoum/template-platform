@@ -1,6 +1,6 @@
 "use client";
 
-import {useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -14,10 +14,9 @@ type Inputs = {
 };
 
 export const AdditionalInfoForm = () => {
-
   const [, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [userMetada,] = useState<Inputs>();
+  const [userMetada] = useState<Inputs>();
   // we can assing to watch a spesific field
   // const emailW = watch("email");
   const validationSchema = yup

@@ -118,9 +118,7 @@ const DrawerMenu = () => {
                   />
                 )}
               </div>
-              <CustomButton
-                onClick={async () =>signOut()}
-              >
+              <CustomButton onClick={async () => signOut()}>
                 Logout
                 <ArrowLeftOnRectangleIcon className="w-6 h-6 flex self-end flex-col" />
               </CustomButton>

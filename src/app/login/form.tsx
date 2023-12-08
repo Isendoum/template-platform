@@ -7,7 +7,6 @@ import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 
 export const LoginForm = () => {
-
   const [error, setError] = useState("");
   const [loggingIn, setLoggingIn] = useState(false);
 
