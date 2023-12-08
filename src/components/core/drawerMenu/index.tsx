@@ -25,9 +25,9 @@ const DrawerMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { data } = useSession();
   const [isClosing, setIsClosing] = useState(false);
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
-  };
+  // const toggleMenu = () => {
+  //   setIsOpen(!isOpen);
+  // };
 
   const renderMenuItems = (menuItems: any) => {
     return menuItems.map((mItem: any) => (
@@ -60,14 +60,16 @@ const DrawerMenu = () => {
     };
   }, []);
 
-  const imageLoader = ({ src }: any) => {
-    return src;
-  };
+  // const imageLoader = ({ src }: any) => {
+  //   return src;
+  // };
 
   return (
-    <div className={`lg:relative`}>
+    <div className={"lg:relative"}>
       <aside
-        className={`lg:h-[100%] lg:w-64 flex lg:flex-col w-[100%] px-3 py-4 overflow-y-auto lg:rounded-r lg:h-[100%]`}
+        className={
+          "lg:h-[100%] lg:w-64 flex lg:flex-col w-[100%] px-3 py-4 overflow-y-auto lg:rounded-r lg:h-[100%]"
+        }
         aria-label="Sidebar"
       >
         <div className="flex flex-row lg:justify-center items-center">
@@ -117,14 +119,7 @@ const DrawerMenu = () => {
                 )}
               </div>
               <CustomButton
-                onClick={async () => {
-                  try {
-                    // await axiosInstance.post("auth/signOut");
-                  } catch (error) {
-                  } finally {
-                    signOut();
-                  }
-                }}
+                onClick={async () =>signOut()}
               >
                 Logout
                 <ArrowLeftOnRectangleIcon className="w-6 h-6 flex self-end flex-col" />

@@ -26,8 +26,8 @@ const NavMobileMenu = ({
   }, [isClosing, setIsOpen]);
   return (
     <div
-      className={`relative z-10 ${isOpen ? `` : `hidden`} ${
-        isClosing ? `opacity-0 transition-opacity duration-500` : ``
+      className={`relative z-10 ${isOpen ? "" : "hidden"} ${
+        isClosing ? "opacity-0 transition-opacity duration-500" : ""
       }`}
       aria-labelledby="slide-over-title"
       role="dialog"

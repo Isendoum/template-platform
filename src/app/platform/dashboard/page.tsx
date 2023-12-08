@@ -5,8 +5,6 @@ import { useCallback, useEffect, useState } from "react";
 
 const Dashboard = () => {
   const [data, setData] = useState<any>([]);
-  const a = "";
-  const b = "";
   const fetchData = useCallback(() => {
     const data1 = [
       { x: "2023-04-15", y: 6 },

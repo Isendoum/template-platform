@@ -7,7 +7,7 @@ import { ChevronDownIcon } from "@heroicons/react/24/solid";
 const NavMenuItemMobile = ({
   title,
   link,
-  icon,
+  // icon,
   setIsClosing,
   children,
 }: {
@@ -27,8 +27,8 @@ const NavMenuItemMobile = ({
     setIsOpen(!isOpen);
   };
   return (
-    <li id={title} className={`flex flex-col w-full`}>
-      <div className={`flex flex-row items-center`}>
+    <li id={title} className={"flex flex-col w-full"}>
+      <div className={"flex flex-row items-center"}>
         <div className="flex flex-row w-full justify-between p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white">
           <div onClick={handleClick} className="flex">
             <NavMenuItemTitle title={title} />
@@ -38,7 +38,7 @@ const NavMenuItemMobile = ({
               className="flex self-end cursor-pointer"
               onClick={handleOpenMenuItem}
             >
-              <ChevronDownIcon className={`w-6 h-6`} />
+              <ChevronDownIcon className={"w-6 h-6"} />
             </div>
           )}
         </div>

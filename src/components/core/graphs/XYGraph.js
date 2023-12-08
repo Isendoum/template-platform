@@ -7,7 +7,6 @@ const XYGraph = ({
   xAxisLabel = "x",
   yAxisLabel = "y",
   graphTitle = "Graph Title",
-  curvature = 0.0,
 }) => {
   const gridLinesCount = 5;
 
@@ -60,7 +59,7 @@ const XYGraph = ({
   return (
     <div
       style={{ width: width + 60, height: height + 100, padding: 16 }}
-      className={`rounded-md bg-white`}
+      className={"rounded-md bg-white"}
     >
       <div className="text-black mb-2">{graphTitle}</div>
       <div className="relative">

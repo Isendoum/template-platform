@@ -23,7 +23,7 @@ export default function SuccessPage() {
           {params.get("message")}
         </div>
         <CustomButton onClick={() => router.replace("/")} type="submit">
-          {`<--`}
+          {"<--"}
         </CustomButton>
       </SimpleSpace>
     </div>

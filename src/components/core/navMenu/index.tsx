@@ -19,7 +19,7 @@ const menu = [
 const NavMenu: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
-  const [expandedMenu, setExpandedMenu] = useState<String | null>(null);
+  const [expandedMenu, setExpandedMenu] = useState<string | null>(null);
   const session = useSession();
   const pathname = usePathname();
   const navMenuRef = useRef<HTMLDivElement>(null);
@@ -56,7 +56,7 @@ const NavMenu: React.FC = () => {
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      //@ts-ignore
+      //@ts-expect-error reason:testing
       if (navMenuRef.current && !navMenuRef.current.contains(event.target)) {
         setExpandedMenu(null);
       }

@@ -3,15 +3,10 @@
 import { useSession } from "next-auth/react";
 import { useState } from "react";
 
-type Inputs = {
-  username: string;
-  email: string;
-};
 const BasicInfoForm = () => {
-  const [user, setUser] = useState<any>();
-  const [loading, setLoading] = useState(false);
+
   const { data } = useSession();
-  const [error, setError] = useState("");
+  const [error,] = useState("");
 
   return (
     <form>

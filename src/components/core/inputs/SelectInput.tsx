@@ -1,7 +1,5 @@
-import React, { HTMLProps } from "react";
+import React from "react";
 import { UseFormRegister } from "react-hook-form";
-
-type SelectInputProps = HTMLProps<HTMLSelectElement>;
 
 const SelectInput = React.forwardRef<
   HTMLSelectElement,

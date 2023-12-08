@@ -1,9 +1,14 @@
 {
   "root": true,
   "env": { "browser": true, "es2020": true, "es6": true, "node": true },
-  "extends": ["next/core-web-vitals", "eslint:recommended", "plugin:react-hooks/recommended","prettier"],
+  "extends": ["next/core-web-vitals", "eslint:recommended","plugin:@typescript-eslint/recommended", "plugin:react-hooks/recommended","prettier"],
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint"],
   "ignorePatterns": ["node_modules/**/*"],
   "rules":{
+    "brace-style": ["error", "1tbs", { "allowSingleLine": false }],
+    "@typescript-eslint/no-unused-vars": ["warn"],
+    "@typescript-eslint/no-explicit-any": ["warn"],
     "no-unused-vars": "error",
     "indent":[2,2],
     "space-infix-ops": "error",
