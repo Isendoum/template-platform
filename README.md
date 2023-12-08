@@ -17,8 +17,9 @@ yarn install
  #or
  - yarn prepare
 ```
+(.husky folder already exists in project)
 
-First, run the development server:
+3. To run the development server:
 
 ```bash
 npm run dev
