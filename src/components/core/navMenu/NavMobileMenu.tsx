@@ -13,7 +13,7 @@ const NavMobileMenu = ({
   setIsOpen: Dispatch<SetStateAction<boolean>>;
   isClosing: boolean;
   setIsClosing: Dispatch<SetStateAction<boolean>>;
-  children: any;
+  children: React.ReactNode[];
 }) => {
   useEffect(() => {
     if (isClosing) {
@@ -26,12 +26,13 @@ const NavMobileMenu = ({
   }, [isClosing, setIsOpen]);
   return (
     <div
-      className={`relative z-10 ${isOpen ? `` : `hidden`} ${
-        isClosing ? `opacity-0 transition-opacity duration-500` : ``
+      className={`relative z-10 ${isOpen ? "" : "hidden"} ${
+        isClosing ? "opacity-0 transition-opacity duration-500" : ""
       }`}
       aria-labelledby="slide-over-title"
       role="dialog"
-      aria-modal="true">
+      aria-modal="true"
+    >
       <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
 
       <div className="fixed inset-0 overflow-hidden">

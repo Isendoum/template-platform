@@ -6,7 +6,6 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import CustomButton from "@/components/core/buttons/Button";
-import TextInput from "@/components/core/inputs/TextInput";
 import { axiosInstance } from "@/lib/axios";
 type Inputs = {
   username: string;
@@ -17,7 +16,7 @@ type Inputs = {
 
 export const SignUpForm = () => {
   const router = useRouter();
-  const [loading, setLoading] = useState(false);
+  const [, setLoading] = useState(false);
   const [error, setError] = useState("");
   // we can assing to watch a spesific field
   // const emailW = watch("email");
@@ -31,11 +30,11 @@ export const SignUpForm = () => {
       .required("password confirmation is required"),
   });
   const {
-    register,
+    // register,
     handleSubmit,
-    setValue,
-    watch,
-    formState: { errors },
+    // setValue,
+    // watch,
+    // formState: { errors },
   } = useForm<Inputs>({ resolver: yupResolver(validationSchema) });
 
   const onSubmit = async (values: Inputs) => {

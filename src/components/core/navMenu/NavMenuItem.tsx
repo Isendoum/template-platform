@@ -6,7 +6,7 @@ import { ChevronDownIcon } from "@heroicons/react/24/solid";
 const NavMenuItem = ({
   title,
   link,
-  icon,
+  //  icon,
   setIsClosing,
   children,
   expandedMenu,
@@ -14,11 +14,11 @@ const NavMenuItem = ({
 }: {
   title: string;
   link: string;
-  icon?: any;
-  expandedMenu: any;
-  setExpandedMenu: (val: any) => void | undefined;
+  // icon?: any;
+  expandedMenu?: string | null;
+  setExpandedMenu?: (val: string | null) => void;
   setIsClosing?: (val: boolean) => void;
-  children?: any[];
+  children?: React.ReactNode;
 }) => {
   const router = useRouter();
   const isExpanded = expandedMenu === title;
@@ -28,7 +28,7 @@ const NavMenuItem = ({
   };
 
   const handleExpandClick = () => {
-    setExpandedMenu(isExpanded ? null : title);
+    setExpandedMenu && setExpandedMenu(isExpanded ? null : title);
   };
 
   const [transitionDuration, setTransitionDuration] = useState("duration-500");
@@ -42,8 +42,8 @@ const NavMenuItem = ({
   }, [isExpanded]);
 
   return (
-    <li id={title} className={`flex flex-col w-full`}>
-      <div className={`flex flex-row items-center relative`}>
+    <li id={title} className={"flex flex-col w-full"}>
+      <div className={"flex flex-row items-center relative"}>
         <div className="flex flex-row w-full justify-between p-2 text-base font-normal">
           <div onClick={handleClick} className="flex">
             <MenuItemTitle title={title} />
@@ -52,7 +52,7 @@ const NavMenuItem = ({
             <div className="flex self-end ml-2 cursor-pointer">
               <ChevronDownIcon
                 onClick={handleExpandClick}
-                className={`w-5 h-5`}
+                className={"w-5 h-5"}
               />
             </div>
           )}
@@ -60,7 +60,8 @@ const NavMenuItem = ({
         <div
           className={`nav-submenu transition-opacity ${transitionDuration} ${
             isExpanded ? "opacity-100" : "opacity-0"
-          }`}>
+          }`}
+        >
           {children}
         </div>
       </div>

@@ -3,16 +3,10 @@
 import CustomButton from "@/components/core/buttons/Button";
 import ButtonLoader from "@/components/core/loaders/ButtonLoader";
 import { signIn } from "next-auth/react";
-import { useSearchParams, useRouter } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 
-type Inputs = {
-  username: string;
-  password: string;
-};
 export const LoginForm = () => {
-  const router = useRouter();
-
   const [error, setError] = useState("");
   const [loggingIn, setLoggingIn] = useState(false);
 
@@ -22,7 +16,7 @@ export const LoginForm = () => {
   const onSubmit = async () => {
     try {
       setLoggingIn(true);
-      const res = await signIn("google", { callbackUrl: callbackUrl });
+      await signIn("google", { callbackUrl: callbackUrl });
     } catch (error: any) {
       setError(error?.message);
     } finally {

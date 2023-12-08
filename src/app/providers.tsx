@@ -1,10 +1,8 @@
 "use client";
 
-import { axiosInstance } from "@/lib/axios";
-import { getServerSession } from "next-auth";
-import { SessionProvider, useSession } from "next-auth/react";
+import { SessionProvider } from "next-auth/react";
 import { ThemeProvider } from "next-themes";
-import { useCallback } from "react";
+import React from "react";
 
 type Props = {
   children?: React.ReactNode;

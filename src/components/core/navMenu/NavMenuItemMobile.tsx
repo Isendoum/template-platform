@@ -7,15 +7,15 @@ import { ChevronDownIcon } from "@heroicons/react/24/solid";
 const NavMenuItemMobile = ({
   title,
   link,
-  icon,
+  // icon,
   setIsClosing,
   children,
 }: {
   title: string;
   link: string;
-  icon?: any;
+  // icon?: any;
   setIsClosing?: (val: boolean) => void;
-  children?: any[];
+  children?: React.ReactNode;
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
@@ -27,8 +27,8 @@ const NavMenuItemMobile = ({
     setIsOpen(!isOpen);
   };
   return (
-    <li id={title} className={`flex flex-col w-full`}>
-      <div className={`flex flex-row items-center`}>
+    <li id={title} className={"flex flex-col w-full"}>
+      <div className={"flex flex-row items-center"}>
         <div className="flex flex-row w-full justify-between p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white">
           <div onClick={handleClick} className="flex">
             <NavMenuItemTitle title={title} />
@@ -36,8 +36,9 @@ const NavMenuItemMobile = ({
           {children && (
             <div
               className="flex self-end cursor-pointer"
-              onClick={handleOpenMenuItem}>
-              <ChevronDownIcon className={`w-6 h-6`} />
+              onClick={handleOpenMenuItem}
+            >
+              <ChevronDownIcon className={"w-6 h-6"} />
             </div>
           )}
         </div>

@@ -7,7 +7,7 @@ import axios from "axios";
 //   return token;
 // };
 
-let axiosInstance = axios.create({
+const axiosInstance = axios.create({
   responseType: "json",
   headers: {
     "content-type": "application/json",

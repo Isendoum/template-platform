@@ -1,13 +1,12 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import CustomButton from "@/components/core/buttons/Button";
 import TextInput from "@/components/core/inputs/TextInput";
-import { axiosInstance } from "@/lib/axios";
+
 type Inputs = {
   firstName: string;
   lastName: string;
@@ -15,10 +14,9 @@ type Inputs = {
 };
 
 export const AdditionalInfoForm = () => {
-  const router = useRouter();
-  const [loading, setLoading] = useState(false);
+  const [, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [userMetada, setUserMetadata] = useState<Inputs>();
+  const [userMetada] = useState<Inputs>();
   // we can assing to watch a spesific field
   // const emailW = watch("email");
   const validationSchema = yup
@@ -31,15 +29,15 @@ export const AdditionalInfoForm = () => {
   const {
     register,
     handleSubmit,
-    setValue,
-    watch,
+    // setValue,
+    // watch,
     formState: { errors },
   } = useForm<Inputs>({
     resolver: yupResolver(validationSchema),
     values: userMetada,
   });
 
-  const onSubmit = async (values: Inputs) => {
+  const onSubmit = async () => {
     try {
       setLoading(true);
 

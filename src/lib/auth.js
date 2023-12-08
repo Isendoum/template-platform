@@ -1,8 +1,7 @@
 import GoogleProvider from "next-auth/providers/google";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { prisma } from "@/lib/prisma";
-// Global variable to save user data which I want in session
-let userData = {};
+
 export const authOptions = {
   adapter: PrismaAdapter(prisma),
   pages: {

@@ -1,6 +1,5 @@
 import SimpleSpace from "@/components/core/spaces/SimpleSpace";
 import { SignUpForm } from "./form";
-import Link from "next/link";
 
 export default function SignUpPage() {
   return (

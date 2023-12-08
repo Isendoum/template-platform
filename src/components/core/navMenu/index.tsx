@@ -2,13 +2,20 @@
 import Link from "next/link";
 import NavMobileMenu from "./NavMobileMenu";
 import NavMenuItem from "./NavMenuItem";
-import { useCallback, useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { Bars3Icon } from "@heroicons/react/24/solid";
 import { useSession } from "next-auth/react";
 import { usePathname } from "next/navigation";
 import NavMenuItemMobile from "./NavMenuItemMobile";
 import Logo from "../../../../public/logo.svg";
 import Image from "next/image";
+
+type TMenuItem = {
+  label: string;
+  link: string;
+  children?: TMenuItem[];
+};
+
 const menu = [
   {
     label: "Home",
@@ -19,43 +26,46 @@ const menu = [
 const NavMenu: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
-  const [expandedMenu, setExpandedMenu] = useState<String | null>(null);
+  const [expandedMenu, setExpandedMenu] = useState<string | null>(null);
   const session = useSession();
   const pathname = usePathname();
   const navMenuRef = useRef<HTMLDivElement>(null);
-  const setIsOpenCallback = useCallback((val: boolean) => {
-    setIsOpen(val);
-  }, []);
-  const setIsClosingCallback = useCallback((val: boolean) => {
-    setIsClosing(val);
-  }, []);
-  const setIsExpandedCallback = useCallback((val: string) => {
+  // const setIsOpenCallback = useCallback((val: boolean) => {
+  //   setIsOpen(val);
+  // }, []);
+  // const setIsClosingCallback = useCallback((val: boolean) => {
+  //   setIsClosing(val);
+  // }, []);
+  const setIsExpandedCallback = useCallback((val: string | null) => {
     setExpandedMenu(val);
   }, []);
   const renderMenuItems = (
-    menuItems: any,
-    setIsClosing?: (val: boolean) => void,
-    expandedMenu?: any,
-    setExpandedMenu?: any
+    menuItems: TMenuItem[],
+    setIsClosing?: () => void,
+    expandedMenu?: string | null,
+    setExpandedMenu?: (val: string | null) => void,
   ) => {
-    return menuItems.map((mItem: any) => (
-      <NavMenuItem
-        key={mItem.label}
-        title={mItem.label}
-        link={mItem.link}
-        expandedMenu={expandedMenu} // pass down the state
-        setExpandedMenu={setExpandedMenu} // pass down the setter
-        setIsClosing={setIsClosing}>
-        {mItem.children && (
-          <ul className="pl-2">{renderMenuItems(mItem.children)}</ul>
-        )}
-      </NavMenuItem>
-    ));
+    return menuItems.map(
+      (mItem: TMenuItem): React.ReactNode => (
+        <NavMenuItem
+          key={mItem.label}
+          title={mItem.label}
+          link={mItem.link}
+          expandedMenu={expandedMenu} // pass down the state
+          setExpandedMenu={setExpandedMenu} // pass down the setter
+          setIsClosing={setIsClosing}
+        >
+          {mItem.children && (
+            <ul className="pl-2">{renderMenuItems(mItem.children)}</ul>
+          )}
+        </NavMenuItem>
+      ),
+    );
   };
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      //@ts-ignore
+      //@ts-expect-error reason:testing
       if (navMenuRef.current && !navMenuRef.current.contains(event.target)) {
         setExpandedMenu(null);
       }
@@ -72,13 +82,14 @@ const NavMenu: React.FC = () => {
   if (pathname.includes("/platform")) {
     return null;
   }
-  const renderMenuItemsMob = (menuItems: any) => {
-    return menuItems.map((mItem: any) => (
+  const renderMenuItemsMob = (menuItems: TMenuItem[]): React.ReactNode => {
+    return menuItems.map((mItem: TMenuItem) => (
       <NavMenuItemMobile
         key={mItem.link}
         title={mItem.label}
         link={mItem.link}
-        setIsClosing={setIsClosing}>
+        setIsClosing={setIsClosing}
+      >
         {mItem.children && (
           <ul className="pl-2">{renderMenuItemsMob(mItem.children)}</ul>
         )}
@@ -101,7 +112,7 @@ const NavMenu: React.FC = () => {
               menu,
               () => null,
               expandedMenu,
-              setIsExpandedCallback
+              setIsExpandedCallback,
             )}
           </div>
           {session?.status !== "authenticated" && (
@@ -116,7 +127,8 @@ const NavMenu: React.FC = () => {
             <div className="flex flex-row items-center mr-4">
               <Link
                 className="inline-block px-6 py-3 text-primary"
-                href="/platform/dashboard">
+                href="/platform/dashboard"
+              >
                 <span className="text-1xl ">Dashboard</span>
               </Link>
             </div>
@@ -132,8 +144,9 @@ const NavMenu: React.FC = () => {
             isOpen={isOpen}
             setIsOpen={setIsOpen}
             isClosing={isClosing}
-            setIsClosing={setIsClosing}>
-            {renderMenuItemsMob(menu)}
+            setIsClosing={setIsClosing}
+          >
+            {renderMenuItemsMob(menu) as React.ReactNode[]}
           </NavMobileMenu>
         </div>
       </div>

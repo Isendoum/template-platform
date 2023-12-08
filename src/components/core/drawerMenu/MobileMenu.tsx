@@ -30,12 +30,13 @@ const MobileMenu = ({
   }, [isClosing, setIsOpen]);
   return (
     <div
-      className={`relative z-10 ${isOpen ? `` : `hidden`} ${
-        isClosing ? `opacity-0 transition-opacity duration-500` : ``
+      className={`relative z-10 ${isOpen ? "" : "hidden"} ${
+        isClosing ? "opacity-0 transition-opacity duration-500" : ""
       }`}
       aria-labelledby="slide-over-title"
       role="dialog"
-      aria-modal="true">
+      aria-modal="true"
+    >
       <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
 
       <div className="fixed inset-0 overflow-hidden">
@@ -71,12 +72,9 @@ const MobileMenu = ({
                 <div className="mr-14 ml-14">
                   <CustomButton
                     onClick={async () => {
-                      try {
-                      } catch (error) {
-                      } finally {
-                        signOut();
-                      }
-                    }}>
+                      signOut();
+                    }}
+                  >
                     Logout
                     <ArrowLeftOnRectangleIcon className="w-6 h-6 flex self-end flex-col" />
                   </CustomButton>
