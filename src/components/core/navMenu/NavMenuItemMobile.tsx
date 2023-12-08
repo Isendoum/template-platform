@@ -13,9 +13,9 @@ const NavMenuItemMobile = ({
 }: {
   title: string;
   link: string;
-  icon?: any;
+  // icon?: any;
   setIsClosing?: (val: boolean) => void;
-  children?: any[];
+  children?: React.ReactNode;
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();

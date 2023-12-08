@@ -9,6 +9,13 @@ import { usePathname } from "next/navigation";
 import NavMenuItemMobile from "./NavMenuItemMobile";
 import Logo from "../../../../public/logo.svg";
 import Image from "next/image";
+
+type TMenuItem = {
+  label:string;
+  link:string;
+  children?:TMenuItem[]
+}
+
 const menu = [
   {
     label: "Home",
@@ -33,12 +40,12 @@ const NavMenu: React.FC = () => {
     setExpandedMenu(val);
   }, []);
   const renderMenuItems = (
-    menuItems: any,
+    menuItems: TMenuItem[],
     setIsClosing?: () => void,
     expandedMenu?: any,
     setExpandedMenu?: any,
   ) => {
-    return menuItems.map((mItem: any) => (
+    return menuItems.map((mItem: TMenuItem):React.ReactNode => (
       <NavMenuItem
         key={mItem.label}
         title={mItem.label}
@@ -73,8 +80,8 @@ const NavMenu: React.FC = () => {
   if (pathname.includes("/platform")) {
     return null;
   }
-  const renderMenuItemsMob = (menuItems: any) => {
-    return menuItems.map((mItem: any) => (
+  const renderMenuItemsMob = (menuItems: TMenuItem[]): React.ReactNode => {
+    return menuItems.map((mItem: TMenuItem) => (
       <NavMenuItemMobile
         key={mItem.link}
         title={mItem.label}
@@ -137,7 +144,7 @@ const NavMenu: React.FC = () => {
             isClosing={isClosing}
             setIsClosing={setIsClosing}
           >
-            {renderMenuItemsMob(menu)}
+            {renderMenuItemsMob(menu) as React.ReactNode[]}
           </NavMobileMenu>
         </div>
       </div>

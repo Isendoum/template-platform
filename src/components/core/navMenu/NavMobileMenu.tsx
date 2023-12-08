@@ -13,7 +13,7 @@ const NavMobileMenu = ({
   setIsOpen: Dispatch<SetStateAction<boolean>>;
   isClosing: boolean;
   setIsClosing: Dispatch<SetStateAction<boolean>>;
-  children: any;
+  children: React.ReactNode[];
 }) => {
   useEffect(() => {
     if (isClosing) {

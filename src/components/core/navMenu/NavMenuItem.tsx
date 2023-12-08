@@ -14,11 +14,11 @@ const NavMenuItem = ({
 }: {
   title: string;
   link: string;
-  icon?: any;
-  expandedMenu: any;
-  setExpandedMenu: (val: any) => void | undefined;
+  // icon?: any;
+  expandedMenu: string;
+  setExpandedMenu: (val: string|null) => void | undefined;
   setIsClosing?: (val: boolean) => void;
-  children?: any[];
+  children?: React.ReactNode;
 }) => {
   const router = useRouter();
   const isExpanded = expandedMenu === title;
