@@ -29,6 +29,10 @@ export default function Home() {
                   Already implemented inputs.
                </p>
             </div>
+            <p className="text-xl p-2 hover-grow">
+               Husky setup with pre-commit hooks to keep the code clean (eslint,
+               prettier).
+            </p>
          </div>
       </div>
    );
