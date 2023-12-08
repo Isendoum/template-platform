@@ -4,9 +4,7 @@ import { prisma } from "@/lib/prisma";
 
 export const authOptions = {
    adapter: PrismaAdapter(prisma),
-   pages: {
-      signIn: "/login",
-   },
+   pages: { signIn: "/login" },
    session: {
       /*
        * Choose how you want to save the user session.

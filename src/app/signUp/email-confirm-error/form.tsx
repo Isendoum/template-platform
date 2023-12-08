@@ -15,9 +15,7 @@ type Inputs = {
 };
 export const EmailResendForm = () => {
    const validationSchema = yup
-      .object({
-         email: yup.string().required().email(),
-      })
+      .object({ email: yup.string().required().email() })
       .required();
    const {
       register,
@@ -43,13 +41,24 @@ export const EmailResendForm = () => {
 
    return (
       <form>
-         {error && <p className="text-center bg-red-300 py-4 mb-6 rounded">{error}</p>}
+         {error && (
+            <p className="text-center bg-red-300 py-4 mb-6 rounded">{error}</p>
+         )}
 
          <div className="mb-6">
-            <TextInput type="text" label={"Email"} error={errors["email"]} {...register("email")} />
+            <TextInput
+               type="text"
+               label={"Email"}
+               error={errors["email"]}
+               {...register("email")}
+            />
          </div>
 
-         <CustomButton disabled={isSubmitting} onClick={handleSubmit(onSubmit)} type="submit">
+         <CustomButton
+            disabled={isSubmitting}
+            onClick={handleSubmit(onSubmit)}
+            type="submit"
+         >
             Resend
             {isSubmitting && <ButtonLoader />}
          </CustomButton>

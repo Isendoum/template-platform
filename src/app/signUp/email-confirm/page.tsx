@@ -8,8 +8,13 @@ export default function SignUpEmailConfirmPage() {
    return (
       <div className="container mx-auto px-6 py-12 h-full flex justify-center items-center">
          <SimpleSpace>
-            <div className="text-black text-center mb-4">Email have been confirmed successfully</div>
-            <CustomButton onClick={() => router.replace("/login")} type="submit">
+            <div className="text-black text-center mb-4">
+               Email have been confirmed successfully
+            </div>
+            <CustomButton
+               onClick={() => router.replace("/login")}
+               type="submit"
+            >
                go to login
             </CustomButton>
          </SimpleSpace>

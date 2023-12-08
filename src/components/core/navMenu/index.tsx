@@ -39,7 +39,12 @@ const NavMenu: React.FC = () => {
    const setIsExpandedCallback = useCallback((val: string | null) => {
       setExpandedMenu(val);
    }, []);
-   const renderMenuItems = (menuItems: TMenuItem[], setIsClosing?: () => void, expandedMenu?: string | null, setExpandedMenu?: (val: string | null) => void) => {
+   const renderMenuItems = (
+      menuItems: TMenuItem[],
+      setIsClosing?: () => void,
+      expandedMenu?: string | null,
+      setExpandedMenu?: (val: string | null) => void,
+   ) => {
       return menuItems.map(
          (mItem: TMenuItem): React.ReactNode => (
             <NavMenuItem
@@ -50,7 +55,9 @@ const NavMenu: React.FC = () => {
                setExpandedMenu={setExpandedMenu} // pass down the setter
                setIsClosing={setIsClosing}
             >
-               {mItem.children && <ul className="pl-2">{renderMenuItems(mItem.children)}</ul>}
+               {mItem.children && (
+                  <ul className="pl-2">{renderMenuItems(mItem.children)}</ul>
+               )}
             </NavMenuItem>
          ),
       );
@@ -77,17 +84,37 @@ const NavMenu: React.FC = () => {
    }
    const renderMenuItemsMob = (menuItems: TMenuItem[]): React.ReactNode => {
       return menuItems.map((mItem: TMenuItem) => (
-         <NavMenuItemMobile key={mItem.link} title={mItem.label} link={mItem.link} setIsClosing={setIsClosing}>
-            {mItem.children && <ul className="pl-2">{renderMenuItemsMob(mItem.children)}</ul>}
+         <NavMenuItemMobile
+            key={mItem.link}
+            title={mItem.label}
+            link={mItem.link}
+            setIsClosing={setIsClosing}
+         >
+            {mItem.children && (
+               <ul className="pl-2">{renderMenuItemsMob(mItem.children)}</ul>
+            )}
          </NavMenuItemMobile>
       ));
    };
    return (
       <nav className="w-full" ref={navMenuRef}>
          <div className="flex flex-row w-full h-[4rem] justify-between items-center">
-            <Image className="ml-4 mr-4" width={36} height={36} alt="logo" src={Logo} />
+            <Image
+               className="ml-4 mr-4"
+               width={36}
+               height={36}
+               alt="logo"
+               src={Logo}
+            />
             <div className="flex flex-row items-center justify-between w-full">
-               <div className="max-lg:hidden flex flex-row pl-6 items-center">{renderMenuItems(menu, () => null, expandedMenu, setIsExpandedCallback)}</div>
+               <div className="max-lg:hidden flex flex-row pl-6 items-center">
+                  {renderMenuItems(
+                     menu,
+                     () => null,
+                     expandedMenu,
+                     setIsExpandedCallback,
+                  )}
+               </div>
                {session?.status !== "authenticated" && (
                   <div className="flex flex-row items-center ml-4 mr-4">
                      <Link href="/login" className="inline-block py-3">
@@ -98,16 +125,27 @@ const NavMenu: React.FC = () => {
 
                {session?.status === "authenticated" && (
                   <div className="flex flex-row items-center mr-4">
-                     <Link className="inline-block px-6 py-3 text-primary" href="/platform/dashboard">
+                     <Link
+                        className="inline-block px-6 py-3 text-primary"
+                        href="/platform/dashboard"
+                     >
                         <span className="text-1xl ">Dashboard</span>
                      </Link>
                   </div>
                )}
 
-               <Bars3Icon className="w-6 h-6 cursor-pointer lg:hidden mr-4" onClick={() => setIsOpen(true)} />
+               <Bars3Icon
+                  className="w-6 h-6 cursor-pointer lg:hidden mr-4"
+                  onClick={() => setIsOpen(true)}
+               />
             </div>
             <div id="test" className="lg:hidden">
-               <NavMobileMenu isOpen={isOpen} setIsOpen={setIsOpen} isClosing={isClosing} setIsClosing={setIsClosing}>
+               <NavMobileMenu
+                  isOpen={isOpen}
+                  setIsOpen={setIsOpen}
+                  isClosing={isClosing}
+                  setIsClosing={setIsClosing}
+               >
                   {renderMenuItemsMob(menu) as React.ReactNode[]}
                </NavMobileMenu>
             </div>
