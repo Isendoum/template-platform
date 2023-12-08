@@ -1,5 +1,32 @@
 #!/usr/bin/env bash
 . "$(dirname -- "$0")/_/husky.sh"
 
-npm run format:all
-npm run lint --fix
+# Detect OS
+OS="`uname`"
+case $OS in
+  'Linux')
+    OS='Linux'
+    npm_command="npm"
+    ;;
+  'Darwin') 
+    OS='Mac'
+    npm_command="npm"
+    ;;
+  'WindowsNT')
+    OS='Windows'
+    npm_command="npm.cmd"
+    ;;
+  *) 
+    ;;
+esac
+
+# Run commands based on OS
+if [ "$OS" = "Windows" ]; then
+    # Windows commands
+    $npm_command run format:all
+    $npm_command run lint --fix
+else
+    # Unix/Linux/Mac commands
+    npm run format:all
+    npm run lint --fix
+fi
