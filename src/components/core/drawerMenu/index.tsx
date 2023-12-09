@@ -116,7 +116,7 @@ const DrawerMenu = () => {
                   >
                      {renderMenuItems(menu)}
                   </ul>
-                  <div>
+                  <div className="flex flex-col">
                      <div className="flex flex-row justify-around mb-2 items-center">
                         <div>{data?.user?.name}</div>
                         {data?.user?.image && (

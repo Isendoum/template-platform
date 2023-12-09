@@ -52,10 +52,10 @@ body {
 }
 
 button {
-   background-color: rgb(var(--button-background-color));
+   background-color: rgb(var(--button-background-color)) !important;
    color: rgb(var(--button-color));
    transition: background-color 0.4s ease;
-   border-radius: 1rem;
+   border-radius: 0.75rem;
    width: 100%;
    margin-top: 4px;
    margin-bottom: 4px;
@@ -63,7 +63,7 @@ button {
 }
 
 button:hover {
-   background-color: rgb(var(--button-background-color-hover));
+   background-color: rgb(var(--button-background-color-hover)) !important;
 }
 
 footer {
