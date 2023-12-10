@@ -1,7 +1,8 @@
 "use client";
 
 import CustomButton from "@/components/core/buttons/Button";
-import ButtonLoader from "@/components/core/loaders/ButtonLoader";
+
+import { ArrowRightIcon } from "@heroicons/react/24/solid";
 import { signIn } from "next-auth/react";
 import { useSearchParams } from "next/navigation";
 import { useState } from "react";
@@ -30,8 +31,13 @@ export const LoginForm = () => {
             <p className="text-center bg-red-300 py-4 mb-6 rounded">{error}</p>
          )}
 
-         <CustomButton disabled={loggingIn} onClick={onSubmit}>
-            Sign In with Google{loggingIn && <ButtonLoader />}
+         <CustomButton
+            disabled={loggingIn}
+            loading={loggingIn}
+            onClick={onSubmit}
+         >
+            Sign In with Google
+            {!loggingIn && <ArrowRightIcon width={26} />}
          </CustomButton>
       </div>
    );

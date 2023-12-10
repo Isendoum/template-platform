@@ -1,11 +1,14 @@
 import React, { ButtonHTMLAttributes } from "react";
+import ButtonLoader from "../loaders/ButtonLoader";
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
    variant?: "primary" | "success";
+   loading?: boolean;
 };
 const CustomButton: React.FC<ButtonProps> = ({
    children,
    className,
    variant,
+   loading,
    ...props
 }) => {
    const btnClassname = () => {
@@ -23,10 +26,11 @@ const CustomButton: React.FC<ButtonProps> = ({
 
    return (
       <button className={combinedClassName} {...props}>
-         <div className="flex flex-row justify-center">
+         <div className="flex flex-row justify-center items-center">
             {React.Children.map(children, (child) => (
-               <div className="px-4">{child}</div>
+               <div className="px-2">{child}</div>
             ))}
+            {loading && <ButtonLoader />}
          </div>
       </button>
    );
