@@ -1,7 +1,7 @@
 import React, { ButtonHTMLAttributes } from "react";
 import ButtonLoader from "../loaders/ButtonLoader";
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
-   variant?: "primary" | "success";
+   variant?: "primary" | "success" | "text";
    loading?: boolean;
    iconRight?: React.ReactNode;
 };
@@ -19,6 +19,8 @@ const CustomButton: React.FC<ButtonProps> = ({
             return "border bg-primary text-white transition duration-500 ease select-none hover:bg-primary-hover focus:outline-none focus:shadow-outline";
          case "success":
             return "border border-green-500 bg-green-500 text-white transition duration-500 ease select-none hover:bg-green-600 focus:outline-none focus:shadow-outline";
+         case "text":
+            return "bg-transparent border-white-500 border";
          default:
             return "";
       }

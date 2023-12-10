@@ -131,6 +131,7 @@ const DrawerMenu = () => {
                         )}
                      </div>
                      <CustomButton
+                        variant="text"
                         onClick={async () => signOut()}
                         iconRight={
                            <ArrowLeftOnRectangleIcon className="w-6 h-6 flex" />

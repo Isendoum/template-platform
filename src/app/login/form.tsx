@@ -32,7 +32,7 @@ export const LoginForm = () => {
 
          <CustomButton
             disabled={loggingIn}
-            loading={!loggingIn}
+            loading={loggingIn}
             onClick={onSubmit}
             iconRight={<ArrowRightOnRectangleIcon className="w-6 h-6" />}
          >
