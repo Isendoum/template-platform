@@ -1,5 +1,5 @@
 type Size = "small" | "medium" | "large";
-const ButtonLoader = ({
+const LoadingIndicator = ({
    size = "medium",
    color = "#3498db",
 }: {
@@ -22,4 +22,4 @@ const ButtonLoader = ({
       ></div>
    );
 };
-export default ButtonLoader;
+export default LoadingIndicator;

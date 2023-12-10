@@ -6,6 +6,7 @@
    --foreground-rgb: 0, 0, 0;
    --button-color: 255, 255, 255;
    --text-color: 0, 0, 0;
+   --space-bg-color: 250, 250, 250;
    --button-background-color: 70, 130, 180;
    --button-background-color-hover: 70, 140, 190;
    --background: 230, 230, 230;
@@ -30,15 +31,22 @@
 
 [data-theme="dark"] {
    --foreground-rgb: 255, 255, 255;
-   --text-color: 255, 255, 255;
    --button-color: 255, 255, 255;
-   --button-background-color: 31, 41, 55;
-   --button-background-color-hover: 55, 65, 81;
-   --background: 60, 60, 90;
+   --text-color: 255, 255, 255;
+   --space-bg-color: 31, 41, 55;
+   --button-background-color: 60, 70, 95;
+   --button-background-color-hover: 55, 65, 90;
+   --background: 55, 65, 90;
    --nav-text-color: 255, 255, 255;
    --nav-bg: 10, 20, 40;
    --nav-submenu-bg: 10, 30, 59;
    --drawer-background-color: 31, 41, 55;
+}
+
+.space {
+   background-color: rgb(var(--space-bg-color));
+   color: rgb(var(--text-color));
+   border-radius: 1rem;
 }
 
 aside {
@@ -52,7 +60,7 @@ body {
 }
 
 button {
-   background-color: rgb(var(--button-background-color)) !important;
+   background-color: rgb(var(--button-background-color));
    color: rgb(var(--button-color));
    transition: background-color 0.4s ease;
    border-radius: 0.75rem;
@@ -92,6 +100,7 @@ nav {
    border-bottom-right-radius: 1rem;
 }
 
+/* Loading indicator*/
 .loading-indicator {
    animation: spin 1s linear infinite;
    border-radius: 9999px;

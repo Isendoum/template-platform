@@ -1,5 +1,5 @@
 import React, { ButtonHTMLAttributes } from "react";
-import ButtonLoader from "../loaders/ButtonLoader";
+import ButtonLoader from "../loaders/LoadingIndicator";
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
    variant?: "primary" | "success" | "text";
    loading?: boolean;

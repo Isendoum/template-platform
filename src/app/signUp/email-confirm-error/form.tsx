@@ -2,7 +2,7 @@
 
 import CustomButton from "@/components/core/buttons/Button";
 import TextInput from "@/components/core/inputs/TextInput";
-import ButtonLoader from "@/components/core/loaders/ButtonLoader";
+import ButtonLoader from "@/components/core/loaders/LoadingIndicator";
 import { axiosInstance } from "@/lib/axios";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useRouter } from "next/navigation";

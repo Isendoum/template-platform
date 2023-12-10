@@ -15,15 +15,13 @@ const BasicInfoForm = () => {
          <div className="min-h-[200px]">
             {data?.user ? (
                <div>
-                  <label className="font-semibold text-[#07074D]">
-                     Username
-                  </label>
-                  <div className="mb-6 text-[#07074D]">{data?.user?.name}</div>
-                  <label className="font-semibold text-[#07074D]">Email</label>
-                  <div className="mb-6 text-[#07074D]">{data?.user?.email}</div>
+                  <label className="font-semibold">Username</label>
+                  <div className="mb-6">{data?.user?.name}</div>
+                  <label className="font-semibold">Email</label>
+                  <div className="mb-6">{data?.user?.email}</div>
                </div>
             ) : (
-               <div className="mb-6 text-[#07074D]">loading info...</div>
+               <div className="mb-6">loading info...</div>
             )}
          </div>
       </form>

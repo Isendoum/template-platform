@@ -9,11 +9,9 @@ const Account = async () => {
          </h1>
          <div className="spacing-4 flex flex-col">
             <SimpleSpace>
-               <h4 className="text-[#07074D] text-xl font-medium mb-8">
-                  Basic account info
-               </h4>
+               <h4 className="text-xl font-medium mb-8">Basic account info</h4>
                <BasicUserForm />
-               <div className="text-xs text-black text-center">
+               <div className="text-xs text-center">
                   these info cannot be changed
                </div>
             </SimpleSpace>
