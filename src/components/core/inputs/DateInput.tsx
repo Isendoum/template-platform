@@ -5,16 +5,11 @@ type TextInputProps = HTMLProps<HTMLInputElement>;
 
 const DateInput = React.forwardRef<
    HTMLInputElement & TextInputProps,
-   { label: string; error?: any; type?: string } & ReturnType<
-      UseFormRegister<any>
-   >
->(({ onChange, onBlur, name, label, error, type }, ref) => (
-   <div className="w-full min-w-36 px-3 ">
+   { label: string; error?: any } & ReturnType<UseFormRegister<any>>
+>(({ onChange, onBlur, name, label, error }, ref) => (
+   <div className="w-full min-w-36">
       <div className="mb-5">
-         <label
-            className="mb-3 block text-base font-medium text-[#07074D]"
-            htmlFor={label}
-         >
+         <label className="mb-3 block text-base font-medium" htmlFor={label}>
             {label}
          </label>
          <input
@@ -23,7 +18,7 @@ const DateInput = React.forwardRef<
             ref={ref}
             onChange={onChange}
             onBlur={onBlur}
-            type={type}
+            type={"date"}
          />
          {error && <p className="text-red-500">{error.message}</p>}
       </div>

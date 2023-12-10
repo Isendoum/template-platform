@@ -10,12 +10,9 @@ const SelectInput = React.forwardRef<
    } & ReturnType<UseFormRegister<any>>
 >(({ onChange, onBlur, name, label, error, options }, ref) => {
    return (
-      <div className="w-full min-w-36 px-3 ">
+      <div className="w-full min-w-36">
          <div className="mb-5">
-            <label
-               className="mb-3 block text-base font-medium text-[#07074D]"
-               htmlFor={name}
-            >
+            <label className="mb-3 block text-base font-medium" htmlFor={name}>
                {label}
             </label>
             <select
@@ -26,7 +23,11 @@ const SelectInput = React.forwardRef<
                onBlur={onBlur}
             >
                {options?.map(({ label, value }) => (
-                  <option key={value} value={value}>
+                  <option
+                     className="font-sans text-base font-medium text-[#6B7280]"
+                     key={value}
+                     value={value}
+                  >
                      {label}
                   </option>
                ))}

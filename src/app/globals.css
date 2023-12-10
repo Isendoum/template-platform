@@ -70,6 +70,28 @@ button {
    padding: 12px;
 }
 
+button[type="submit"] {
+   background-color: rgb(var(--button-background-color));
+   color: rgb(var(--button-color));
+   transition: background-color 0.4s ease;
+   border-radius: 0.75rem;
+   width: 100%;
+   margin-top: 4px;
+   margin-bottom: 4px;
+   padding: 12px;
+}
+
+button[type="reset"] {
+   background-color: rgb(var(--button-background-color));
+   color: rgb(var(--button-color));
+   transition: background-color 0.4s ease;
+   border-radius: 0.75rem;
+   width: 100%;
+   margin-top: 4px;
+   margin-bottom: 4px;
+   padding: 12px;
+}
+
 button:hover {
    background-color: rgb(var(--button-background-color-hover)) !important;
 }
@@ -102,6 +124,7 @@ nav {
 
 /* Loading indicator*/
 .loading-indicator {
+   color: rgb(var(--button-color));
    animation: spin 1s linear infinite;
    border-radius: 9999px;
    border-top-width: 3px;
