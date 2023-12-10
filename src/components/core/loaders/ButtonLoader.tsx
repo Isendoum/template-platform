@@ -1,8 +1,24 @@
-const ButtonLoader = () => {
+type Size = "small" | "medium" | "large";
+const ButtonLoader = ({
+   size = "medium",
+   color = "#3498db",
+}: {
+   size?: Size;
+   color?: string;
+}) => {
+   const sizeClasses: Record<Size, number> = {
+      small: 14,
+      medium: 18,
+      large: 26,
+   };
    return (
       <div
-         className="rounded-full border-4 border-t-4 border-gray-200 h-5 w-5 transform -translate-y-1/2 animate-spin"
-         style={{ borderTopColor: "#3498db" }}
+         className="loading-indicator"
+         style={{
+            borderColor: color ? color : "currentColor",
+            width: sizeClasses[size],
+            height: sizeClasses[size],
+         }}
       ></div>
    );
 };

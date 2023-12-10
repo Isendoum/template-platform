@@ -91,3 +91,23 @@ nav {
    border-bottom-left-radius: 0.3rem;
    border-bottom-right-radius: 1rem;
 }
+
+.loading-indicator {
+   animation: spin 1s linear infinite;
+   border-radius: 9999px;
+   border-top-width: 3px;
+   border-left-width: 3px;
+   border-bottom-width: 0px;
+   border-right-width: 0px;
+   border-style: solid;
+}
+
+/* Keyframes for spin animation */
+@keyframes spin {
+   from {
+      transform: rotate(0deg);
+   }
+   to {
+      transform: rotate(360deg);
+   }
+}

@@ -3,12 +3,14 @@ import ButtonLoader from "../loaders/ButtonLoader";
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
    variant?: "primary" | "success";
    loading?: boolean;
+   iconRight?: React.ReactNode;
 };
 const CustomButton: React.FC<ButtonProps> = ({
    children,
    className,
    variant,
    loading,
+   iconRight,
    ...props
 }) => {
    const btnClassname = () => {
@@ -30,6 +32,7 @@ const CustomButton: React.FC<ButtonProps> = ({
             {React.Children.map(children, (child) => (
                <div className="px-2">{child}</div>
             ))}
+            {iconRight && !loading && iconRight}
             {loading && <ButtonLoader />}
          </div>
       </button>

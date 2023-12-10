@@ -1,8 +1,7 @@
 "use client";
 
 import CustomButton from "@/components/core/buttons/Button";
-
-import { ArrowRightIcon } from "@heroicons/react/24/solid";
+import { ArrowRightOnRectangleIcon } from "@heroicons/react/24/solid";
 import { signIn } from "next-auth/react";
 import { useSearchParams } from "next/navigation";
 import { useState } from "react";
@@ -33,11 +32,11 @@ export const LoginForm = () => {
 
          <CustomButton
             disabled={loggingIn}
-            loading={loggingIn}
+            loading={!loggingIn}
             onClick={onSubmit}
+            iconRight={<ArrowRightOnRectangleIcon className="w-6 h-6" />}
          >
             Sign In with Google
-            {!loggingIn && <ArrowRightIcon width={26} />}
          </CustomButton>
       </div>
    );
