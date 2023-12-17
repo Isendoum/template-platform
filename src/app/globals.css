@@ -16,6 +16,7 @@
    --drawer-background-color: 70, 130, 180;
    --calendar-hover: 230, 230, 230;
    --day-equal-bg: 230, 230, 230;
+   --menu-item-hover-bg: 230, 230, 230, 0.5;
 }
 
 /* @media (prefers-color-scheme: dark) {
@@ -45,6 +46,7 @@
    --drawer-background-color: 31, 41, 55;
    --calendar-hover: 55, 65, 90;
    --day-equal-bg: 55, 65, 90;
+   --menu-item-hover-bg: 55, 65, 90;
 }
 
 .space {
@@ -98,6 +100,12 @@ button[type="reset"] {
 
 button:hover {
    background-color: rgb(var(--button-background-color-hover)) !important;
+}
+
+.menu-item {
+}
+.menu-item:hover {
+   background-color: rgba(var(--menu-item-hover-bg));
 }
 
 footer {

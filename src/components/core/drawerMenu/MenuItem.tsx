@@ -27,12 +27,7 @@ const MenuItem = ({
       setIsOpen(!isOpen);
    };
    return (
-      <li
-         id={title}
-         className={
-            "flex flex-col w-full hover:bg-gray-100 rounded-md dark:hover:bg-gray-700"
-         }
-      >
+      <li id={title} className={"flex flex-col w-full rounded-md menu-item"}>
          <div className={"flex flex-row items-center"}>
             <div className="flex flex-row w-full justify-between p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white">
                <div onClick={handleClick} className="flex">
