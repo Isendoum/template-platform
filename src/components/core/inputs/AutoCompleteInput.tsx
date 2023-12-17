@@ -1,4 +1,4 @@
-import React, { useState, useEffect, HTMLProps } from "react";
+import React, { useState, useEffect, HTMLProps, useRef } from "react";
 import { UseFormRegister } from "react-hook-form";
 import debounce from "lodash/debounce";
 
@@ -16,12 +16,28 @@ const AutoCompleteInput = React.forwardRef<
    const [value, setValue] = useState("");
    const [showOptions, setShowOptions] = useState(false);
    const [highlightedIndex, setHighlightedIndex] = useState(0);
-
+   const containerRef = useRef<HTMLDivElement>(null);
    useEffect(() => {
       if (!showOptions) {
          setHighlightedIndex(0);
       }
    }, [showOptions]);
+
+   useEffect(() => {
+      const handleClickOutside = (event: MouseEvent) => {
+         if (
+            containerRef.current &&
+            !containerRef.current.contains(event.target as Node)
+         ) {
+            setShowOptions(false);
+         }
+      };
+
+      document.addEventListener("mousedown", handleClickOutside);
+      return () => {
+         document.removeEventListener("mousedown", handleClickOutside);
+      };
+   }, []);
 
    const filterOptions = (searchValue: string) => {
       if (!searchValue) {
@@ -75,10 +91,10 @@ const AutoCompleteInput = React.forwardRef<
 
    return (
       <div className="w-full min-w-36 relative">
-         <div className="mb-5">
-            <label className="mb-3 block text-base font-medium " htmlFor={name}>
-               {label}
-            </label>
+         <label className="mb-3 block text-base font-medium" htmlFor={name}>
+            {label}
+         </label>
+         <div className="mb-5" ref={containerRef}>
             <input
                className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-sm"
                name={name}
@@ -90,7 +106,10 @@ const AutoCompleteInput = React.forwardRef<
                onClick={() => setShowOptions(true)}
             />
             {showOptions && (
-               <div className="absolute z-10 w-full bg-white border border-[#e0e0e0] rounded-md py-2 mt-1">
+               <div
+                  style={{ scrollbarWidth: "thin" }}
+                  className="absolute z-10 w-full max-h-[200px] overflow-y-auto bg-white border border-[#e0e0e0] rounded-md py-2 mt-1"
+               >
                   {autoCompleteOptions.length > 0 ? (
                      autoCompleteOptions.map((option, index) => (
                         <p

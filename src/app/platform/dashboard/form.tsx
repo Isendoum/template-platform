@@ -72,6 +72,9 @@ export const Form = () => {
                { label: "Senior", value: "senior" },
                { label: "Mid", value: "mid" },
                { label: "Junior", value: "junior" },
+               { label: "Ele", value: "ele" },
+               { label: "Omg", value: "omg" },
+               { label: "Titan", value: "titan" },
             ]}
             {...register("job")}
          />
