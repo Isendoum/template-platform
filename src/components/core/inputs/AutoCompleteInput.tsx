@@ -127,7 +127,7 @@ const AutoCompleteInput = React.forwardRef<
                   )}
                </div>
             )}
-            {error && <p className="text-red-500">{error.message}</p>}
+            {error && <p className="text-red-500">{error}</p>}
          </div>
       </div>
    );

@@ -27,7 +27,7 @@ export const Form = () => {
    const validationSchema = yup.object({
       //   username: yup.string(),
       email: yup.string().email().required(),
-      //   password: yup.string(),
+      job: yup.string().required(),
       //   password2: yup
       //      .string()
       //      .oneOf([yup.ref("password")], "Passwords must match")
@@ -68,6 +68,7 @@ export const Form = () => {
          />
          <AutoCompleteInput
             label="Job"
+            error={errors.job?.message}
             options={[
                { label: "Senior", value: "senior" },
                { label: "Mid", value: "mid" },
@@ -78,6 +79,7 @@ export const Form = () => {
             ]}
             {...register("job")}
          />
+         {/* <DateInput label="Date" {...register("date")} /> */}
          <DateInput label="Date" {...register("date")} />
 
          <CustomButton
