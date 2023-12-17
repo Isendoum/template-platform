@@ -11,6 +11,7 @@ import SimpleSpace from "@/components/core/spaces/SimpleSpace";
 import SelectInput from "@/components/core/inputs/SelectInput";
 import AutoCompleteInput from "@/components/core/inputs/AutoCompleteInput";
 import DateInput from "@/components/core/inputs/DateInput";
+
 type Inputs = {
    email: string;
    color: string;

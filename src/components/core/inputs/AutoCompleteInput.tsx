@@ -1,5 +1,6 @@
-import React, { useState, HTMLProps } from "react";
+import React, { useState, useEffect, HTMLProps } from "react";
 import { UseFormRegister } from "react-hook-form";
+import debounce from "lodash/debounce";
 
 type AutoCompleteProps = HTMLProps<HTMLInputElement> & {
    options: { label: string; value: string }[];
@@ -10,34 +11,66 @@ const AutoCompleteInput = React.forwardRef<
    { label: string; error?: any } & ReturnType<UseFormRegister<any>> &
       AutoCompleteProps
 >(({ onChange, onBlur, name, label, error, options }, ref) => {
-   const [autoCompleteOptions, setAutoCompleteOptions] = useState<
-      { label: string; value: string }[]
-   >([]);
+   const [autoCompleteOptions, setAutoCompleteOptions] =
+      useState<{ label: string; value: string }[]>(options);
    const [value, setValue] = useState("");
    const [showOptions, setShowOptions] = useState(false);
+   const [highlightedIndex, setHighlightedIndex] = useState(0);
 
-   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-      setValue(event.target.value);
-      if (onChange) onChange(event);
+   useEffect(() => {
+      if (!showOptions) {
+         setHighlightedIndex(0);
+      }
+   }, [showOptions]);
 
-      setShowOptions(true);
-
-      const searchValue = event.target.value;
-      if (searchValue) {
-         const filteredOptions = options.filter((option) =>
+   const filterOptions = (searchValue: string) => {
+      if (!searchValue) {
+         setAutoCompleteOptions(options);
+      } else {
+         const filtered = options.filter((option) =>
             option.label.toLowerCase().includes(searchValue.toLowerCase()),
          );
-         setAutoCompleteOptions(filteredOptions);
-      } else {
-         setAutoCompleteOptions(options);
+         setAutoCompleteOptions(filtered);
       }
    };
 
-   const handleBlur = (event: React.FocusEvent<HTMLInputElement>) => {
-      if (onBlur) onBlur(event);
+   // Debounce filter function
+   const debouncedFilterOptions = debounce(filterOptions, 300);
 
-      // Remove autocomplete options after leaving the input
-      setTimeout(() => setShowOptions(false), 100);
+   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+      setValue(event.target.value);
+      setShowOptions(true);
+      debouncedFilterOptions(event.target.value);
+   };
+
+   const handleSelectOption = (option: { label: string; value: string }) => {
+      setValue(option.label);
+      setShowOptions(false);
+      // Manually invoke the onChange prop with the selected value
+      if (onChange) {
+         onChange({ target: { name, value: option.value } } as any);
+      }
+   };
+
+   const handleKeyDown = (event: React.KeyboardEvent) => {
+      switch (event.key) {
+         case "ArrowDown":
+            setHighlightedIndex((prev) =>
+               Math.min(prev + 1, autoCompleteOptions.length - 1),
+            );
+            break;
+         case "ArrowUp":
+            setHighlightedIndex((prev) => Math.max(prev - 1, 0));
+            break;
+         case "Enter":
+            handleSelectOption(autoCompleteOptions[highlightedIndex]);
+            break;
+         case "Escape":
+            setShowOptions(false);
+            break;
+         default:
+            break;
+      }
    };
 
    return (
@@ -52,24 +85,27 @@ const AutoCompleteInput = React.forwardRef<
                ref={ref}
                value={value}
                onChange={handleChange}
-               onBlur={handleBlur}
+               onBlur={onBlur}
+               onKeyDown={handleKeyDown}
+               onClick={() => setShowOptions(true)}
             />
-            {autoCompleteOptions?.length > 0 && showOptions && (
+            {showOptions && (
                <div className="absolute z-10 w-full bg-white border border-[#e0e0e0] rounded-md py-2 mt-1">
-                  {autoCompleteOptions?.map((option, index) => (
-                     <p
-                        onClick={() => setValue(option.label)}
-                        key={index}
-                        className="px-4 py-2 text-black hover:bg-[#e0e0e0] cursor-pointer"
-                     >
-                        {option.label}
-                     </p>
-                  ))}
-               </div>
-            )}
-            {autoCompleteOptions?.length === 0 && showOptions && (
-               <div className="absolute z-10 w-full bg-white border border-[#e0e0e0] rounded-md py-2 mt-1">
-                  <p className="px-4 py-2 text-black">No options</p>
+                  {autoCompleteOptions.length > 0 ? (
+                     autoCompleteOptions.map((option, index) => (
+                        <p
+                           onClick={() => handleSelectOption(option)}
+                           key={index}
+                           className={`px-4 py-2 text-black hover:bg-[#e0e0e0] cursor-pointer ${
+                              index === highlightedIndex ? "bg-gray-200" : ""
+                           }`}
+                        >
+                           {option.label}
+                        </p>
+                     ))
+                  ) : (
+                     <p className="px-4 py-2 text-black">No options</p>
+                  )}
                </div>
             )}
             {error && <p className="text-red-500">{error.message}</p>}
