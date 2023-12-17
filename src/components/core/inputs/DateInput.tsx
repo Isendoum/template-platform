@@ -19,12 +19,13 @@ interface DateInputProps
    onChange?: OnChangeType;
    value?: string;
    locale?: string;
+   error?: string;
 }
 
 const DateInput = React.forwardRef<
    HTMLInputElement,
    DateInputProps & ReturnType<UseFormRegister<any>>
->(({ label, onChange, locale = "default", ...props }, forwardedRef) => {
+>(({ label, onChange, locale = "default", error, ...props }, forwardedRef) => {
    const [isCalendarOpen, setIsCalendarOpen] = useState(false);
    const [selectedDate, setSelectedDate] = useState<Date | string | null>("");
    const inputRef = useRef<HTMLInputElement>(
@@ -79,13 +80,17 @@ const DateInput = React.forwardRef<
    };
 
    const valueGetter = (selectedDate: Date | string | null): string => {
-      return selectedDate instanceof Date
-         ? selectedDate.toISOString().split("T")[0]
-         : selectedDate || "";
+      if (selectedDate instanceof Date && !isNaN(selectedDate.getTime())) {
+         // Check if selectedDate is a valid Date object
+         return selectedDate.toISOString().split("T")[0];
+      } else if (typeof selectedDate === "string") {
+         // Return the string if it's a string (might be empty if cleared)
+         return selectedDate;
+      }
+      return "";
    };
-
    return (
-      <div className="w-full min-w-36 relative">
+      <div className="w-full min-w-36 relative ">
          <label className="mb-3 block text-base font-medium" htmlFor={label}>
             {label}
          </label>
@@ -99,7 +104,7 @@ const DateInput = React.forwardRef<
                type="text"
             />
             <div
-               className="absolute inset-y-0 right-0 flex items-center pr-2 pl-2 cursor-pointer"
+               className="absolute inset-y-0 right-0 items-center flex pr-2 pl-2 cursor-pointer"
                onClick={!props.disabled ? toggleCalendar : () => {}}
             >
                <CalendarIcon width={20} height={20} color="gray" />
@@ -114,6 +119,7 @@ const DateInput = React.forwardRef<
                )}
             </div>
          </div>
+         {error && <p className="text-red-500">{error}</p>}
       </div>
    );
 });

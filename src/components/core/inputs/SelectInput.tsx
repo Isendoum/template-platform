@@ -32,7 +32,7 @@ const SelectInput = React.forwardRef<
                   </option>
                ))}
             </select>
-            {error && <p className="text-red-500">{error.message}</p>}
+            {error && <p className="text-red-500">{error}</p>}
          </div>
       </div>
    );

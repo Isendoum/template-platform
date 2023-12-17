@@ -15,6 +15,7 @@
    --nav-submenu-bg: 10, 20, 40;
    --drawer-background-color: 70, 130, 180;
    --calendar-hover: 230, 230, 230;
+   --day-equal-bg: 230, 230, 230;
 }
 
 /* @media (prefers-color-scheme: dark) {
@@ -43,6 +44,7 @@
    --nav-submenu-bg: 10, 30, 59;
    --drawer-background-color: 31, 41, 55;
    --calendar-hover: 55, 65, 90;
+   --day-equal-bg: 55, 65, 90;
 }
 
 .space {
@@ -249,7 +251,9 @@ nav {
 }
 
 .day-number-box-equal {
-   background-color: #4d5961; /* Closest hex color to Tailwind's bg-blue-300 */
+   background-color: rgb(
+      var(--day-equal-bg)
+   ); /* Closest hex color to Tailwind's bg-blue-300 */
 }
 
 .day-number-box-not-equal {

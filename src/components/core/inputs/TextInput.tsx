@@ -9,7 +9,6 @@ const TextInput = React.forwardRef<
       UseFormRegister<any>
    >
 >(({ onChange, onBlur, name, label, error, type }, ref) => {
-   console.log(error);
    return (
       <div className="w-full min-w-36">
          <div className="mb-5">
