@@ -13,6 +13,7 @@ const SwitchInput = React.forwardRef<
          <input
             type="checkbox"
             id={name}
+            name={name}
             ref={ref}
             className="switch-checkbox" // Add your own styling
             onChange={onChange}
@@ -21,7 +22,6 @@ const SwitchInput = React.forwardRef<
             {label}
          </label>
          {error && <p className="text-red-500">{error}</p>}
-         {/* Add your own styling */}
       </div>
    );
 });

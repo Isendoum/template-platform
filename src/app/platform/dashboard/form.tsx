@@ -13,6 +13,7 @@ import AutoCompleteInput from "@/components/core/inputs/AutoCompleteInput";
 import DateInput from "@/components/core/inputs/DateInput";
 import RadioInput from "@/components/core/inputs/RadioInput";
 import SwitchInput from "@/components/core/inputs/SwitchInput";
+import NumberInput from "@/components/core/inputs/NumberInput";
 type Inputs = {
    email: string;
    select: string;
@@ -20,6 +21,7 @@ type Inputs = {
    date: string;
    radio: string;
    switch: string;
+   age: number;
 };
 
 export const Form = () => {
@@ -99,6 +101,7 @@ export const Form = () => {
             label="Radio"
             {...register("radio")}
          />
+         <NumberInput label="Age" step="1" {...register("age")} />
          <SwitchInput label="Switch" {...register("switch")} />
 
          <CustomButton
