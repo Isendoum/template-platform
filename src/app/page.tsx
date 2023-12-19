@@ -1,3 +1,5 @@
+import SimpleSpace from "@/components/core/spaces/SimpleSpace";
+
 export default function Home() {
    return (
       <div className="flex flex-col w-[100%] items-center">
@@ -13,7 +15,7 @@ export default function Home() {
             </div>
          </div>
 
-         <div className="animate-fade-in flex flex-col text-center p-8 rounded-lg w-[80%] bg-gray-800">
+         <SimpleSpace className="animate-fade-in flex flex-col text-center p-8 w-[80%]">
             <h2 className="text-3xl font-bold p-8">Features included</h2>
             <div className="grid grid-rows-4 grid-cols-1 lg:grid-cols-4 lg:grid-rows-2 justify-start w-[100%]">
                <p className="text-xl p-2 hover-grow">
@@ -33,7 +35,7 @@ export default function Home() {
                Husky setup with pre-commit hooks to keep the code clean (eslint,
                prettier).
             </p>
-         </div>
+         </SimpleSpace>
       </div>
    );
 }

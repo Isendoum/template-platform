@@ -14,6 +14,9 @@
    --nav-text-color: 255, 255, 255;
    --nav-submenu-bg: 10, 20, 40;
    --drawer-background-color: 70, 130, 180;
+   --calendar-hover: 230, 230, 230;
+   --day-equal-bg: 230, 230, 230;
+   --menu-item-hover-bg: 230, 230, 230, 0.5;
 }
 
 /* @media (prefers-color-scheme: dark) {
@@ -41,6 +44,9 @@
    --nav-bg: 10, 20, 40;
    --nav-submenu-bg: 10, 30, 59;
    --drawer-background-color: 31, 41, 55;
+   --calendar-hover: 55, 65, 90;
+   --day-equal-bg: 55, 65, 90;
+   --menu-item-hover-bg: 55, 65, 90;
 }
 
 .space {
@@ -70,8 +76,36 @@ button {
    padding: 12px;
 }
 
+button[type="submit"] {
+   background-color: rgb(var(--button-background-color));
+   color: rgb(var(--button-color));
+   transition: background-color 0.4s ease;
+   border-radius: 0.75rem;
+   width: 100%;
+   margin-top: 4px;
+   margin-bottom: 4px;
+   padding: 12px;
+}
+
+button[type="reset"] {
+   background-color: rgb(var(--button-background-color));
+   color: rgb(var(--button-color));
+   transition: background-color 0.4s ease;
+   border-radius: 0.75rem;
+   width: 100%;
+   margin-top: 4px;
+   margin-bottom: 4px;
+   padding: 12px;
+}
+
 button:hover {
    background-color: rgb(var(--button-background-color-hover)) !important;
+}
+
+.menu-item {
+}
+.menu-item:hover {
+   background-color: rgba(var(--menu-item-hover-bg));
 }
 
 footer {
@@ -89,6 +123,10 @@ nav {
    background: rgb(var(--nav-bg));
 }
 
+.arrow {
+   cursor: pointer;
+}
+
 .nav-submenu {
    color: rgb(var(--nav-text-color));
    background: rgb(var(--nav-submenu-bg));
@@ -102,6 +140,7 @@ nav {
 
 /* Loading indicator*/
 .loading-indicator {
+   color: rgb(var(--button-color));
    animation: spin 1s linear infinite;
    border-radius: 9999px;
    border-top-width: 3px;
@@ -119,4 +158,119 @@ nav {
    to {
       transform: rotate(360deg);
    }
+}
+
+.calendar-container {
+   width: 300px;
+   border-radius: 0.25rem;
+   border: 2px solid rgba(156, 156, 156, 0.3); /* Border width of 2px */
+   background-color: rgb(var(--space-bg-color));
+   color: rgb(var(--text-color));
+   margin-top: 0.5rem;
+   padding-top: 0.5rem;
+   padding-bottom: 0.5rem;
+}
+
+.calendar-year-text {
+   text-align: center;
+   cursor: pointer;
+}
+
+.caldendar-month-action-container {
+   display: grid;
+   grid-template-columns: repeat(
+      3,
+      1fr
+   ); /* Creates 3 columns with equal width */
+   grid-template-rows: auto; /* Creates 1 row that sizes according to its content */
+   text-align: center; /* Centers text horizontally */
+   padding-bottom: 0.5rem; /* Tailwind's spacing scale, where 2 units is equal to 0.5rem */
+}
+
+.month-container {
+   background-color: rgb(var(--space-bg-color));
+   color: rgb(var(--text-color));
+   margin: 0.5rem; /* m-2 translates to 0.5rem */
+   gap: 0.25rem; /* gap-1 translates to 0.25rem */
+   border: 2px solid rgba(156, 156, 156, 0.3); /* Border width of 2px */
+   border-radius: 0.25rem; /* Default border-radius for 'rounded' */
+   align-items: center; /* For items-center */
+   justify-content: center; /* For justify-center */
+   text-align: center;
+   height: 202px;
+   overflow-y: auto; /* Vertical scroll */
+   padding-left: 0.25rem;
+   padding-right: 0.25rem;
+}
+
+.month-text:hover {
+   cursor: pointer;
+   background-color: rgb(var(--calendar-hover));
+   width: 100%;
+}
+
+.year-container {
+   display: grid;
+   grid-template-columns: repeat(4, 1fr); /* Creates 4 equal-width columns */
+   background-color: rgb(var(--space-bg-color));
+   color: rgb(var(--text-color));
+   margin: 0.5rem; /* m-2 translates to 0.5rem */
+   border: 2px solid rgba(156, 156, 156, 0.3); /* Border width of 2px */
+   border-radius: 0.25rem; /* Default border-radius for 'rounded' */
+   align-items: center; /* For items-center */
+   justify-content: center; /* For justify-center */
+   text-align: center;
+   max-height: 202px;
+   overflow-y: auto; /* Vertical scroll */
+}
+
+.year-text:hover {
+   cursor: pointer;
+   background-color: rgb(var(--calendar-hover));
+}
+
+.days-container {
+   display: grid;
+   grid-template-rows: repeat(5, auto); /* Creates 5 rows */
+   grid-template-columns: repeat(7, 1fr); /* Creates 7 equal-width columns */
+   padding: 0.5rem; /* p-2 translates to 0.5rem */
+   background-color: rgb(var(--space-bg-color));
+   color: rgb(var(--text-color));
+   margin: 0.5rem; /* m-2 translates to 0.5rem */
+   gap: 0.5rem; /* gap-2 translates to 0.5rem */
+   border: 2px solid rgba(156, 156, 156, 0.3); /* Border width of 2px */
+   border-radius: 0.25rem; /* Default border-radius for 'rounded' */
+   align-items: center; /* For items-center */
+}
+
+.days-container-hidden {
+   display: none;
+}
+
+.day-text-box {
+   text-align: center;
+   border-radius: 0.25rem;
+}
+
+.day-number-box {
+   text-align: center;
+   cursor: pointer;
+   border-radius: 0.25rem; /* Default border-radius for 'rounded' */
+}
+
+.day-number-box-equal {
+   background-color: rgb(
+      var(--day-equal-bg)
+   ); /* Closest hex color to Tailwind's bg-blue-300 */
+}
+
+.day-number-box-not-equal {
+   background-color: rgb(var(--space-bg-color));
+   color: rgb(var(--text-color));
+}
+
+.day-number-box:hover {
+   background-color: rgb(
+      var(--calendar-hover)
+   ); /* Closest hex color to Tailwind's hover:bg-blue-200 */
 }

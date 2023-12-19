@@ -1,7 +1,7 @@
 type Size = "small" | "medium" | "large";
 const LoadingIndicator = ({
    size = "medium",
-   color = "#3498db",
+   color,
 }: {
    size?: Size;
    color?: string;
