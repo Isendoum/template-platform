@@ -11,12 +11,15 @@ import SimpleSpace from "@/components/core/spaces/SimpleSpace";
 import SelectInput from "@/components/core/inputs/SelectInput";
 import AutoCompleteInput from "@/components/core/inputs/AutoCompleteInput";
 import DateInput from "@/components/core/inputs/DateInput";
-
+import RadioInput from "@/components/core/inputs/RadioInput";
+import SwitchInput from "@/components/core/inputs/SwitchInput";
 type Inputs = {
    email: string;
-   color: string;
-   job: string;
+   select: string;
+   autocomplete: string;
    date: string;
+   radio: string;
+   switch: string;
 };
 
 export const Form = () => {
@@ -27,9 +30,9 @@ export const Form = () => {
    const validationSchema = yup.object({
       //   username: yup.string(),
       email: yup.string().email().required(),
-      color: yup.string().required(),
-      job: yup.string().required(),
-      date: yup.date().typeError("Enter a valid date"),
+      select: yup.string().required(),
+      autocomplete: yup.string().required(),
+      date: yup.date().typeError("Enter a valid date"), // this changes how the date appears when values are
       //   password2: yup
       //      .string()
       //      .oneOf([yup.ref("password")], "Passwords must match")
@@ -65,12 +68,12 @@ export const Form = () => {
          <SelectInput
             options={[{ label: "Red", value: "red" }]}
             error={""}
-            label="Color"
-            {...register("color")}
+            label="Select"
+            {...register("select")}
          />
          <AutoCompleteInput
-            label="Job"
-            error={errors.job?.message}
+            label="Autocomplete"
+            error={errors.autocomplete?.message}
             options={[
                { label: "Senior", value: "senior" },
                { label: "Mid", value: "mid" },
@@ -79,7 +82,7 @@ export const Form = () => {
                { label: "Omg", value: "omg" },
                { label: "Titan", value: "titan" },
             ]}
-            {...register("job")}
+            {...register("autocomplete")}
          />
          {/* <DateInput label="Date" {...register("date")} /> */}
          <DateInput
@@ -87,9 +90,20 @@ export const Form = () => {
             label="Date"
             {...register("date")}
          />
+         <RadioInput
+            error={errors.radio?.message}
+            options={[
+               { label: "Yes", value: "true" },
+               { label: "No", value: "false" },
+            ]}
+            label="Radio"
+            {...register("radio")}
+         />
+         <SwitchInput label="Switch" {...register("switch")} />
 
          <CustomButton
             loading={loading}
+            disabled={loading}
             onClick={handleSubmit(onSubmit)}
             type="submit"
          >

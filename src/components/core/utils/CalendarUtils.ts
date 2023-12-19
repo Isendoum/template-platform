@@ -34,3 +34,13 @@ export const dateEquality = (date: Date, curDate: Date | null) => {
    }
    return false;
 };
+
+export const formatDate = (date: Date) => {
+   // Convert the date to UTC
+   const utcDate = new Date(date.getTime() + date.getTimezoneOffset() * 60000);
+
+   const year = utcDate.getFullYear();
+   const month = (utcDate.getMonth() + 1).toString().padStart(2, "0");
+   const day = utcDate.getDate().toString().padStart(2, "0");
+   return `${year}-${month}-${day}`;
+};

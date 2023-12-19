@@ -26,12 +26,6 @@ const menu = [
    },
 ];
 
-const test = {
-   id: 1,
-   name: "test",
-};
-console.log(test);
-
 const DrawerMenu = () => {
    const router = useRouter();
    const [isOpen, setIsOpen] = useState(false);
