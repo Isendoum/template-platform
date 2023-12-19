@@ -86,7 +86,6 @@ export const Form = () => {
             ]}
             {...register("autocomplete")}
          />
-         {/* <DateInput label="Date" {...register("date")} /> */}
          <DateInput
             error={errors.date?.message}
             label="Date"
@@ -110,7 +109,7 @@ export const Form = () => {
             onClick={handleSubmit(onSubmit)}
             type="submit"
          >
-            Sign Up
+            Submit
          </CustomButton>
       </SimpleSpace>
    );
