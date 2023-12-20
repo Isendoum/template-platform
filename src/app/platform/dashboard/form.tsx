@@ -34,11 +34,10 @@ export const Form = () => {
       email: yup.string().email().required(),
       select: yup.string().required(),
       autocomplete: yup.string().required(),
-      date: yup.date().typeError("Enter a valid date"), // this changes how the date appears when values are
-      //   password2: yup
-      //      .string()
-      //      .oneOf([yup.ref("password")], "Passwords must match")
-      //      .required("password confirmation is required"),
+      date: yup.date().typeError("Enter a valid date"), // this changes how the date appears when is yup.date()
+      age: yup.number().typeError("Enter a valid number"),
+      switch: yup.bool().oneOf([true], "Field must be checked"),
+      radio: yup.string().required(),
    });
    const {
       register,
@@ -50,7 +49,6 @@ export const Form = () => {
    const onSubmit = async (values: Inputs) => {
       try {
          setLoading(true);
-
          setTimeout(() => {
             setLoading(false);
             alert(JSON.stringify(values, undefined, 2));
@@ -100,8 +98,18 @@ export const Form = () => {
             label="Radio"
             {...register("radio")}
          />
-         <NumberInput label="Age" step="1" {...register("age")} />
-         <SwitchInput label="Switch" {...register("switch")} />
+         <NumberInput
+            error={errors.age?.message}
+            min={18}
+            label="Age"
+            step="1"
+            {...register("age")}
+         />
+         <SwitchInput
+            error={errors.switch?.message}
+            label="Agree with terms and conditions"
+            {...register("switch")}
+         />
 
          <CustomButton
             loading={loading}
