@@ -65,9 +65,7 @@ body {
    background: rgb(var(--background));
 }
 
-button {
-   background-color: rgb(var(--button-background-color));
-   color: rgb(var(--button-color));
+.cbutton {
    transition: background-color 0.4s ease;
    border-radius: 0.75rem;
    width: 100%;
@@ -76,9 +74,7 @@ button {
    padding: 12px;
 }
 
-button[type="submit"] {
-   background-color: rgb(var(--button-background-color));
-   color: rgb(var(--button-color));
+.cbutton[type="submit"] {
    transition: background-color 0.4s ease;
    border-radius: 0.75rem;
    width: 100%;
@@ -87,19 +83,13 @@ button[type="submit"] {
    padding: 12px;
 }
 
-button[type="reset"] {
-   background-color: rgb(var(--button-background-color));
-   color: rgb(var(--button-color));
+.cbutton[type="reset"] {
    transition: background-color 0.4s ease;
    border-radius: 0.75rem;
    width: 100%;
    margin-top: 4px;
    margin-bottom: 4px;
    padding: 12px;
-}
-
-button:hover {
-   background-color: rgb(var(--button-background-color-hover)) !important;
 }
 
 .menu-item {

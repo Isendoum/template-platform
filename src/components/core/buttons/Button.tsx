@@ -16,13 +16,13 @@ const CustomButton: React.FC<ButtonProps> = ({
    const btnClassname = () => {
       switch (variant) {
          case "primary":
-            return "border bg-primary text-white transition duration-500 ease select-none hover:bg-primary-hover focus:outline-none focus:shadow-outline";
+            return "cbutton border bg-primary text-white transition duration-500 ease select-none hover:bg-primary-hover focus:outline-none focus:shadow-outline";
          case "success":
-            return "border border-green-500 bg-green-500 text-white transition duration-500 ease select-none hover:bg-green-600 focus:outline-none focus:shadow-outline";
+            return "cbutton border border-green-500 bg-green-500 text-white transition duration-500 ease select-none hover:bg-green-600 focus:outline-none focus:shadow-outline";
          case "text":
-            return "bg-transparent border-white-500 border";
+            return "cbutton bg-transparent";
          default:
-            return "";
+            return "cbutton border bg-primary text-white transition duration-500 ease select-none hover:bg-primary-hover focus:outline-none focus:shadow-outline";
       }
    };
 

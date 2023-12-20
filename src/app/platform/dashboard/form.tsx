@@ -14,6 +14,7 @@ import DateInput from "@/components/core/inputs/DateInput";
 import RadioInput from "@/components/core/inputs/RadioInput";
 import SwitchInput from "@/components/core/inputs/SwitchInput";
 import NumberInput from "@/components/core/inputs/NumberInput";
+import Modal from "@/components/core/modals/Modal";
 type Inputs = {
    email: string;
    select: string;
@@ -26,6 +27,8 @@ type Inputs = {
 
 export const Form = () => {
    const [loading, setLoading] = useState(false);
+   const [showModal, setShowModal] = useState(false);
+   const [message, setMessage] = useState("");
 
    // we can assing to watch a spesific field
    // const emailW = watch("email");
@@ -51,7 +54,8 @@ export const Form = () => {
          setLoading(true);
          setTimeout(() => {
             setLoading(false);
-            alert(JSON.stringify(values, undefined, 2));
+            setMessage(JSON.stringify(values, undefined, 2));
+            setShowModal(true);
          }, 1000);
       } catch (error: any) {
          alert(error);
@@ -59,66 +63,71 @@ export const Form = () => {
       }
    };
    return (
-      <SimpleSpace>
-         <TextInput
-            error={errors.email?.message}
-            label="Email"
-            {...register("email")}
-         />
-         <SelectInput
-            options={[{ label: "Red", value: "red" }]}
-            error={""}
-            label="Select"
-            {...register("select")}
-         />
-         <AutoCompleteInput
-            label="Autocomplete"
-            error={errors.autocomplete?.message}
-            options={[
-               { label: "Senior", value: "senior" },
-               { label: "Mid", value: "mid" },
-               { label: "Junior", value: "junior" },
-               { label: "Ele", value: "ele" },
-               { label: "Omg", value: "omg" },
-               { label: "Titan", value: "titan" },
-            ]}
-            {...register("autocomplete")}
-         />
-         <DateInput
-            error={errors.date?.message}
-            label="Date"
-            {...register("date")}
-         />
-         <RadioInput
-            error={errors.radio?.message}
-            options={[
-               { label: "Yes", value: "true" },
-               { label: "No", value: "false" },
-            ]}
-            label="Radio"
-            {...register("radio")}
-         />
-         <NumberInput
-            error={errors.age?.message}
-            min={18}
-            label="Age"
-            step="1"
-            {...register("age")}
-         />
-         <SwitchInput
-            error={errors.switch?.message}
-            label="Agree with terms and conditions"
-            {...register("switch")}
-         />
+      <div>
+         <SimpleSpace>
+            <TextInput
+               error={errors.email?.message}
+               label="Email"
+               {...register("email")}
+            />
+            <SelectInput
+               options={[{ label: "Red", value: "red" }]}
+               error={""}
+               label="Select"
+               {...register("select")}
+            />
+            <AutoCompleteInput
+               label="Autocomplete"
+               error={errors.autocomplete?.message}
+               options={[
+                  { label: "Senior", value: "senior" },
+                  { label: "Mid", value: "mid" },
+                  { label: "Junior", value: "junior" },
+                  { label: "Ele", value: "ele" },
+                  { label: "Omg", value: "omg" },
+                  { label: "Titan", value: "titan" },
+               ]}
+               {...register("autocomplete")}
+            />
+            <DateInput
+               error={errors.date?.message}
+               label="Date"
+               {...register("date")}
+            />
+            <RadioInput
+               error={errors.radio?.message}
+               options={[
+                  { label: "Yes", value: "true" },
+                  { label: "No", value: "false" },
+               ]}
+               label="Radio"
+               {...register("radio")}
+            />
+            <NumberInput
+               error={errors.age?.message}
+               min={18}
+               label="Age"
+               step="1"
+               {...register("age")}
+            />
+            <SwitchInput
+               error={errors.switch?.message}
+               label="Agree with terms and conditions"
+               {...register("switch")}
+            />
 
-         <CustomButton
-            loading={loading}
-            disabled={loading}
-            onClick={handleSubmit(onSubmit)}
-            type="submit"
-         >
-            Submit
-         </CustomButton>
-      </SimpleSpace>
+            <CustomButton
+               loading={loading}
+               disabled={loading}
+               onClick={handleSubmit(onSubmit)}
+               type="submit"
+            >
+               Submit
+            </CustomButton>
+         </SimpleSpace>
+         <Modal show={showModal} onClose={() => setShowModal(false)}>
+            <div className="text-black">{message}</div>
+         </Modal>
+      </div>
    );
 };
