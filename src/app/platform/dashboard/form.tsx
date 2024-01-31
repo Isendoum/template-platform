@@ -34,7 +34,13 @@ export const Form = () => {
       email: yup.string().email().required(),
       select: yup.string().required(),
       autocomplete: yup.string().required(),
-      date: yup.date().typeError("Enter a valid date"), // this changes how the date appears when is yup.date()
+      date: yup
+         .string()
+         .required("Date is required")
+         .test("is-valid-date", "Enter a valid date", (value) => {
+            const parsedDate = value.toString().split("T")[0];
+            return parsedDate !== null;
+         }),
       age: yup.number().typeError("Enter a valid number"),
       switch: yup.bool().oneOf([true], "Field must be checked"),
       radio: yup.string().required(),

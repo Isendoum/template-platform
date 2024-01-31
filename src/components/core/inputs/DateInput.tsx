@@ -70,7 +70,7 @@ const DateInput = React.forwardRef<
 
    const handleDateSelect = (date: Date) => {
       const formattedDate = formatDate(date);
-      setSelectedDate(formattedDate);
+      setSelectedDate(parseDate(formattedDate));
       setIsCalendarOpen(false);
       triggerInputChange(formattedDate);
    };

@@ -36,36 +36,26 @@ export const dateEquality = (date: Date, curDate: Date | null) => {
 };
 
 export const formatDate = (date: Date) => {
-   /**
-    * Formats a date into a string in the format "DD/MM/YYYY".
-    * @param {Date} date - The date to be formatted.
-    * @returns {string} - The formatted date string.
-    */
+   if (!(date instanceof Date)) return "";
 
-   const day: string = date.getDate().toString().padStart(2, "0");
-   const month: string = (date.getMonth() + 1).toString().padStart(2, "0"); // January is 0
-   const year: number = date.getFullYear();
+   const day = date.getDate().toString().padStart(2, "0");
+   const month = (date.getMonth() + 1).toString().padStart(2, "0");
+   const year = date.getFullYear();
 
    return `${day}/${month}/${year}`;
 };
 
+// Parses a string in "dd/mm/yyyy" format to a Date object
 export const parseDate = (dateStr: string) => {
    const parts = dateStr.match(/(\d+)/g);
    if (!parts || parts.length !== 3) return null;
 
-   const day = parseInt(parts[0], 10);
-   const month = parseInt(parts[1], 10) - 1; // months are 0-based
-   const year = parseInt(parts[2], 10);
-
-   const date = new Date(year, month, day);
-   if (
-      date &&
-      date.getDate() === day &&
-      date.getMonth() === month &&
-      date.getFullYear() === year
-   ) {
-      return date;
-   }
-
-   return null;
+   const [day, month, year] = parts.map((part) => parseInt(part, 10));
+   const date = new Date(year, month - 1, day);
+   return date &&
+      date.getFullYear() === year &&
+      date.getMonth() === month - 1 &&
+      date.getDate() === day
+      ? date
+      : null;
 };
