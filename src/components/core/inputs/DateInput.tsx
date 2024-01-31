@@ -8,7 +8,7 @@ import React, {
 import { UseFormRegister } from "react-hook-form";
 import Calendar from "./Calendar";
 import { CalendarIcon } from "@heroicons/react/24/solid";
-import { formatDate } from "../utils/CalendarUtils";
+import { formatDate, parseDate } from "../utils/CalendarUtils"; // Assuming parseDate is a utility function to parse date strings
 
 type DateValueType = Date | string;
 
@@ -42,10 +42,7 @@ const DateInput = React.forwardRef<
 
    const combinedRef = useCallback(
       (element: HTMLInputElement) => {
-         // Set the ref for local usage
          inputRef.current = element;
-
-         // Forward the ref to parent component or hook form
          if (typeof forwardedRef === "function") {
             forwardedRef(element);
          } else if (forwardedRef) {
@@ -72,7 +69,7 @@ const DateInput = React.forwardRef<
    }, []);
 
    const handleDateSelect = (date: Date) => {
-      const formattedDate = formatDate(date); // Format the date manually
+      const formattedDate = formatDate(date);
       setSelectedDate(formattedDate);
       setIsCalendarOpen(false);
       triggerInputChange(formattedDate);
@@ -92,40 +89,53 @@ const DateInput = React.forwardRef<
          const inputValue = event.target.value;
          const newDate = new Date(inputValue);
 
-         // Check if the input value is a valid date string
-         if (!isNaN(newDate.getTime())) {
-            setSelectedDate(newDate); // Set as Date if valid
+         // Update only if it's a valid date
+         if (
+            !isNaN(newDate.getTime()) &&
+            newDate.toISOString().startsWith(inputValue)
+         ) {
+            setSelectedDate(newDate);
          } else {
-            setSelectedDate(inputValue); // Keep as string if not a valid date
+            setSelectedDate(inputValue); // Keep the input as is
          }
 
-         // Call the provided onChange with the original event and the new date or string
          if (onChange) {
-            onChange(event, inputValue);
+            onChange(event, newDate);
          }
       },
       [onChange],
    );
 
+   const handleInputBlur = useCallback(() => {
+      if (typeof selectedDate === "string") {
+         const newDate = parseDate(selectedDate);
+         if (newDate) {
+            setSelectedDate(newDate);
+            if (inputRef.current) {
+               inputRef.current.value = formatDate(newDate);
+            }
+         } else {
+            setSelectedDate(null);
+            if (inputRef.current) {
+               inputRef.current.value = "";
+            }
+         }
+      }
+   }, [selectedDate]);
+
    const toggleCalendar = () => {
       setIsCalendarOpen(!isCalendarOpen);
    };
 
-   const valueGetter = (selectedDate: Date | string | null): string => {
-      if (selectedDate instanceof Date && !isNaN(selectedDate.getTime())) {
-         // Check if selectedDate is a valid Date object
-         return `${selectedDate.getUTCDate()}/${
-            selectedDate.getMonth() + 1
-         }/${selectedDate.getFullYear()}`;
-      } else if (typeof selectedDate === "string") {
-         // Return the string if it's a string (might be empty if cleared)
-         return selectedDate;
+   const valueGetter = (selectedDate: any) => {
+      if (selectedDate instanceof Date) {
+         return formatDate(selectedDate);
       }
-      return "";
+      return selectedDate || "";
    };
 
    return (
-      <div className="w-full min-w-36 relative ">
+      <div className="w-full min-w-36 relative">
          <label className="mb-3 block text-base font-medium" htmlFor={label}>
             {label}
          </label>
@@ -137,6 +147,7 @@ const DateInput = React.forwardRef<
                   value={valueGetter(selectedDate)}
                   type="text"
                   {...props}
+                  onBlur={handleInputBlur}
                   ref={combinedRef}
                />
                <div
@@ -146,7 +157,7 @@ const DateInput = React.forwardRef<
                   <CalendarIcon width={20} height={20} color="gray" />
                </div>
             </div>
-            <div className="absolute z-10" ref={containerRef}>
+            <div className="absolute z-10">
                {isCalendarOpen && (
                   <Calendar
                      date={selectedDate}

@@ -36,11 +36,36 @@ export const dateEquality = (date: Date, curDate: Date | null) => {
 };
 
 export const formatDate = (date: Date) => {
-   // Convert the date to UTC
-   const utcDate = new Date(date.getTime() + date.getTimezoneOffset() * 60000);
+   /**
+    * Formats a date into a string in the format "DD/MM/YYYY".
+    * @param {Date} date - The date to be formatted.
+    * @returns {string} - The formatted date string.
+    */
 
-   const year = utcDate.getFullYear();
-   const month = (utcDate.getMonth() + 1).toString().padStart(2, "0");
-   const day = utcDate.getDate().toString().padStart(2, "0");
-   return `${year}-${month}-${day}`;
+   const day: string = date.getDate().toString().padStart(2, "0");
+   const month: string = (date.getMonth() + 1).toString().padStart(2, "0"); // January is 0
+   const year: number = date.getFullYear();
+
+   return `${day}/${month}/${year}`;
+};
+
+export const parseDate = (dateStr: string) => {
+   const parts = dateStr.match(/(\d+)/g);
+   if (!parts || parts.length !== 3) return null;
+
+   const day = parseInt(parts[0], 10);
+   const month = parseInt(parts[1], 10) - 1; // months are 0-based
+   const year = parseInt(parts[2], 10);
+
+   const date = new Date(year, month, day);
+   if (
+      date &&
+      date.getDate() === day &&
+      date.getMonth() === month &&
+      date.getFullYear() === year
+   ) {
+      return date;
+   }
+
+   return null;
 };
