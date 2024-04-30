@@ -10,6 +10,7 @@ interface AiDescriptionProps extends React.HTMLAttributes<HTMLDivElement> {}
 // Create the component to fetch data using SWR
 const AiDescription: React.FC<AiDescriptionProps> = () => {
    const { descriptionData } = useAiContext();
+   console.log(descriptionData);
 
    return (
       <div className="space px-8 py-10 mb-8 animate-fade-in">

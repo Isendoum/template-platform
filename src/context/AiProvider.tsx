@@ -50,7 +50,7 @@ export const AiProvider = ({ children }: { children: React.ReactNode }) => {
       // error: coverError,
       // isLoading: coverIsLoading,
    } = useSWR(
-      shouldFetch ? `/api/ai/cover?cat=${category}` : null,
+      category !== "" ? `/api/ai/cover?cat=${category}` : null,
       imageFetcher,
       {
          suspense: true,
@@ -63,7 +63,7 @@ export const AiProvider = ({ children }: { children: React.ReactNode }) => {
       // error: featuresError,
       // isLoading: featuresIsLoading,
    } = useSWR(
-      shouldFetch ? `/api/ai/features?cat=${category}` : null,
+      category !== "" ? `/api/ai/features?cat=${category}` : null,
       fetcher,
       {
          suspense: false,
@@ -76,18 +76,22 @@ export const AiProvider = ({ children }: { children: React.ReactNode }) => {
       data: titleData,
       // error: titleError,
       // isLoading: titleIsLoading,
-   } = useSWR(shouldFetch ? `/api/ai/title?cat=${category}` : null, fetcher, {
-      suspense: false,
-      fallbackData: null,
-      revalidateOnFocus: false,
-   });
+   } = useSWR(
+      category !== "" ? `/api/ai/title?cat=${category}` : null,
+      fetcher,
+      {
+         suspense: false,
+         fallbackData: null,
+         revalidateOnFocus: false,
+      },
+   );
 
    const {
       data: descriptionData,
       // error: descriptionError,
       // isLoading: descriptionIsLoading,
    } = useSWR(
-      shouldFetch ? `/api/ai/description?cat=${category}` : null,
+      category !== "" ? `/api/ai/description?cat=${category}` : null,
       fetcher,
       {
          suspense: false,
@@ -106,9 +110,8 @@ export const AiProvider = ({ children }: { children: React.ReactNode }) => {
    }, [coverData]);
 
    useEffect(() => {
-      const loaded = featuresData && descriptionData && titleData && imageUrl;
-      setAllLoaded(loaded);
-      if (loaded) {
+      if (featuresData && descriptionData && titleData && imageUrl) {
+         setAllLoaded(true);
          setShouldFetch(false);
          setCanReset(true);
       }
