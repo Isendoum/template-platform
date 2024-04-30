@@ -42,33 +42,41 @@ export const AiProvider = ({ children }: { children: React.ReactNode }) => {
    const [imageUrl, setImageUrl] = useState<string | null>(null);
    const [shouldFetch, setShouldFetch] = useState<boolean>(false);
    const [allLoaded, setAllLoaded] = useState(false);
-   const [category, setCategory] = useState<string | undefined>(undefined);
+   const [category, setCategory] = useState<string | undefined>("");
    const [canReset, setCanReset] = useState<boolean>(false);
 
    const {
       data: coverData,
       // error: coverError,
       // isLoading: coverIsLoading,
-   } = useSWR(category ? `/api/ai/cover?cat=${category}` : null, imageFetcher, {
-      suspense: true,
-      fallbackData: null,
-      revalidateOnFocus: false,
-   });
+   } = useSWR(
+      shouldFetch ? `/api/ai/cover?cat=${category}` : null,
+      imageFetcher,
+      {
+         suspense: true,
+         fallbackData: null,
+         revalidateOnFocus: false,
+      },
+   );
    const {
       data: featuresData,
       // error: featuresError,
       // isLoading: featuresIsLoading,
-   } = useSWR(category ? `/api/ai/features?cat=${category}` : null, fetcher, {
-      suspense: false,
-      fallbackData: null,
-      revalidateOnFocus: false,
-   });
+   } = useSWR(
+      shouldFetch ? `/api/ai/features?cat=${category}` : null,
+      fetcher,
+      {
+         suspense: false,
+         fallbackData: null,
+         revalidateOnFocus: false,
+      },
+   );
 
    const {
       data: titleData,
       // error: titleError,
       // isLoading: titleIsLoading,
-   } = useSWR(category ? `/api/ai/title?cat=${category}` : null, fetcher, {
+   } = useSWR(shouldFetch ? `/api/ai/title?cat=${category}` : null, fetcher, {
       suspense: false,
       fallbackData: null,
       revalidateOnFocus: false,
@@ -79,7 +87,7 @@ export const AiProvider = ({ children }: { children: React.ReactNode }) => {
       // error: descriptionError,
       // isLoading: descriptionIsLoading,
    } = useSWR(
-      category ? `/api/ai/description?cat=${category}` : null,
+      shouldFetch ? `/api/ai/description?cat=${category}` : null,
       fetcher,
       {
          suspense: false,

@@ -29,9 +29,7 @@ export const Form = () => {
    // we can assing to watch a spesific field
    // const emailW = watch("email");
    const validationSchema = yup.object({
-      //   username: yup.string(),
-
-      select: yup.string().not([undefined]).required(),
+      select: yup.string().required(),
    });
    const {
       register,
@@ -68,8 +66,8 @@ export const Form = () => {
             <CustomButton
                disabled={loading}
                onClick={() => {
-                  reset({ select: "" });
-                  setCategory(undefined);
+                  reset({ select: undefined });
+                  setCategory("");
                   setCanReset(false);
                }}
             >
@@ -78,7 +76,7 @@ export const Form = () => {
          ) : (
             <CustomButton
                loading={shouldFetch}
-               disabled={shouldFetch || selectW === ""}
+               disabled={shouldFetch || selectW === "" || selectW === undefined}
                onClick={handleSubmit(onSubmit)}
                type="submit"
             >
