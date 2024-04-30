@@ -55,6 +55,16 @@ export const Form = () => {
                { label: "Sports", value: "sports" },
                { label: "Electronics", value: "electronics" },
                { label: "Cryptocurrencies", value: "cryptocurrencies" },
+               { label: "Cooking", value: "cooking" },
+               { label: "Gardening", value: "gardening" },
+               { label: "Music", value: "music" },
+               { label: "Literature", value: "literature" },
+               { label: "Travel", value: "travel" },
+               { label: "Health & Wellness", value: "health_wellness" },
+               { label: "Photography", value: "photography" },
+               { label: "Technology", value: "technology" },
+               { label: "Art", value: "art" },
+               { label: "Education", value: "education" },
             ]}
             disabled={canReset}
             error={errors.select?.message}

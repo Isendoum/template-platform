@@ -9,7 +9,6 @@ import React, {
 } from "react";
 import useSWR from "swr";
 import { fetcher, imageFetcher } from "@/lib/network";
-import SkeletonLoader from "@/components/core/loaders/SkeletonLoader";
 
 type IAiContext = {
    featuresData: string;
@@ -110,8 +109,9 @@ export const AiProvider = ({ children }: { children: React.ReactNode }) => {
    }, [coverData]);
 
    useEffect(() => {
-      if (featuresData && descriptionData && titleData && imageUrl) {
-         setAllLoaded(true);
+      const loaded = featuresData && descriptionData && titleData && imageUrl;
+      setAllLoaded(loaded);
+      if (loaded) {
          setShouldFetch(false);
          setCanReset(true);
       }
@@ -141,13 +141,6 @@ export const AiProvider = ({ children }: { children: React.ReactNode }) => {
 
    return (
       <AiCoverContext.Provider value={value}>
-         {shouldFetch && !allLoaded && (
-            <SkeletonLoader
-               style={{ height: "100%", width: "100%", zIndex: 10 }}
-            >
-               <span className="text-3xl bold">Loading Content...</span>
-            </SkeletonLoader>
-         )}
          {children}
       </AiCoverContext.Provider>
    );
