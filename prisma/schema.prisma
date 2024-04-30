@@ -15,6 +15,26 @@ enum Role {
   ADMIN
 }
 
+enum SubscriptionTier {
+  FREE
+  STARTER
+  ENTERPRISE
+}
+
+enum SubscriptionDuration {
+  MONTHLY
+  SIX_MONTHS
+  YEARLY
+}
+
+model Subscription {
+  id          String               @id @default(cuid())
+  tier        SubscriptionTier @default(FREE)               // e.g., "Free", "Starter", "Enterprise"
+  price       Float                // assuming a decimal value for the price
+  duration    SubscriptionDuration
+  users       User[]               // relation to users
+}
+
 model Account {
   id                 String  @id @default(cuid())
   userId             String
@@ -51,6 +71,8 @@ model User {
   accounts      Account[]
   sessions      Session[]
   role         Role     @default(USER)
+   subscriptionId String?
+  subscription  Subscription?    @relation(fields: [subscriptionId], references: [id])
 }
 
 model VerificationToken {

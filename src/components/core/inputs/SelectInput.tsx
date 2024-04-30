@@ -6,9 +6,10 @@ const SelectInput = React.forwardRef<
    {
       label: string;
       error?: any;
-      options: { label: string; value: string }[];
+      options: { label: string; value: string | undefined }[];
+      disabled?: boolean;
    } & ReturnType<UseFormRegister<any>>
->(({ onChange, onBlur, name, label, error, options }, ref) => {
+>(({ onChange, onBlur, name, label, error, options, disabled }, ref) => {
    return (
       <div className="w-full min-w-36">
          <div className="mb-5">
@@ -16,16 +17,28 @@ const SelectInput = React.forwardRef<
                {label}
             </label>
             <select
-               className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-sm"
+               className={`w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-sm ${
+                  disabled ? "bg-[#11111190]" : ""
+               }`}
                name={name}
                ref={ref}
                onChange={onChange}
                onBlur={onBlur}
+               defaultValue={""}
+               disabled={disabled}
             >
-               {options?.map(({ label, value }) => (
+               <option
+                  className="font-sans text-base font-medium text-[#6B7280]"
+                  key={""}
+                  value={""}
+                  disabled
+               >
+                  Select an option
+               </option>
+               {options?.map(({ label, value }, index) => (
                   <option
                      className="font-sans text-base font-medium text-[#6B7280]"
-                     key={value}
+                     key={index}
                      value={value}
                   >
                      {label}

@@ -14,15 +14,15 @@ import Logo from "../../../../public/logo.svg";
 const menu = [
    {
       label: "Dashboard",
-      link: "platform/dashboard",
+      link: "/platform/dashboard",
    },
    {
       label: "Settings",
-      link: "platform/settings",
+      link: "/platform/settings",
    },
    {
       label: "Account",
-      link: "platform/account",
+      link: "/platform/account",
    },
 ];
 

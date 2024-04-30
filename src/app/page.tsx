@@ -1,41 +1,36 @@
-import SimpleSpace from "@/components/core/spaces/SimpleSpace";
+"use client";
+
+import AiCover from "@/components/ai/AiCover";
+import AiDescription from "@/components/ai/AiDescription";
+import AiFeatures from "@/components/ai/AiFeatures";
+import AiTitle from "@/components/ai/AiTitle";
+import { useAiContext } from "@/context/AiProvider";
 
 export default function Home() {
+   const { allLoaded } = useAiContext();
+   // Track loading states for each component
+
    return (
       <div className="flex flex-col w-[100%] items-center">
-         <div className="animate-fade-in p-8 rounded-lg text-center">
-            <h1 className="text-4xl font-bold p-8">Welcome to Template app</h1>
-         </div>
-         <div className="animate-fade-in flex flex-col text-center p-8 rounded-lg w-[80%] mb-16">
-            <div className="flex flex-col lg:flex-row justify-around w-[100%]">
-               <p className="text-xl p-2 hover-grow">
-                  A next js (13.4.3) template platform. Start building your
-                  platform with the basics done.
-               </p>
+         {allLoaded ? (
+            <div className="flex flex-col w-[100%] items-center">
+               <AiCover>
+                  <div className="bg-[#11111150] flex h-[30rem] flex align-center align-center justify-center items-center">
+                     <AiTitle />
+                  </div>
+               </AiCover>
+               <div className="animate-fade-in flex flex-col text-center p-8 rounded-lg w-[80%] mb-16">
+                  <div className="flex flex-col lg:flex-row justify-around w-[100%]">
+                     <AiDescription />
+                  </div>
+               </div>
+               <AiFeatures />
             </div>
-         </div>
-
-         <SimpleSpace className="animate-fade-in flex flex-col text-center p-8 w-[80%]">
-            <h2 className="text-3xl font-bold p-8">Features included</h2>
-            <div className="grid grid-rows-4 grid-cols-1 lg:grid-cols-4 lg:grid-rows-2 justify-start w-[100%]">
-               <p className="text-xl p-2 hover-grow">
-                  Google authentication with Next Auth.
-               </p>
-               <p className="text-xl p-2 hover-grow">
-                  Postgresql for data persistence with Prisma.
-               </p>
-               <p className="text-xl p-2 hover-grow">
-                  Build forms with react-hook-forms.
-               </p>
-               <p className="text-xl p-2 hover-grow">
-                  Already implemented inputs.
-               </p>
+         ) : (
+            <div className="flex flex-col w-[100%] h-[100vh] justify-center items-center">
+               Login and generate static content
             </div>
-            <p className="text-xl p-2 hover-grow">
-               Husky setup with pre-commit hooks to keep the code clean (eslint,
-               prettier).
-            </p>
-         </SimpleSpace>
+         )}
       </div>
    );
 }

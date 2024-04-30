@@ -26,7 +26,9 @@ const CustomButton: React.FC<ButtonProps> = ({
       }
    };
 
-   const combinedClassName = `${btnClassname()} ${className || ""}`.trim();
+   const combinedClassName = `${btnClassname()} ${className || ""} ${
+      props.disabled && " cursor-not-allowed"
+   }`.trim();
 
    return (
       <button className={combinedClassName} {...props}>

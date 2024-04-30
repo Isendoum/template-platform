@@ -160,6 +160,37 @@ nav {
    }
 }
 
+.skeleton {
+   background-color: #303030;
+   position: relative;
+   overflow: hidden;
+}
+
+.skeleton::after {
+   content: "";
+   position: absolute;
+   top: 0;
+   left: -100%;
+   height: 100%;
+   width: 100%;
+   background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0),
+      rgba(255, 255, 255, 0.5),
+      rgba(255, 255, 255, 0)
+   );
+   animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+   0% {
+      left: -100%;
+   }
+   100% {
+      left: 100%;
+   }
+}
+
 .calendar-container {
    width: 300px;
    border-radius: 0.25rem;
